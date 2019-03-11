@@ -1,10 +1,10 @@
 const fn = require('./on')
 
 const fixtures = {
-  activated: ':active',
-  focused: ':focus',
-  hovered: ':hover',
-  visited: ':visited',
+  activated: '&:active',
+  focused: '&:focus',
+  hovered: '&:hover',
+  visited: '&:visited',
 }
 
 Object.entries(fixtures).forEach(([k, v]) => {

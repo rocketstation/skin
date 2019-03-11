@@ -4,13 +4,13 @@ module.exports = (queries, ...rules) => ({
     .map((query) => {
       switch (query) {
         case 'activated':
-          return ':active'
+          return '&:active'
         case 'focused':
-          return ':focus'
+          return '&:focus'
         case 'hovered':
-          return ':hover'
+          return '&:hover'
         case 'visited':
-          return ':visited'
+          return '&:visited'
       }
     })
     .join(',')]: Object.assign({}, ...rules),
