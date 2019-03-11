@@ -774,25 +774,25 @@ const fixtures = {
     {
       in: 'row',
       out: {
-        direction: 'row',
+        flexDirection: 'row',
       },
     },
     {
       in: ['row', true],
       out: {
-        direction: 'row-reverse',
+        flexDirection: 'row-reverse',
       },
     },
     {
       in: 'col',
       out: {
-        direction: 'column',
+        flexDirection: 'column',
       },
     },
     {
       in: ['col', true],
       out: {
-        direction: 'column-reverse',
+        flexDirection: 'column-reverse',
       },
     },
   ],

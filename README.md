@@ -389,7 +389,7 @@ it contains props for Fela Plugin Custom Property
 - parses `'center'` as `'line-through'`
 - parses `'bottom'` as `'underline'`
 
-#### `direction` -> `direction`
+#### `direction` -> `flexDirection`
 
 - parses `'row'` as `'row'`
 - parses `['row', true]` as `'row-reverse'`

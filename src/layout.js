@@ -645,15 +645,15 @@ module.exports = {
 
     switch (direction) {
       case 'row':
-        rules.direction = 'row'
+        rules.flexDirection = 'row'
         break
 
       case 'col':
-        rules.direction = 'column'
+        rules.flexDirection = 'column'
         break
     }
 
-    if (isReversed) rules.direction += '-reverse'
+    if (isReversed) rules.flexDirection += '-reverse'
     return rules
   },
   fill: (v) => {
