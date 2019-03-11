@@ -1139,10 +1139,10 @@ module.exports = {
     const rules = {}
 
     if (typeof v === 'object') {
-      const left = ['left', 'col'].filter((k) => v.hasOwnProperty(k))
-      const right = ['right', 'col'].filter((k) => v.hasOwnProperty(k))
-      const top = ['top', 'row'].filter((k) => v.hasOwnProperty(k))
-      const bottom = ['bottom', 'row'].filter((k) => v.hasOwnProperty(k))
+      const left = ['left', 'row'].filter((k) => v.hasOwnProperty(k))
+      const right = ['right', 'row'].filter((k) => v.hasOwnProperty(k))
+      const top = ['top', 'col'].filter((k) => v.hasOwnProperty(k))
+      const bottom = ['bottom', 'col'].filter((k) => v.hasOwnProperty(k))
       if (left) rules.paddingLeft = v[left]
       if (right) rules.paddingRight = v[right]
       if (top) rules.paddingTop = v[top]
@@ -1160,10 +1160,10 @@ module.exports = {
     const rules = {}
 
     if (typeof v === 'object') {
-      const left = ['left', 'col'].filter((k) => v.hasOwnProperty(k))
-      const right = ['right', 'col'].filter((k) => v.hasOwnProperty(k))
-      const top = ['top', 'row'].filter((k) => v.hasOwnProperty(k))
-      const bottom = ['bottom', 'row'].filter((k) => v.hasOwnProperty(k))
+      const left = ['left', 'row'].filter((k) => v.hasOwnProperty(k))
+      const right = ['right', 'row'].filter((k) => v.hasOwnProperty(k))
+      const top = ['top', 'col'].filter((k) => v.hasOwnProperty(k))
+      const bottom = ['bottom', 'col'].filter((k) => v.hasOwnProperty(k))
       if (left) rules.marginLeft = v[left]
       if (right) rules.marginRight = v[right]
       if (top) rules.marginTop = v[top]
