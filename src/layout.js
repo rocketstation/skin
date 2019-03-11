@@ -737,10 +737,10 @@ module.exports = {
     const rules = {}
 
     if (typeof v === 'object') {
-      const left = ['left', 'col'].filter((k) => v.hasOwnProperty(k))
-      const right = ['right', 'col'].filter((k) => v.hasOwnProperty(k))
-      const top = ['top', 'row'].filter((k) => v.hasOwnProperty(k))
-      const bottom = ['bottom', 'row'].filter((k) => v.hasOwnProperty(k))
+      const left = ['left', 'row'].filter((k) => v.hasOwnProperty(k))
+      const right = ['right', 'row'].filter((k) => v.hasOwnProperty(k))
+      const top = ['top', 'col'].filter((k) => v.hasOwnProperty(k))
+      const bottom = ['bottom', 'col'].filter((k) => v.hasOwnProperty(k))
       if (left) rules.left = v[left]
       if (right) rules.right = v[right]
       if (top) rules.top = v[top]
