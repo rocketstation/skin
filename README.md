@@ -216,7 +216,6 @@ it contains props for Fela Plugin Custom Property
 #### `animationDelay` -> `animationDelay`
 
 - parses one or more values
-- parses `0` as `0`
 - parses number as ms
 - parses any valid value
 
@@ -231,7 +230,6 @@ it contains props for Fela Plugin Custom Property
 #### `animationDuration` -> `animationDuration`
 
 - parses one or more values
-- parses `0` as `0`
 - parses number as `'{number}ms'`
 - parses any valid value
 

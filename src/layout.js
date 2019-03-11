@@ -133,7 +133,7 @@ module.exports = {
     const rules = {}
     rules.animationDelay = []
       .concat(v)
-      .map((v) => (typeof v === 'number' && v !== 0 ? v + 'ms' : v))
+      .map((v) => (typeof v === 'number' ? v + 'ms' : v))
       .join(',')
     return rules
   },
@@ -1246,22 +1246,22 @@ module.exports = {
         if (typeof v === 'object') {
           r.delay.push(
             v.hasOwnProperty('delay')
-              ? typeof v.delay === 'number' && v.delay !== 0
+              ? typeof v.delay === 'number'
                 ? v.delay + 'ms'
                 : v.delay
-              : 0
+              : '0ms'
           )
           r.duration.push(
             v.hasOwnProperty('duration')
-              ? typeof v.duration === 'number' && v.duration !== 0
+              ? typeof v.duration === 'number'
                 ? v.duration + 'ms'
                 : v.duration
-              : 0
+              : '0ms'
           )
           r.fn.push(v.hasOwnProperty('fn') ? v.fn : 'ease')
         } else {
-          r.delay.push(0)
-          r.duration.push(typeof v === 'number' && v !== 0 ? v + 'ms' : v)
+          r.delay.push('0ms')
+          r.duration.push(typeof v === 'number' ? v + 'ms' : v)
           r.fn.push('ease')
         }
 

@@ -163,7 +163,7 @@ const fixtures = {
     {
       in: 0,
       out: {
-        animationDelay: '0',
+        animationDelay: '0ms',
       },
     },
   ],
@@ -1577,7 +1577,7 @@ const fixtures = {
         color: 500,
       },
       out: {
-        transitionDelay: '0',
+        transitionDelay: '0ms',
         transitionDuration: '500ms',
         transitionProperty: 'color',
         transitionTimingFunction: 'ease',
@@ -1603,8 +1603,8 @@ const fixtures = {
         color: {},
       },
       out: {
-        transitionDelay: '0',
-        transitionDuration: '0',
+        transitionDelay: '0ms',
+        transitionDuration: '0ms',
         transitionProperty: 'color',
         transitionTimingFunction: 'ease',
       },
