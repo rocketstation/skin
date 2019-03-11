@@ -7,7 +7,7 @@ module.exports = (queries, ...rules) => ({
 
         if (query.modifier === 'children') modifier = '>'
         if (query.modifier === 'next')
-          modifier = query.isStrict === false ? '~' : '+'
+          modifier = query.isStrict === false ? '&~' : '&+'
 
         if (query.kind) modifier += query.kind
         if (query.class)
@@ -36,7 +36,7 @@ module.exports = (queries, ...rules) => ({
         case 'placeholder':
           return '::placeholder'
         case 'next':
-          return '+*'
+          return '&+*'
         case 'highlight':
           return '::selection'
       }

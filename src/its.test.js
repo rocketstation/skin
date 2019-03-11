@@ -15,7 +15,7 @@ const fixtures = {
     out: '>div.foo.bar#tst',
   },
   highlight: '::selection',
-  next: '+*',
+  next: '&+*',
   nextMultiple: {
     in: {
       class: ['foo', 'bar'],
@@ -24,7 +24,7 @@ const fixtures = {
       kind: 'div',
       modifier: 'next',
     },
-    out: '~div.foo.bar#tst',
+    out: '&~div.foo.bar#tst',
   },
   nextSingle: {
     in: {
@@ -33,7 +33,7 @@ const fixtures = {
       kind: 'div',
       modifier: 'next',
     },
-    out: '+div.foo.bar#tst',
+    out: '&+div.foo.bar#tst',
   },
   obj: {
     in: {
