@@ -24,6 +24,29 @@ module.exports = {
 
     return rules
   },
+  alignContent: (v) => {
+    const rules = {}
+
+    switch (v) {
+      case 'start':
+        rules.alignItems = 'flex-start'
+        break
+
+      case 'end':
+        rules.alignItems = 'flex-end'
+        break
+
+      case 'center':
+        rules.alignItems = 'center'
+        break
+
+      case 'stretch':
+        rules.alignItems = 'stretch'
+        break
+    }
+
+    return rules
+  },
   alignMajor: (v) => {
     const rules = {}
 
@@ -52,11 +75,11 @@ module.exports = {
 
     switch (v) {
       case 'start':
-        rules.alignItems = ['flex-start', 'start']
+        rules.alignItems = 'start'
         break
 
       case 'end':
-        rules.alignItems = ['flex-end', 'end']
+        rules.alignItems = 'end'
         break
 
       case 'center':
@@ -65,6 +88,29 @@ module.exports = {
 
       case 'stretch':
         rules.alignItems = 'stretch'
+        break
+    }
+
+    return rules
+  },
+  alignSelf: (v) => {
+    const rules = {}
+
+    switch (v) {
+      case 'start':
+        rules.alignSelf = 'flex-start'
+        break
+
+      case 'end':
+        rules.alignSelf = 'flex-end'
+        break
+
+      case 'center':
+        rules.alignSelf = 'center'
+        break
+
+      case 'stretch':
+        rules.alignSelf = 'stretch'
         break
     }
 
@@ -98,11 +144,11 @@ module.exports = {
 
     switch (v) {
       case 'start':
-        rules.alignSelf = ['flex-start', 'start']
+        rules.alignSelf = 'start'
         break
 
       case 'end':
-        rules.alignSelf = ['flex-end', 'end']
+        rules.alignSelf = 'end'
         break
 
       case 'center':
@@ -864,6 +910,64 @@ module.exports = {
 
     return rules
   },
+  placeContentMajor: (v) => {
+    const rules = {}
+
+    switch (v) {
+      case 'start':
+        rules.justifyContent = 'flex-start'
+        break
+
+      case 'end':
+        rules.justifyContent = 'flex-end'
+        break
+
+      case 'center':
+        rules.justifyContent = 'center'
+        break
+
+      case 'space-between':
+        rules.justifyContent = 'space-between'
+        break
+
+      default: {
+        const [kind, isEqual] = [].concat(v)
+        if (kind === 'space-around')
+          rules.justifyContent = isEqual ? 'space-evenly' : 'space-around'
+      }
+    }
+
+    return rules
+  },
+  placeContentMinor: (v) => {
+    const rules = {}
+
+    switch (v) {
+      case 'start':
+        rules.alignContent = 'flex-start'
+        break
+
+      case 'end':
+        rules.alignContent = 'flex-end'
+        break
+
+      case 'center':
+        rules.alignContent = 'center'
+        break
+
+      case 'space-between':
+        rules.alignContent = 'space-between'
+        break
+
+      default: {
+        const [kind, isEqual] = [].concat(v)
+        if (kind === 'space-around')
+          rules.alignContent = isEqual ? 'space-evenly' : 'space-around'
+      }
+    }
+
+    return rules
+  },
   placeDirection: (v) => {
     const rules = {}
 
@@ -1225,7 +1329,7 @@ module.exports = {
       .join('')
     return rules
   },
-  transform: (v) => {
+  modify: (v) => {
     const rules = {}
     if (v === false) rules.transform = 'none'
     else

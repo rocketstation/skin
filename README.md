@@ -183,8 +183,15 @@ it contains props for Fela Plugin Custom Property
 
 #### `alignMinor` -> `alignItems`
 
-- parses `'start` as `['flex-start', 'start']`
-- parses `'end` as `['flex-end', 'end']`
+- parses `'start` as `'start'`
+- parses `'end` as `'end'`
+- parses `'center` as `'center'`
+- parses `'stretch` as `'stretch'`
+
+#### `alignContent` -> `alignItems`
+
+- parses `'start` as `'flex-start'`
+- parses `'end` as `'flex-end'`
 - parses `'center` as `'center'`
 - parses `'stretch` as `'stretch'`
 
@@ -197,8 +204,15 @@ it contains props for Fela Plugin Custom Property
 
 #### `alignSelfMinor` -> `alignSelf`
 
-- parses `'start` as `['flex-start', 'start']`
-- parses `'end` as `['flex-end', 'end']`
+- parses `'start` as `'start'`
+- parses `'end` as `'end'`
+- parses `'center` as `'center'`
+- parses `'stretch` as `'stretch'`
+
+#### `alignSelf` -> `alignSelf`
+
+- parses `'start` as `'flex-start'`
+- parses `'end` as `'flex-end'`
 - parses `'center` as `'center'`
 - parses `'stretch` as `'stretch'`
 
@@ -506,6 +520,24 @@ it contains props for Fela Plugin Custom Property
 - parses `'space-around'` as `'space-around'`
 - parses `['space-around', true]` as `'space-evenly'`
 
+#### `placeContentMinor` -> `alignContent`
+
+- parses `'start` as `'flex-start'`
+- parses `'end` as `'flex-end'`
+- parses `'center` as `'center'`
+- parses `'space-between'` as `'space-between'`
+- parses `'space-around'` as `'space-around'`
+- parses `['space-around', true]` as `'space-evenly'`
+
+#### `placeContentMajor` -> `justifyContent`
+
+- parses `'start` as `'flex-start'`
+- parses `'end` as `'flex-end'`
+- parses `'center` as `'center'`
+- parses `'space-between'` as `'space-between'`
+- parses `'space-around'` as `'space-around'`
+- parses `['space-around', true]` as `'space-evenly'`
+
 #### `placeMinor` -> `alignContent`
 
 - parses `'start` as `'start'`
@@ -650,7 +682,7 @@ it contains props for Fela Plugin Custom Property
 - parses `null` as `'.'`
 - parses any valid value
 
-#### `transform` -> `transform`
+#### `modify` -> `transform`
 
 - parses `{ key: [val, val, val] }` as `key(val, val, val)`
 

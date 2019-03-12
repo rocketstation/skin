@@ -27,6 +27,32 @@ const fixtures = {
       },
     },
   ],
+  alignContent: [
+    {
+      in: 'start',
+      out: {
+        alignItems: 'flex-start',
+      },
+    },
+    {
+      in: 'end',
+      out: {
+        alignItems: 'flex-end',
+      },
+    },
+    {
+      in: 'center',
+      out: {
+        alignItems: 'center',
+      },
+    },
+    {
+      in: 'stretch',
+      out: {
+        alignItems: 'stretch',
+      },
+    },
+  ],
   alignMajor: [
     {
       in: 'start',
@@ -57,13 +83,13 @@ const fixtures = {
     {
       in: 'start',
       out: {
-        alignItems: ['flex-start', 'start'],
+        alignItems: 'start',
       },
     },
     {
       in: 'end',
       out: {
-        alignItems: ['flex-end', 'end'],
+        alignItems: 'end',
       },
     },
     {
@@ -76,6 +102,32 @@ const fixtures = {
       in: 'stretch',
       out: {
         alignItems: 'stretch',
+      },
+    },
+  ],
+  alignSelf: [
+    {
+      in: 'start',
+      out: {
+        alignSelf: 'flex-start',
+      },
+    },
+    {
+      in: 'end',
+      out: {
+        alignSelf: 'flex-end',
+      },
+    },
+    {
+      in: 'center',
+      out: {
+        alignSelf: 'center',
+      },
+    },
+    {
+      in: 'stretch',
+      out: {
+        alignSelf: 'stretch',
       },
     },
   ],
@@ -109,13 +161,13 @@ const fixtures = {
     {
       in: 'start',
       out: {
-        alignSelf: ['flex-start', 'start'],
+        alignSelf: 'start',
       },
     },
     {
       in: 'end',
       out: {
-        alignSelf: ['flex-end', 'end'],
+        alignSelf: 'end',
       },
     },
     {
@@ -1099,6 +1151,82 @@ const fixtures = {
       },
     },
   ],
+  placeContentMajor: [
+    {
+      in: 'start',
+      out: {
+        justifyContent: 'flex-start',
+      },
+    },
+    {
+      in: 'end',
+      out: {
+        justifyContent: 'flex-end',
+      },
+    },
+    {
+      in: 'center',
+      out: {
+        justifyContent: 'center',
+      },
+    },
+    {
+      in: 'space-between',
+      out: {
+        justifyContent: 'space-between',
+      },
+    },
+    {
+      in: 'space-around',
+      out: {
+        justifyContent: 'space-around',
+      },
+    },
+    {
+      in: ['space-around', true],
+      out: {
+        justifyContent: 'space-evenly',
+      },
+    },
+  ],
+  placeContentMinor: [
+    {
+      in: 'start',
+      out: {
+        alignContent: 'flex-start',
+      },
+    },
+    {
+      in: 'end',
+      out: {
+        alignContent: 'flex-end',
+      },
+    },
+    {
+      in: 'center',
+      out: {
+        alignContent: 'center',
+      },
+    },
+    {
+      in: 'space-between',
+      out: {
+        alignContent: 'space-between',
+      },
+    },
+    {
+      in: 'space-around',
+      out: {
+        alignContent: 'space-around',
+      },
+    },
+    {
+      in: ['space-around', true],
+      out: {
+        alignContent: 'space-evenly',
+      },
+    },
+  ],
   placeDirection: [
     {
       in: 'col',
@@ -1554,7 +1682,7 @@ const fixtures = {
         '"header header header""minor majorHeader .""minor majorFooter .""footer footer footer"',
     },
   },
-  transform: [
+  modify: [
     {
       in: false,
       out: {
