@@ -43,6 +43,7 @@ const handler = {
       .concat(v)
       .map((v) => `.${v}`)
       .join(''),
+  event: (v) => ':' + v,
   id: (v) =>
     []
       .concat(v)
@@ -52,6 +53,7 @@ const handler = {
   isCurr: (v) => (v ? ':target' : ':not(:target)'),
   isDisabled: (v) => (v ? ':disabled' : ':enabled'),
   isEmpty: (v) => (v ? ':empty' : ':not(:empty)'),
+  isNew: (v) => (v ? ':not(:visited)' : ':visited'),
   isOnly: (v) => {
     if (typeof v === 'object') {
       const { isNot, isStrict } = v
@@ -112,6 +114,12 @@ module.exports = (queries, ...rules) => ({
       }
 
       switch (query) {
+        case 'hover':
+          return handler['event']('hover')
+        case 'focus':
+          return handler['event']('focus')
+        case 'active':
+          return handler['event']('active')
         case 'last':
           return handler['nth']('first')
         case 'first':
@@ -128,6 +136,10 @@ module.exports = (queries, ...rules) => ({
           return handler['isEmpty'](true)
         case 'isNotEmpty':
           return handler['isEmpty'](false)
+        case 'isNew':
+          return handler['isNew'](true)
+        case 'isNotNew':
+          return handler['isNew'](false)
         case 'isOnly':
           return handler['isOnly'](true)
         case 'isNotOnly':
