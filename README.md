@@ -63,20 +63,17 @@ ReactDOM.render(
 
 sets `@media screen and ...` based on config
 
-- if config is number, returns `'@media screen and (min-width: {number/16}em)'`
+- if config is number, returns
+  ```javascript
+  {
+    '@media screen and (max-width: {number-1/16}em)' : arguments[1],
+    '@media screen and (min-width: {number/16}em)': arguments[2],
+  }
+  ```
 - if config is object
   - it parses `from` as `(min-width: {number/16}em)`
   - it parses `to` as `(max-width: {(number - 1)/16}em)`
   - it parses `{ key: val }` as `(key: val)`
-
-### on
-
-`on([...configs], ...rules)` - events helper
-
-- parses `'hovered'` as `':hover'`
-- parses `'focused'` as `':focus'`
-- parses `'activated'` as `':active'`
-- parses `'visited'` as `':visited'`
 
 ### its
 

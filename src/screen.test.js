@@ -1,31 +1,20 @@
 const fn = require('./screen')
 
-const fixtures = {
-  number: {
-    in: 300,
-    out: `@media screen and (min-width: ${300 / 16}em)`,
-  },
-  object: {
-    in: {
-      from: 600,
-      orientation: `'landscape'`,
-      to: 1200,
-    },
-    out: `@media screen and (min-width: ${600 /
-      16}em) and (orientation: 'landscape') and (max-width: ${1199 / 16}em)`,
-  },
-}
+const prefix = '@media screen'
 
-Object.entries(fixtures).forEach(([k, v]) => {
-  test(k, () => {
-    ;[].concat(v).forEach((v) => {
-      if (typeof v === 'object') {
-        expect(fn(v.in || k)).toEqual(
-          typeof v.out === 'object' ? v.out : { [v.out]: {} }
-        )
-      } else {
-        expect(fn(k)).toEqual({ [v]: {} })
-      }
-    })
+test('object', () => {
+  const from = `(min-width:${600 / 16}em)`
+  const to = `(max-width:${1199 / 16}em)`
+  const orientation = `(orientation:'landscape')`
+
+  expect(fn({ from: 600, orientation: `'landscape'`, to: 1200 })).toEqual({
+    [`${prefix} and ${from} and ${orientation} and ${to}`]: {},
+  })
+})
+
+test('number', () => {
+  expect(fn(960)).toEqual({
+    [`${prefix} and (max-width:${959 / 16}em)`]: {},
+    [`${prefix} and (min-width:${960 / 16}em)`]: {},
   })
 })

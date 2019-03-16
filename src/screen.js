@@ -1,26 +1,37 @@
-module.exports = (query, ...rules) => ({
-  [typeof query === 'object'
-    ? Object.entries(query)
-        .reduce(
-          (r, [k, v]) => {
-            switch (k) {
-              case 'from':
-                r.push(`(min-width: ${v / 16}em)`)
-                break
-              case 'to':
-                r.push(`(max-width: ${(v - 1) / 16}em)`)
-                break
-              default:
-                r.push(`(${k}: ${v})`)
-            }
+var parse = function(screen) {
+  var queries = ['@media screen']
 
-            return r
-          },
-          ['@media screen']
-        )
-        .join(' and ')
-    : `@media screen and (min-width: ${query / 16}em)`]: Object.assign(
-    {},
-    ...rules
-  ),
-})
+  for (var query in screen) {
+    if (screen.hasOwnProperty(query)) {
+      var val = screen[query]
+
+      switch (query) {
+        case 'from':
+          queries.push('(min-width:' + val / 16 + 'em' + ')')
+          break
+        case 'to':
+          queries.push('(max-width:' + (val - 1) / 16 + 'em' + ')')
+          break
+        default:
+          queries.push('(' + query + ':' + val + ')')
+      }
+    }
+  }
+
+  return queries.join(' and ')
+}
+
+var combine = function(rules) {
+  return [].concat(rules).reduce((r, v) => Object.assign(r, v), {})
+}
+
+module.exports = function(screen) {
+  var rules = {}
+
+  if (typeof screen === 'number') {
+    rules[parse({ to: screen })] = combine(arguments[1])
+    rules[parse({ from: screen })] = combine(arguments[2])
+  } else rules[parse(screen)] = combine(arguments[1])
+
+  return rules
+}
