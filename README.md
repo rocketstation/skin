@@ -102,48 +102,18 @@ it returns one or more strings divided by `','` based on amount of configs
 
 ### if
 
-`if([...configs], ...rules)` - modifiers helper
+`if(configs, rules)` - modifiers helper
 
 - if config is string
-  - parses `'active'` as `':active'`
-  - parses `'focus'` as `':focus'`
-  - parses `'hover'` as `':hover'`
+  - parses '{event}' as `':{event}'`
   - parses `'last'` as `':nth-child(1)'`
   - parses `'first'` as `':nth-last-child(1)'`
-  - parses `'isActive'` as `':checked'`
-  - parses `'isNotActive'` as `':not(:checked)'`
-  - parses `'isCurr'` as `':target'`
-  - parses `'isNotCurr'` as `':not(:target)'`
-  - parses `'isEmpty'` as `':empty'`
-  - parses `'isNotEmpty'` as `':not(:empty)'`
-  - parses `isNew` as `':visited'`
-  - parses `isNotNew` as `':not(:visited)'`
-  - parses `'isOnly'` as `':target'`
-  - parses `'isNotOnly'` as `':not(:target)'`
-  - parses `'isDisabled'` as `':disabled'`
-  - parses `'isNotDisabled'` as `':enabled'`
-  - parses `'isReadOnly'` as `':read-only'`
-  - parses `'isNotReadOnly'` as `':not(:read-only)'`
 - if config is object joins all props to string
   - parses `kind` string as element
   - parses `class` string or array as class, adds `.` to each of them, joins them
   - parses `id` string or array as id, adds `#` to each of them, joins them
   - parses `{ nth: 'last' }` as `':nth-child(1)'`
   - parses `{ nth: 'first' }` as `':nth-last-child(1)'`
-  - parses `{ isActive: true }` as `':checked'`
-  - parses `{ isActive: false }` as `':not(:checked)'`
-  - parses `{ isCurr: true }` as `':target'`
-  - parses `{ isCurr: false }` as `':not(:target)'`
-  - parses `{ isEmpty: true }` as `':empty'`
-  - parses `{ isEmpty: false }` as `':not(:empty)'`
-  - parses `{ isNew: true }` as `':visited'`
-  - parses `{ isNew: false }` as `':not(:visited)'`
-  - parses `{ isOnly: true }` as `':target'`
-  - parses `{ isOnly: false }` as `':not(:target)'`
-  - parses `{ isDisabled: true }` as `':disabled'`
-  - parses `{ isDisabled: false }` as `':enabled'`
-  - parses `{ isReadOnly: true }` as `':read-only'`
-  - parses `{ isReadOnly: false }` as `':not(:read-only)'`
   - parses `{ event: 'val' }` as `:{val}`
   - parses `attr` as `'[{key}{modifier}{val}]'`
     - if `val` is not defined, returns `'[key]'`
@@ -159,9 +129,6 @@ it returns one or more strings divided by `','` based on amount of configs
     - it parses `from` as disp like `+{from}`
     - if `isReversed` is `true`, returns `':nth-last-...'`
     - if `isStrict` is `true`, returns `'...-of-type'`
-    - if `isNot` is `true`, returns `':not(...)'`
-  - if `isOnly` is object
-    - if `isStrict` is `true`, returns `':only-of-type'
     - if `isNot` is `true`, returns `':not(...)'`
 
 it returns one or more strings divided by `','` based on amount of configs

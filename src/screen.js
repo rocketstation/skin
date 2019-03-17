@@ -22,16 +22,18 @@ var parse = function(screen) {
 }
 
 var combine = function(rules) {
-  return [].concat(rules).reduce((r, v) => Object.assign(r, v), {})
+  return [].concat(rules).reduce(function(r, v) {
+    return Object.assign(r, v)
+  }, {})
 }
 
 module.exports = function(screen) {
-  var rules = {}
+  var next = {}
 
   if (typeof screen === 'number') {
-    rules[parse({ to: screen })] = combine(arguments[1])
-    rules[parse({ from: screen })] = combine(arguments[2])
-  } else rules[parse(screen)] = combine(arguments[1])
+    next[parse({ to: screen })] = combine(arguments[1])
+    next[parse({ from: screen })] = combine(arguments[2])
+  } else next[parse(screen)] = combine(arguments[1])
 
-  return rules
+  return next
 }
