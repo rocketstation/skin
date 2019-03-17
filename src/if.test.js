@@ -15,18 +15,18 @@ test('custom', () => {
         isStrict: true,
       },
     })
-  ).toEqual({ '&div.foo.bar#tst:not(:nth-last-of-type(1n+1)):hover': {} })
+  ).toEqual({ 'div.foo.bar#tst:not(:nth-last-of-type(1n+1)):hover': {} })
 })
 
 test('attr', () => {
   ;[
-    ['tst', '&[tst]'],
+    ['tst', '[tst]'],
     [
       {
         isNot: true,
         key: 'tst',
       },
-      '&:not([tst])',
+      ':not([tst])',
     ],
     [
       {
@@ -34,7 +34,7 @@ test('attr', () => {
         modifier: 'equals',
         val: 'bar',
       },
-      '&[foo=bar]',
+      '[foo=bar]',
     ],
     [
       {
@@ -42,7 +42,7 @@ test('attr', () => {
         modifier: 'contains',
         val: 'bar',
       },
-      '&[foo~=bar]',
+      '[foo~=bar]',
     ],
     [
       {
@@ -50,7 +50,7 @@ test('attr', () => {
         modifier: 'starts',
         val: 'bar',
       },
-      '&[foo|=bar]',
+      '[foo|=bar]',
     ],
     [
       {
@@ -58,7 +58,7 @@ test('attr', () => {
         modifier: 'startsWithStr',
         val: 'bar',
       },
-      '&[foo^="bar"]',
+      '[foo^="bar"]',
     ],
     [
       {
@@ -66,7 +66,7 @@ test('attr', () => {
         modifier: 'containsStr',
         val: 'bar',
       },
-      '&[foo*="bar"]',
+      '[foo*="bar"]',
     ],
     [
       {
@@ -74,7 +74,7 @@ test('attr', () => {
         modifier: 'endsWithStr',
         val: 'bar',
       },
-      '&[foo$="bar"]',
+      '[foo$="bar"]',
     ],
   ].forEach((v) => {
     expect(

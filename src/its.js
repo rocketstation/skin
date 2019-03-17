@@ -1,45 +1,42 @@
-module.exports = (queries, ...rules) => ({
-  [[]
-    .concat(queries)
-    .map((query) => {
-      if (typeof query === 'object') {
-        let modifier = ' '
+module.exports = function(modifier, rules) {
+  if (typeof modifier === 'object') {
+    var config = Object.assign({}, modifier)
 
-        if (query.modifier === 'children') modifier = '>'
-        if (query.modifier === 'next')
-          modifier = query.isStrict === false ? '&~' : '&+'
+    switch (config.modifier) {
+      case 'children':
+        config.modifier = '&>'
+        break
+      case 'nextSingle':
+        config.modifier = '&+'
+        break
+      case 'nextMultiple':
+        config.modifier = '&~'
+        break
+      default:
+        config.modifier = '& '
+    }
 
-        if (query.kind) modifier += query.kind
-        if (query.class)
-          modifier += []
-            .concat(query.class)
-            .map((v) => `.${v}`)
-            .join('')
-        if (query.id)
-          modifier += []
-            .concat(query.id)
-            .map((v) => `#${v}`)
-            .join('')
+    return require('./if')(config, rules)
+  }
 
-        return modifier
-      }
+  var next = [].concat(rules).reduce(function(r, v) {
+    return Object.assign(r, v)
+  }, {})
 
-      switch (query) {
-        case 'children':
-          return '>*'
-        case 'before':
-          return '::before'
-        case 'after':
-          return '::after'
-        case 'around':
-          return '::before,::after'
-        case 'placeholder':
-          return '::placeholder'
-        case 'next':
-          return '&+*'
-        case 'highlight':
-          return '::selection'
-      }
-    })
-    .join(',')]: Object.assign({}, ...rules),
-})
+  switch (modifier) {
+    case 'children':
+      return { '>*': next }
+    case 'before':
+      return { '::before': next }
+    case 'after':
+      return { '::after': next }
+    case 'placeholder':
+      return { '::placeholder': next }
+    case 'nextSingle':
+      return { '&+*': next }
+    case 'nextMultiple':
+      return { '&~*': next }
+    case 'highlight':
+      return { '::selection': next }
+  }
+}

@@ -59,7 +59,7 @@ ReactDOM.render(
 
 ### screen
 
-`screen(config, ...rules)` - screen helper
+`screen(config, [...rules])` - screen helper
 
 sets `@media screen and ...` based on config
 
@@ -77,32 +77,25 @@ sets `@media screen and ...` based on config
 
 ### its
 
-`its([...configs], ...rules)` - domains helper
+`its(config, [...rules])` - domains helper
 
 - if config is string
-  - parses `'children'` as `'>*'`
+  - parses `'children'` as `'&>*'`
   - parses `'before'` as `'::before'`
   - parses `'after'` as `'::after'`
-  - parses `'around'` as `'::before,::after'`
   - parses `'placeholder'` as `'::placeholder'`
-  - parses `'next'` as `'+*'`
+  - parses `'nextSingle'` as `'&+*'`
+  - parses `'nextMultiple'` as `'&+~'`
   - parses `'highlight'` as `'::selection'`
-- if config is object
-  - parses `kind` string as element
-  - parses `class` string or array as class, adds `.` to each of them, joins them
-  - parses `id` string or array as id, adds `#` to each of them, joins them
-
-by default it returns string with prefix `' '`. However it can be changed using `modifier` & `isStrict`
-
- - if `modifier` is `children`, returns string with prefix `'>'`
- - if `modifier` is `next`, returns string with prefix `'+'`
- - if `modifier` is `next` and `isStrict` is `false`, returns string with prefix `'~'`
-
-it returns one or more strings divided by `','` based on amount of configs
+- if config is object adds modifier & calls `if`
+ - if `modifier` is not defined, returns string with prefix `'& '`
+ - if `modifier` is `children`, returns string with prefix `'&>'`
+ - if `modifier` is `nextSingle`, returns string with prefix `'&+'`
+ - if `modifier` is `nextMultiple` returns string with prefix `'&~'`
 
 ### if
 
-`if(configs, rules)` - modifiers helper
+`if(configs, [...rules])` - modifiers helper
 
 - if config is string
   - parses '{event}' as `':{event}'`
@@ -131,13 +124,9 @@ it returns one or more strings divided by `','` based on amount of configs
     - if `isStrict` is `true`, returns `'...-of-type'`
     - if `isNot` is `true`, returns `':not(...)'`
 
-it returns one or more strings divided by `','` based on amount of configs
-
 ### layout
 
 it contains props for Fela Plugin Custom Property
-
-
 
 #### `align` -> `textAlign`
 

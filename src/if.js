@@ -92,10 +92,14 @@ var parseNth = function(v) {
 
 var parse = function(modifier) {
   if (typeof modifier === 'object') {
-    var queries = ['&']
+    var queries = []
+
+    if (modifier.hasOwnProperty('modifier')) {
+      queries.push(modifier.modifier)
+    }
 
     if (modifier.hasOwnProperty('kind')) {
-      queries.push(modifier.kind)
+      queries.push(modifier.kind === true ? '*' : modifier.kind)
     }
 
     if (modifier.hasOwnProperty('class')) {
