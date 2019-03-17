@@ -121,9 +121,9 @@ module.exports = (queries, ...rules) => ({
         case 'active':
           return handler['event']('active')
         case 'last':
-          return handler['nth']('first')
-        case 'first':
           return handler['nth']('last')
+        case 'first':
+          return handler['nth']('first')
         case 'isActive':
           return handler['isActive'](true)
         case 'isNotActive':

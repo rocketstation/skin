@@ -1,6 +1,7 @@
 const fn = require('./if')
 
 const fixtures = {
+  active: ':active',
   attr: [
     {
       in: {
@@ -84,7 +85,9 @@ const fixtures = {
     },
     out: '.foo.bar',
   },
-  first: ':nth-last-child(1)',
+  first: ':nth-child(1)',
+  focus: ':focus',
+  hover: ':hover',
   id: {
     in: {
       id: 'tst',
@@ -151,15 +154,12 @@ const fixtures = {
       out: ':not(:empty)',
     },
   ],
-  active: ':active',
-  hover: ':hover',
-  focus: ':focus',
   isNew: ':not(:visited)',
-  isNotNew: ':visited',
   isNotActive: ':not(:checked)',
   isNotCurr: ':not(:target)',
   isNotDisabled: ':enabled',
   isNotEmpty: ':not(:empty)',
+  isNotNew: ':visited',
   isNotOnly: ':not(:only-child)',
   isNotReadOnly: ':not(:read-only)',
   isOnly: ':only-child',
@@ -215,7 +215,7 @@ const fixtures = {
     },
     out: 'div',
   },
-  last: ':nth-child(1)',
+  last: ':nth-last-child(1)',
   nth: [
     {
       in: {
