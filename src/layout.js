@@ -633,22 +633,22 @@ module.exports = {
         v.hasOwnProperty(k)
       )
       if (leftTop)
-        rules.borderBottomLeftRadius = []
+        rules.borderTopLeftRadius = []
           .concat(v[leftTop])
           .map((v) => (typeof v === 'number' ? v + 'px' : v))
           .join('/')
       if (leftBottom)
-        rules.borderBottomRightRadius = []
+        rules.borderBottomLeftRadius = []
           .concat(v[leftBottom])
           .map((v) => (typeof v === 'number' ? v + 'px' : v))
           .join('/')
       if (rightTop)
-        rules.borderTopLeftRadius = []
+        rules.borderTopRightRadius = []
           .concat(v[rightTop])
           .map((v) => (typeof v === 'number' ? v + 'px' : v))
           .join('/')
       if (rightBottom)
-        rules.borderTopRightRadius = []
+        rules.borderBottomRightRadius = []
           .concat(v[rightBottom])
           .map((v) => (typeof v === 'number' ? v + 'px' : v))
           .join('/')
