@@ -1531,7 +1531,7 @@ const fixtures = {
         min: 1,
       },
       out: {
-        gridColumnGap: 'minmax(1fr,1fr)',
+        gridColumnGap: 'minmax(1rem,1rem)',
       },
     },
     {
@@ -1630,7 +1630,7 @@ const fixtures = {
         min: 1,
       },
       out: {
-        gridRowGap: 'minmax(1fr,1fr)',
+        gridRowGap: 'minmax(1rem,1rem)',
       },
     },
     {

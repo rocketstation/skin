@@ -1231,11 +1231,12 @@ module.exports = {
         rules.gridColumnGap = `repeat(${[].concat(v.repeat).join(',')})`
       else {
         let { min = 'auto', max = 'auto' } = v
-        min = typeof min === 'number' && min !== 0 ? min + 'fr' : min
-        max = typeof max === 'number' && max !== 0 ? max + 'fr' : max
+        min = typeof min === 'number' && min !== 0 ? min + 'rem' : min
+        max = typeof max === 'number' && max !== 0 ? max + 'rem' : max
         rules.gridColumnGap = `minmax(${min},${max})`
       }
-    } else rules.gridColumnGap = typeof v === 'number' && v !== 0 ? v + 'fr' : v
+    } else
+      rules.gridColumnGap = typeof v === 'number' && v !== 0 ? v + 'rem' : v
 
     return rules
   },
@@ -1289,11 +1290,11 @@ module.exports = {
         rules.gridRowGap = `repeat(${[].concat(v.repeat).join(',')})`
       else {
         let { min = 'auto', max = 'auto' } = v
-        min = typeof min === 'number' && min !== 0 ? min + 'fr' : min
-        max = typeof max === 'number' && max !== 0 ? max + 'fr' : max
+        min = typeof min === 'number' && min !== 0 ? min + 'rem' : min
+        max = typeof max === 'number' && max !== 0 ? max + 'rem' : max
         rules.gridRowGap = `minmax(${min},${max})`
       }
-    } else rules.gridRowGap = typeof v === 'number' && v !== 0 ? v + 'fr' : v
+    } else rules.gridRowGap = typeof v === 'number' && v !== 0 ? v + 'rem' : v
 
     return rules
   },
