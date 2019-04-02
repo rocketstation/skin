@@ -259,11 +259,17 @@ module.exports = function() {
       } else {
         var to = parseScreen({ to: k })
 
-        this.rules[to] = combine.apply(void 0, [this.rules[to]].concat(v))
+        this.rules[to] = combine.apply(
+          void 0,
+          [this.rules[to]].concat(arguments[1])
+        )
 
         var from = parseScreen({ from: k })
 
-        this.rules[from] = combine.apply(void 0, [this.rules[from]].concat(v))
+        this.rules[from] = combine.apply(
+          void 0,
+          [this.rules[from]].concat(arguments[2])
+        )
       }
 
       return this
