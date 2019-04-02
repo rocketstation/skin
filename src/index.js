@@ -1,6 +1,5 @@
 module.exports = {
-  if: require('./if'),
-  its: require('./its'),
-  layout: require('./layout'),
-  screen: require('./screen'),
+  alias: require('./alias'),
+  helper: require('./helper'),
+  parser: require('./parser'),
 }

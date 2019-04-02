@@ -16,34 +16,37 @@ import $ from '@rocketstation/black-box'
 
 import { createRenderer } from 'fela'
 import pluginCustomProperty from 'fela-plugin-custom-property'
+import React from 'react'
+import ReactDOM from 'react-dom'
 import { RendererProvider as FelaProvider } from 'react-fela'
 
 const MyComponent = ({ name, ...props }) =>
   $(
     'div',
     {
-      onClick: () => { console.log('test') },
-      skin: [
-        {
-          colorBox: 'white',
-          colorText: 'black',
-        },
-        skin.on(['focused', 'hovered'], {
-          colorBox: 'black',
-          colorText: 'white',
-        }),
-        skin.if('isCurr', { isItalic: true }),
-        skin.its('children', { weight: 'bold' }),
-        skin.screen(960, { size: '120%' }),
-      ],
-      ...props
+      onClick: () => {
+        console.log('test')
+      },
+      skin: ({ theme: t }) =>
+        skin({
+          colorBox: t.box.color.major,
+          colorText: t.text.color.major,
+        })
+          .hover({
+            colorBox: t.text.color.major,
+            colorText: t.box.color.major,
+          })
+          .screen(960, { size: '125%' }),
+      ...props,
     },
     'Hello',
     $('span', name),
     '!'
   )
 
-const renderer = createRenderer({ plugins: [pluginCustomProperty(skin.layout)] })
+const renderer = createRenderer({
+  plugins: [skin.parser, pluginCustomProperty(skin.alias)],
+})
 
 ReactDOM.render(
   React.createElement(
@@ -57,125 +60,99 @@ ReactDOM.render(
 
 ## API
 
-### screen
+### helper
 
-`screen(config, [...rules])` - screen helper
+- combines multiple rules
+- supports chain syntax
+- parses `hover()` as `:hover`
+- parses `focus()` as `:focus`
+- parses `active()` as `:active`
+- parses `after()` as `::after`
+- parses `before()` as `::before`
+- parses `children()` as `>*`
+- parses `nextSingle()` as `&+*`
+- parses `nextMultiple()` as `&~*`
+- parses `class('tst')` as `.tst`
+- parses `id(tst)` as `#tst`
+- parses `if(tst)` as `tst`
+- parses `first()` as `:first-child`
+- parses `last()` as `:last-child`
+- parses `highlight()` as `::selection`
+- parses `placeholder()` as `::placeholder`
+- parses `attr(key)` as `'[{key}]'`
+- parses `attr({ key, val, modifier })` as `'[{key}{modifier}{val}]'`
+  - if `modifier` is not defined, returns `'[{key}={val}]'`
+  - if `modifier` is `'equals'`, returns `'[{key}={val}]'`
+  - if `modifier` is `'contains'`, returns `'[{key}~={val}]'`
+  - if `modifier` is `'starts'`, returns `'[{key}|={val}]'`
+  - if `modifier` is `'startsWithStr'`, returns `'[{key}^={val}]'`
+  - if `modifier` is `'containsStr'`, returns `'[{key}*={val}]'`
+  - if `modifier` is `'endsWithStr'`, returns `'[{key}$={val}]'`
+- parses `nth()`
+  - it parses `from` as disp like `'+{from}'`
+  - if `isReversed` is true, returns `':nth-last-...'`
+  - if `isStrict` is true, returns `'...-of-type'`
+  - if `isNot` is true, returns `':not(...)'`
+- parses `screen({ from: bpFrom, to: bpToo, key: val })` as `@media screen and (max-width: (bpFrom - 1/16)em) and (min-width: (bpTo/16)em) and (key: val)`
+- parses `screen(bp, rulesBefore, rulesAfter)` as `@media screen and (max-width: (bp - 1/16)em): rulesBefore` and `@media screen and (min-width: (bp/16)em): rulesAfter`
 
-sets `@media screen and ...` based on config
+### parser
 
-- if config is number, returns
-  ```javascript
-  {
-    '@media screen and (max-width: {number-1/16}em)' : arguments[1],
-    '@media screen and (min-width: {number/16}em)': arguments[2],
-  }
-  ```
-- if config is object
-  - it parses `from` as `(min-width: {number/16}em)`
-  - it parses `to` as `(max-width: {(number - 1)/16}em)`
-  - it parses `{ key: val }` as `(key: val)`
+- if object has rules property it returns object.rules
+- if object doesn’t have rules property it returns object
 
-### its
-
-`its(config, [...rules])` - domains helper
-
-- if config is string
-  - parses `'children'` as `'&>*'`
-  - parses `'before'` as `'::before'`
-  - parses `'after'` as `'::after'`
-  - parses `'placeholder'` as `'::placeholder'`
-  - parses `'nextSingle'` as `'&+*'`
-  - parses `'nextMultiple'` as `'&+~'`
-  - parses `'highlight'` as `'::selection'`
-- if config is object adds modifier & calls `if`
- - if `modifier` is not defined, returns string with prefix `'& '`
- - if `modifier` is `children`, returns string with prefix `'&>'`
- - if `modifier` is `nextSingle`, returns string with prefix `'&+'`
- - if `modifier` is `nextMultiple` returns string with prefix `'&~'`
-
-### if
-
-`if(configs, [...rules])` - modifiers helper
-
-- if config is string
-  - parses '{event}' as `':{event}'`
-  - parses `'last'` as `':nth-child(1)'`
-  - parses `'first'` as `':nth-last-child(1)'`
-- if config is object joins all props to string
-  - parses `kind` string as element
-  - parses `class` string or array as class, adds `.` to each of them, joins them
-  - parses `id` string or array as id, adds `#` to each of them, joins them
-  - parses `{ nth: 'last' }` as `':nth-child(1)'`
-  - parses `{ nth: 'first' }` as `':nth-last-child(1)'`
-  - parses `{ event: 'val' }` as `:{val}`
-  - parses `attr` as `'[{key}{modifier}{val}]'`
-    - if `val` is not defined, returns `'[key]'`
-    - if `modifier` is not defined, returns `'[{key}={val}]'`
-    - if `modifier` is `'equals'`, returns `'[{key}={val}]'`
-    - if `modifier` is `'contains'`, returns `'[{key}~={val}]'`
-    - if `modifier` is `'starts'`, returns `'[{key}|={val}]'`
-    - if `modifier` is `'startsWithStr'`, returns `'[{key}^={val}]'`
-    - if `modifier` is `'containsStr'`, returns `'[{key}*={val}]'`
-    - if `modifier` is `'endsWithStr'`, returns `'[{key}$={val}]'`
-  - if `nth` is object
-    - it parses `each` as counter like `{each}n`
-    - it parses `from` as disp like `+{from}`
-    - if `isReversed` is `true`, returns `':nth-last-...'`
-    - if `isStrict` is `true`, returns `'...-of-type'`
-    - if `isNot` is `true`, returns `':not(...)'`
-
-### layout
+### alias
 
 it contains props for Fela Plugin Custom Property
 
 #### `align` -> `textAlign`
 
-- parses `'start'` as `'left'`
-- parses `'end'` as `'right'`
+- parses `'left'` as `'left'`
+- parses `'right'` as `'right'`
 - parses `'center'` as `'center'`
 - parses `'stretch'` as `'justify'`
 
 #### `alignMajor` -> `justifyItems`
 
-- parses `'start` as `'start'`
-- parses `'end` as `'end'`
-- parses `'center` as `'center'`
-- parses `'stretch` as `'stretch'`
+- parses `'start'` as `'start'`
+- parses `'end'` as `'end'`
+- parses `'center'` as `'center'`
+- parses `'stretch'` as `'stretch'`
 
 #### `alignMinor` -> `alignItems`
 
-- parses `'start` as `'start'`
-- parses `'end` as `'end'`
-- parses `'center` as `'center'`
-- parses `'stretch` as `'stretch'`
+- parses `'start'` as `'start'`
+- parses `'end'` as `'end'`
+- parses `'center'` as `'center'`
+- parses `'stretch'` as `'stretch'`
 
 #### `alignContent` -> `alignItems`
 
-- parses `'start` as `'flex-start'`
-- parses `'end` as `'flex-end'`
-- parses `'center` as `'center'`
-- parses `'stretch` as `'stretch'`
+- parses `'start'` as `'flex-start'`
+- parses `'end'` as `'flex-end'`
+- parses `'center'` as `'center'`
+- parses `'stretch'` as `'stretch'`
 
 #### `alignSelfMajor` -> `justifySelf`
 
-- parses `'start` as `'start'`
-- parses `'end` as `'end'`
-- parses `'center` as `'center'`
-- parses `'stretch` as `'stretch'`
+- parses `'start'` as `'start'`
+- parses `'end'` as `'end'`
+- parses `'center'` as `'center'`
+- parses `'stretch'` as `'stretch'`
 
 #### `alignSelfMinor` -> `alignSelf`
 
-- parses `'start` as `'start'`
-- parses `'end` as `'end'`
-- parses `'center` as `'center'`
-- parses `'stretch` as `'stretch'`
+- parses `'start'` as `'start'`
+- parses `'end'` as `'end'`
+- parses `'center'` as `'center'`
+- parses `'stretch'` as `'stretch'`
 
 #### `alignSelf` -> `alignSelf`
 
-- parses `'start` as `'flex-start'`
-- parses `'end` as `'flex-end'`
-- parses `'center` as `'center'`
-- parses `'stretch` as `'stretch'`
+- parses `'start'` as `'flex-start'`
+- parses `'end'` as `'flex-end'`
+- parses `'center'` as `'center'`
+- parses `'stretch'` as `'stretch'`
 
 #### `animation` -> `animationName`
 
@@ -231,8 +208,8 @@ it contains props for Fela Plugin Custom Property
 
 - parses one or more values
 - parses `false` as `'none'`
-- parses `{ direction: true, bps: ['black', ['white', 50], 'black'] }` as `'radial-gradient(black, white 50%, black)'`
-- parses `{ direction: 360, bps: ['black', ['white', 50], 'black'] }` as `'linear-gradient(360deg, black, white 50%, black)'`
+- parses `{ radial: ['black', ['white', 50], 'black'] }` as `'radial-gradient(black, white 50%, black)'`
+- parses `{ 360: ['black', ['white', 50], 'black'] }` as `'linear-gradient(360deg, black, white 50%, black)'`
 - parses string as `'url({string})'`
 
 #### `bgMove` -> `backgroundPosition`
@@ -241,6 +218,7 @@ it contains props for Fela Plugin Custom Property
 - parses `{ [sideRow]: val, [sideCol]: val }` as `'{sideRow} {val} {sideCol} {val}'`
 - parses `{ [sideRow]: 0, [sideCol]: 0 }` as `'{sideRow} 0 {sideCol} 0'`
 - parses `{ [sideRow]: number, [sideCol]: number }` as `'{sideRow} {number}rem {sideCol} {number}rem'`
+- parses `{ [sideRow]: true, [sideCol]: true }` as `'{sideRow} {sideCol}'`
 - parses any valid value
 
 #### `bgOrigin` -> `backgroundOrigin`
@@ -323,7 +301,9 @@ it contains props for Fela Plugin Custom Property
 - parses one or more values
 - parses `false` as `'none'`
 - parses `1` as `1fr`
-- parses `{ repeat: [val, val, val] }` as `'repeat({val},{val},{val})'`
+- parses `[1, auto]` as `'repeat(1, auto)'`
+- parses `[fill, auto]` as `'repeat(auto-fill, auto)'`
+- parses `[fit, auto]` as `'repeat(auto-fit, auto)'`
 - parses `{ min: val, max: val }` as `'minmax({val}, {val})'`
 - parses `{ min: number, max: number }` as `'minmax({number}fr, {number}fr)'`
 - parses `{}` as `'minmax(auto, auto)'`
@@ -331,9 +311,12 @@ it contains props for Fela Plugin Custom Property
 
 #### `colsPseudo` -> `gridAutoColumns`
 
+- parses one or more values
 - parses `false` as `'none'`
 - parses `1` as `1fr`
-- parses `{ repeat: [val, val, val] }` as `'repeat({val},{val},{val})'`
+- parses `[1, auto]` as `'repeat(1, auto)'`
+- parses `[fill, auto]` as `'repeat(auto-fill, auto)'`
+- parses `[fit, auto]` as `'repeat(auto-fit, auto)'`
 - parses `{ min: val, max: val }` as `'minmax({val}, {val})'`
 - parses `{ min: number, max: number }` as `'minmax({number}fr, {number}fr)'`
 - parses `{}` as `'minmax(auto, auto)'`
@@ -414,8 +397,8 @@ it contains props for Fela Plugin Custom Property
 
 - parses `'box'` as `'block'`
 - parses `'text'` as `'inline'`
-- parses `'d1'` as `'flex'`
-- parses `'d2'` as `'grid'`
+- parses `1` as `'flex'`
+- parses `2` as `'grid'`
 - parses `false` as `'none'`
 
 #### `line` -> `lineHeight`
@@ -453,9 +436,8 @@ it contains props for Fela Plugin Custom Property
 
 - parses any valid value
 
-#### `overflow` -> `overflowX overflowY`
+#### `overflowCol` -> `overflowY`
 
-- parses sides `{ row, col }`
 - parses `true` as `'visible'`
 - parses `false` as `'hidden'`
 - parses `'auto'` as `'auto'`
@@ -464,8 +446,16 @@ it contains props for Fela Plugin Custom Property
 #### `overflowDirection` -> `flexWrap`
 
 - parses `1` as `wrap`
-- parses `0` as `'nowrap'`
+- parses false as `'nowrap'`
 - parses `-1` as `wrap-reverse`
+
+
+#### `overflowRow` -> `overflowX`
+
+- parses `true` as `'visible'`
+- parses `false` as `'hidden'`
+- parses `'auto'` as `'auto'`
+- parses `['auto', true]` as `'scroll'`
 
 #### `placeDirection` -> `gridAutoFlow`
 
@@ -481,16 +471,7 @@ it contains props for Fela Plugin Custom Property
 - parses `'space-around'` as `'space-around'`
 - parses `['space-around', true]` as `'space-evenly'`
 
-#### `placeContentMinor` -> `alignContent`
-
-- parses `'start` as `'flex-start'`
-- parses `'end` as `'flex-end'`
-- parses `'center` as `'center'`
-- parses `'space-between'` as `'space-between'`
-- parses `'space-around'` as `'space-around'`
-- parses `['space-around', true]` as `'space-evenly'`
-
-#### `placeContentMajor` -> `justifyContent`
+#### `placeContent` -> `justifyContent`
 
 - parses `'start` as `'flex-start'`
 - parses `'end` as `'flex-end'`
@@ -525,7 +506,9 @@ it contains props for Fela Plugin Custom Property
 - parses one or more values
 - parses `false` as `'none'`
 - parses `1` as `1fr`
-- parses `{ repeat: [val, val, val] }` as `'repeat({val},{val},{val})'`
+- parses `[1, auto]` as `'repeat(1, auto)'`
+- parses `[fill, auto]` as `'repeat(auto-fill, auto)'`
+- parses `[fit, auto]` as `'repeat(auto-fit, auto)'`
 - parses `{ min: val, max: val }` as `'minmax({val}, {val})'`
 - parses `{ min: number, max: number }` as `'minmax({number}fr, {number}fr)'`
 - parses `{}` as `'minmax(auto, auto)'`
@@ -533,9 +516,12 @@ it contains props for Fela Plugin Custom Property
 
 #### `rowsPseudo` -> `gridAutoRows`
 
+- parses one or more values
 - parses `false` as `'none'`
 - parses `1` as `1fr`
-- parses `{ repeat: [val, val, val] }` as `'repeat({val},{val},{val})'`
+- parses `[1, auto]` as `'repeat(1, auto)'`
+- parses `[fill, auto]` as `'repeat(auto-fill, auto)'`
+- parses `[fit, auto]` as `'repeat(auto-fit, auto)'`
 - parses `{ min: val, max: val }` as `'minmax({val}, {val})'`
 - parses `{ min: number, max: number }` as `'minmax({number}fr, {number}fr)'`
 - parses `{}` as `'minmax(auto, auto)'`
@@ -669,6 +655,9 @@ it contains props for Fela Plugin Custom Property
 - parses one or more values
 - parses from object props to transition rules
 - parses from object key in camel case to animation property in kebab case
+- parses `'colorBox'` as `'background-color'`
+- parses `'colorText'` as `'color'`
+- parses `'modify'` as `'transform'`
 - if val is object
   - parses `duration` as `transitionProperty`
   - parses `delay` as `transitionDuration`
