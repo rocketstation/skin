@@ -99,8 +99,8 @@ ReactDOM.render(
 
 ### parser
 
-- if object has rules property it returns object.rules
-- if object doesn’t have rules property it returns object
+- if object has `skin` property it returns `object.skin`
+- if object doesn’t have `skin` property it returns `object`
 
 ### alias
 

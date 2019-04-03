@@ -1,1 +1,1 @@
-module.exports = (v) => (v.hasOwnProperty('rules') ? v.rules : v)
+module.exports = (v) => (v.hasOwnProperty('skin') ? v.skin : v)

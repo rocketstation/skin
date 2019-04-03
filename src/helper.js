@@ -5,7 +5,7 @@ var checkIfObj = function(v) {
 }
 
 var combine = function() {
-  var rules = {}
+  var skin = {}
 
   for (var i = 0; i < arguments.length; i++) {
     var argument = arguments[i]
@@ -17,14 +17,14 @@ var combine = function() {
         if (next.hasOwnProperty(k)) {
           var v = next[k]
 
-          if (checkIfObj(v) && checkIfObj(rules[k])) Object.assign(rules[k], v)
-          else rules[k] = v
+          if (checkIfObj(v) && checkIfObj(skin[k])) Object.assign(skin[k], v)
+          else skin[k] = v
         }
       }
     }
   }
 
-  return rules
+  return skin
 }
 
 var parseAttr = function(v) {
@@ -113,166 +113,166 @@ module.exports = function() {
   return {
     active: function(v) {
       var modifier = ':active'
-      this.rules[modifier] = combine.apply(
+      this.skin[modifier] = combine.apply(
         void 0,
-        [this.rules[modifier]].concat(v)
+        [this.skin[modifier]].concat(v)
       )
       return this
     },
     after: function(v) {
       var modifier = '::after'
-      this.rules[modifier] = combine.apply(
+      this.skin[modifier] = combine.apply(
         void 0,
-        [this.rules[modifier]].concat(v)
+        [this.skin[modifier]].concat(v)
       )
       return this
     },
     attr: function(k, v) {
       var modifier = parseAttr(k)
-      this.rules[modifier] = combine.apply(
+      this.skin[modifier] = combine.apply(
         void 0,
-        [this.rules[modifier]].concat(v)
+        [this.skin[modifier]].concat(v)
       )
       return this
     },
     before: function(v) {
       var modifier = '::before'
-      this.rules[modifier] = combine.apply(
+      this.skin[modifier] = combine.apply(
         void 0,
-        [this.rules[modifier]].concat(v)
+        [this.skin[modifier]].concat(v)
       )
       return this
     },
     children: function(v) {
       var modifier = '>*'
-      this.rules[modifier] = combine.apply(
+      this.skin[modifier] = combine.apply(
         void 0,
-        [this.rules[modifier]].concat(v)
+        [this.skin[modifier]].concat(v)
       )
       return this
     },
     class: function(k, v) {
       var modifier = '.' + k
-      this.rules[modifier] = combine.apply(
+      this.skin[modifier] = combine.apply(
         void 0,
-        [this.rules[modifier]].concat(v)
+        [this.skin[modifier]].concat(v)
       )
       return this
     },
     first: function(v) {
       var modifier = ':first-child'
-      this.rules[modifier] = combine.apply(
+      this.skin[modifier] = combine.apply(
         void 0,
-        [this.rules[modifier]].concat(v)
+        [this.skin[modifier]].concat(v)
       )
       return this
     },
     focus: function(v) {
       var modifier = ':focus'
-      this.rules[modifier] = combine.apply(
+      this.skin[modifier] = combine.apply(
         void 0,
-        [this.rules[modifier]].concat(v)
+        [this.skin[modifier]].concat(v)
       )
       return this
     },
     highlight: function(v) {
       var modifier = '::selection'
-      this.rules[modifier] = combine.apply(
+      this.skin[modifier] = combine.apply(
         void 0,
-        [this.rules[modifier]].concat(v)
+        [this.skin[modifier]].concat(v)
       )
       return this
     },
     hover: function(v) {
       var modifier = ':hover'
-      this.rules[modifier] = combine.apply(
+      this.skin[modifier] = combine.apply(
         void 0,
-        [this.rules[modifier]].concat(v)
+        [this.skin[modifier]].concat(v)
       )
       return this
     },
     id: function(k, v) {
       var modifier = '#' + k
-      this.rules[modifier] = combine.apply(
+      this.skin[modifier] = combine.apply(
         void 0,
-        [this.rules[modifier]].concat(v)
+        [this.skin[modifier]].concat(v)
       )
       return this
     },
     if: function(k, v) {
       var modifier = k
-      this.rules[modifier] = combine.apply(
+      this.skin[modifier] = combine.apply(
         void 0,
-        [this.rules[modifier]].concat(v)
+        [this.skin[modifier]].concat(v)
       )
       return this
     },
     last: function(v) {
       var modifier = ':last-child'
-      this.rules[modifier] = combine.apply(
+      this.skin[modifier] = combine.apply(
         void 0,
-        [this.rules[modifier]].concat(v)
+        [this.skin[modifier]].concat(v)
       )
       return this
     },
     nextMultiple: function(v) {
       var modifier = '&~*'
-      this.rules[modifier] = combine.apply(
+      this.skin[modifier] = combine.apply(
         void 0,
-        [this.rules[modifier]].concat(v)
+        [this.skin[modifier]].concat(v)
       )
       return this
     },
     nextSingle: function(v) {
       var modifier = '&+*'
-      this.rules[modifier] = combine.apply(
+      this.skin[modifier] = combine.apply(
         void 0,
-        [this.rules[modifier]].concat(v)
+        [this.skin[modifier]].concat(v)
       )
       return this
     },
     nth: function(k, v) {
       var modifier = parseNth(k)
-      this.rules[modifier] = combine.apply(
+      this.skin[modifier] = combine.apply(
         void 0,
-        [this.rules[modifier]].concat(v)
+        [this.skin[modifier]].concat(v)
       )
       return this
     },
     placeholder: function(v) {
       var modifier = '::placeholder'
-      this.rules[modifier] = combine.apply(
+      this.skin[modifier] = combine.apply(
         void 0,
-        [this.rules[modifier]].concat(v)
+        [this.skin[modifier]].concat(v)
       )
       return this
     },
-    rules: combine.apply(void 0, arguments),
     screen: function(k, v) {
       if (checkIfObj(k)) {
         var modifier = parseScreen(k)
 
-        this.rules[modifier] = combine.apply(
+        this.skin[modifier] = combine.apply(
           void 0,
-          [this.rules[modifier]].concat(v)
+          [this.skin[modifier]].concat(v)
         )
       } else {
         var to = parseScreen({ to: k })
 
-        this.rules[to] = combine.apply(
+        this.skin[to] = combine.apply(
           void 0,
-          [this.rules[to]].concat(arguments[1])
+          [this.skin[to]].concat(arguments[1])
         )
 
         var from = parseScreen({ from: k })
 
-        this.rules[from] = combine.apply(
+        this.skin[from] = combine.apply(
           void 0,
-          [this.rules[from]].concat(arguments[2])
+          [this.skin[from]].concat(arguments[2])
         )
       }
 
       return this
     },
+    skin: combine.apply(void 0, arguments),
   }
 }

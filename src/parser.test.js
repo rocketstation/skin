@@ -1,8 +1,8 @@
 const fn = require('./parser')
 
-const rules = { foo: 'bar' }
+const skin = { foo: 'bar' }
 
 test('parses rules & skin', () => {
-  expect(fn(rules)).toEqual(rules)
-  expect(fn({ rules })).toEqual(rules)
+  expect(fn(skin)).toEqual(skin)
+  expect(fn({ skin })).toEqual(skin)
 })
