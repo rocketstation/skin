@@ -659,8 +659,8 @@ it contains props for Fela Plugin Custom Property
 - parses `'colorText'` as `'color'`
 - parses `'modify'` as `'transform'`
 - if val is object
-  - parses `duration` as `transitionProperty`
-  - parses `delay` as `transitionDuration`
+  - parses `duration` as `transitionDuration`
+  - parses `delay` as `transitionDelay`
   - parses `fn` as `transitionTimingFunction`
 - if val is not object, parses it as animation duration and sets default for other rules
 
