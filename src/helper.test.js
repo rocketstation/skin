@@ -37,12 +37,12 @@ it('handles before', () => {
 it('handles class', () => {
   expect(fn(rules).class('tst', rules).skin).toEqual({
     ...rules,
-    '.tst': rules,
+    '&.tst': rules,
   })
 })
 
 it('handles id', () => {
-  expect(fn(rules).id('tst', rules).skin).toEqual({ ...rules, '#tst': rules })
+  expect(fn(rules).id('tst', rules).skin).toEqual({ ...rules, '&#tst': rules })
 })
 
 it('handles if', () => {

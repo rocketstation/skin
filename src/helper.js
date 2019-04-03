@@ -152,7 +152,7 @@ module.exports = function() {
       return this
     },
     class: function(k, v) {
-      var modifier = '.' + k
+      var modifier = '&.' + k
       this.skin[modifier] = combine.apply(
         void 0,
         [this.skin[modifier]].concat(v)
@@ -192,7 +192,7 @@ module.exports = function() {
       return this
     },
     id: function(k, v) {
-      var modifier = '#' + k
+      var modifier = '&#' + k
       this.skin[modifier] = combine.apply(
         void 0,
         [this.skin[modifier]].concat(v)
