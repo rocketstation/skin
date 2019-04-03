@@ -945,6 +945,10 @@ const fixtures = {
   },
   isInteractive: [
     {
+      in: void 0,
+      out: {},
+    },
+    {
       in: true,
       out: {
         cursor: 'pointer',

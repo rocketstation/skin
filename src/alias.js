@@ -873,8 +873,13 @@ module.exports = {
     }
   },
   isInteractive: function(v) {
-    return {
-      cursor: v ? 'pointer' : 'auto',
+    switch (v) {
+      case true:
+        return { cursor: 'pointer' }
+      case false:
+        return { cursor: 'auto' }
+      default:
+        return {}
     }
   },
   isItalic: function(v) {
