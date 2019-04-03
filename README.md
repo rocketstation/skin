@@ -89,6 +89,7 @@ ReactDOM.render(
   - if `modifier` is `'containsStr'`, returns `'[{key}*={val}]'`
   - if `modifier` is `'endsWithStr'`, returns `'[{key}$={val}]'`
 - parses `nth()`
+  - it parses `each` as disp like `'{each}n'`
   - it parses `from` as disp like `'+{from}'`
   - if `isReversed` is true, returns `':nth-last-...'`
   - if `isStrict` is true, returns `'...-of-type'`
