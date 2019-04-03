@@ -3,6 +3,10 @@ const fn = require('./alias')
 const fixtures = {
   align: [
     {
+      in: void 0,
+      out: {},
+    },
+    {
       in: 'left',
       out: {
         textAlign: 'left',
@@ -28,6 +32,10 @@ const fixtures = {
     },
   ],
   alignContent: [
+    {
+      in: void 0,
+      out: {},
+    },
     {
       in: 'start',
       out: {
@@ -55,6 +63,10 @@ const fixtures = {
   ],
   alignMajor: [
     {
+      in: void 0,
+      out: {},
+    },
+    {
       in: 'start',
       out: {
         justifyItems: 'start',
@@ -80,6 +92,10 @@ const fixtures = {
     },
   ],
   alignMinor: [
+    {
+      in: void 0,
+      out: {},
+    },
     {
       in: 'start',
       out: {
@@ -107,6 +123,10 @@ const fixtures = {
   ],
   alignSelf: [
     {
+      in: void 0,
+      out: {},
+    },
+    {
       in: 'start',
       out: {
         alignSelf: 'flex-start',
@@ -133,6 +153,10 @@ const fixtures = {
   ],
   alignSelfMajor: [
     {
+      in: void 0,
+      out: {},
+    },
+    {
       in: 'start',
       out: {
         justifySelf: 'start',
@@ -158,6 +182,10 @@ const fixtures = {
     },
   ],
   alignSelfMinor: [
+    {
+      in: void 0,
+      out: {},
+    },
     {
       in: 'start',
       out: {
@@ -637,6 +665,10 @@ const fixtures = {
   ],
   case: [
     {
+      in: void 0,
+      out: {},
+    },
+    {
       in: 'lower',
       out: {
         textTransform: 'lowercase',
@@ -799,6 +831,10 @@ const fixtures = {
   },
   decoration: [
     {
+      in: void 0,
+      out: {},
+    },
+    {
       in: 'top',
       out: {
         textDecoration: 'overline',
@@ -936,6 +972,10 @@ const fixtures = {
     },
   ],
   kind: [
+    {
+      in: void 0,
+      out: {},
+    },
     {
       in: 'box',
       out: {
@@ -1087,6 +1127,10 @@ const fixtures = {
   },
   overflowCol: [
     {
+      in: void 0,
+      out: {},
+    },
+    {
       in: false,
       out: {
         overflowY: 'hidden',
@@ -1113,6 +1157,10 @@ const fixtures = {
   ],
   overflowDirection: [
     {
+      in: void 0,
+      out: {},
+    },
+    {
       in: -1,
       out: {
         flexWrap: 'wrap-reverse',
@@ -1132,6 +1180,10 @@ const fixtures = {
     },
   ],
   overflowRow: [
+    {
+      in: void 0,
+      out: {},
+    },
     {
       in: false,
       out: {
@@ -1158,6 +1210,10 @@ const fixtures = {
     },
   ],
   placeContent: [
+    {
+      in: void 0,
+      out: {},
+    },
     {
       in: 'start',
       out: {
@@ -1197,6 +1253,10 @@ const fixtures = {
   ],
   placeDirection: [
     {
+      in: void 0,
+      out: {},
+    },
+    {
       in: 'col',
       out: {
         gridAutoFlow: 'column',
@@ -1210,6 +1270,10 @@ const fixtures = {
     },
   ],
   placeMajor: [
+    {
+      in: void 0,
+      out: {},
+    },
     {
       in: 'start',
       out: {
@@ -1249,6 +1313,10 @@ const fixtures = {
   ],
   placeMinor: [
     {
+      in: void 0,
+      out: {},
+    },
+    {
       in: 'start',
       out: {
         alignContent: 'start',
@@ -1286,6 +1354,10 @@ const fixtures = {
     },
   ],
   position: [
+    {
+      in: void 0,
+      out: {},
+    },
     {
       in: true,
       out: {
@@ -1428,6 +1500,10 @@ const fixtures = {
     },
   },
   spaceBreak: [
+    {
+      in: void 0,
+      out: {},
+    },
     {
       in: true,
       out: {

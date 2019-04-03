@@ -22,6 +22,8 @@ module.exports = {
         return {
           textAlign: 'justify',
         }
+      default:
+        return {}
     }
   },
   alignContent: function(v) {
@@ -45,6 +47,8 @@ module.exports = {
         return {
           alignItems: 'stretch',
         }
+      default:
+        return {}
     }
   },
   alignMajor: function(v) {
@@ -68,6 +72,8 @@ module.exports = {
         return {
           justifyItems: 'stretch',
         }
+      default:
+        return {}
     }
   },
   alignMinor: function(v) {
@@ -91,6 +97,8 @@ module.exports = {
         return {
           alignItems: 'stretch',
         }
+      default:
+        return {}
     }
   },
   alignSelf: function(v) {
@@ -114,6 +122,8 @@ module.exports = {
         return {
           alignSelf: 'stretch',
         }
+      default:
+        return {}
     }
   },
   alignSelfMajor: function(v) {
@@ -137,6 +147,8 @@ module.exports = {
         return {
           justifySelf: 'stretch',
         }
+      default:
+        return {}
     }
   },
   alignSelfMinor: function(v) {
@@ -160,6 +172,8 @@ module.exports = {
         return {
           alignSelf: 'stretch',
         }
+      default:
+        return {}
     }
   },
   animation: function(v) {
@@ -595,6 +609,8 @@ module.exports = {
         return {
           textTransform: 'none',
         }
+      default:
+        return {}
     }
   },
   colEnd: function(v) {
@@ -809,6 +825,8 @@ module.exports = {
         return {
           textDecoration: 'none',
         }
+      default:
+        return {}
     }
   },
   direction: function(v) {
@@ -890,6 +908,8 @@ module.exports = {
         return {
           display: 'inline',
         }
+      default:
+        return {}
     }
   },
   line: function(v) {
@@ -1013,6 +1033,8 @@ module.exports = {
         overflowY: next[1] ? 'scroll' : 'auto',
       }
     }
+
+    return {}
   },
   overflowDirection: function(v) {
     switch (v) {
@@ -1030,6 +1052,9 @@ module.exports = {
         return {
           flexWrap: 'wrap-reverse',
         }
+
+      default:
+        return {}
     }
   },
   overflowRow: function(v) {
@@ -1051,6 +1076,8 @@ module.exports = {
         overflowX: next[1] ? 'scroll' : 'auto',
       }
     }
+
+    return {}
   },
   placeContent: function(v) {
     switch (v) {
@@ -1082,6 +1109,8 @@ module.exports = {
         justifyContent: next[1] ? 'space-evenly' : 'space-around',
       }
     }
+
+    return {}
   },
   placeDirection: function(v) {
     switch (v) {
@@ -1094,6 +1123,9 @@ module.exports = {
         return {
           gridAutoFlow: 'row',
         }
+
+      default:
+        return {}
     }
   },
   placeMajor: function(v) {
@@ -1126,6 +1158,8 @@ module.exports = {
         justifyContent: next[1] ? 'space-evenly' : 'space-around',
       }
     }
+
+    return {}
   },
   placeMinor: function(v) {
     switch (v) {
@@ -1157,6 +1191,8 @@ module.exports = {
         alignContent: next[1] ? 'space-evenly' : 'space-around',
       }
     }
+
+    return {}
   },
   position: function(v) {
     switch (v) {
@@ -1179,6 +1215,9 @@ module.exports = {
         return {
           position: 'static',
         }
+
+      default:
+        return {}
     }
   },
   rowEnd: function(v) {
@@ -1392,6 +1431,8 @@ module.exports = {
         whiteSpace: 'pre',
       }
     }
+
+    return {}
   },
   spaceChar: function(v) {
     return {
