@@ -27,16 +27,15 @@ const MyComponent = ({ name, ...props }) =>
       onClick: () => {
         console.log('test')
       },
-      skin: ({ theme: t }) =>
-        skin({
-          colorBox: t.box.color.major,
-          colorText: t.text.color.major,
-        })
-          .hover({
-            colorBox: t.text.color.major,
-            colorText: t.box.color.major,
-          })
-          .screen(960, { size: '125%' }),
+      skin: ({ theme: t }) => ({
+        colorBox: t.box.color.major,
+        colorText: t.text.color.major,
+        [skin.on.hover]: {
+          colorBox: t.text.color.major,
+          colorText: t.box.color.major,
+        },
+        [skin.screen.from(960)]: { size: '125%' }
+      }),
       ...props,
     },
     'Hello',
@@ -45,7 +44,7 @@ const MyComponent = ({ name, ...props }) =>
   )
 
 const renderer = createRenderer({
-  plugins: [skin.parser, pluginCustomProperty(skin.alias)],
+  plugins: [pluginCustomProperty(skin.alias)],
 })
 
 ReactDOM.render(
@@ -60,47 +59,43 @@ ReactDOM.render(
 
 ## API
 
-### helper
+### Attr
 
-- combines multiple rules
-- supports chain syntax
-- parses `hover()` as `:hover`
-- parses `focus()` as `:focus`
-- parses `active()` as `:active`
-- parses `after()` as `::after`
-- parses `before()` as `::before`
-- parses `children()` as `>*`
-- parses `nextSingle()` as `&+*`
-- parses `nextMultiple()` as `&~*`
-- parses `class('tst')` as `.tst`
-- parses `id(tst)` as `#tst`
-- parses `if(tst)` as `tst`
-- parses `first()` as `:first-child`
-- parses `last()` as `:last-child`
-- parses `highlight()` as `::selection`
-- parses `placeholder()` as `::placeholder`
-- parses `attr(key)` as `'[{key}]'`
-- parses `attr({ key, val, modifier })` as `'[{key}{modifier}{val}]'`
-  - if `modifier` is not defined, returns `'[{key}={val}]'`
-  - if `modifier` is `'equals'`, returns `'[{key}={val}]'`
-  - if `modifier` is `'contains'`, returns `'[{key}~={val}]'`
-  - if `modifier` is `'starts'`, returns `'[{key}|={val}]'`
-  - if `modifier` is `'startsWithStr'`, returns `'[{key}^={val}]'`
-  - if `modifier` is `'containsStr'`, returns `'[{key}*={val}]'`
-  - if `modifier` is `'endsWithStr'`, returns `'[{key}$={val}]'`
-- parses `nth()`
-  - it parses `each` as counter like `'{each}n'`
-  - it parses `from` as disp like `'+{from}'`
-  - if `isReversed` is true, returns `':nth-last-...'`
-  - if `isStrict` is true, returns `'...-of-type'`
-  - if `isNot` is true, returns `':not(...)'`
-- parses `screen({ from: bpFrom, to: bpToo, key: val })` as `@media screen and (max-width: (bpFrom - 1/16)em) and (min-width: (bpTo/16)em) and (key: val)`
-- parses `screen(bp, rulesBefore, rulesAfter)` as `@media screen and (max-width: (bp - 1/16)em): rulesBefore` and `@media screen and (min-width: (bp/16)em): rulesAfter`
+- parses `attr(key).contains(val)` as `[{key}~={val}]`
+- parses `attr(key).containsStr(val)` as `[{key}*="{val}"]`
+- parses `attr(key).endsWithStr(val)` as `[{key}$="{val}"]`
+- parses `attr(key).equals(val)` as `[{key}={val}]`
+- parses `attr(key).is` as `[{key}]`
+- parses `attr(key).starts(val)` as `[{key}|={val}]`
+- parses `attr(key).startsWithStr(val)` as `[{key}^="{val}"]`
 
-### parser
+### Its
 
-- if object has `skin` property it returns `object.skin`
-- if object doesn’t have `skin` property it returns `object`
+- parses `its(val)` as `& {val}`
+- parses `its.after` as `::after`
+- parses `its.before` as `::before`
+- parses `its.children` as `>*`
+- parses `its.first()` as `:nth-child(0n+1)`
+- parses `its.first(every,from)` as `:nth-child({every}n+{from})`
+- parses `its.last()` as `:nth-last-child(0n+1)`
+- parses `its.last(every,from)` as `:nth-last-child({every}n+{from})`
+- parses `its.highlight` as `::selection`
+- parses `its.nextMultiple` as `&~*`
+- parses `its.nextSingle` as `&+*`
+- parses `its.placeholder` as `::placeholder`
+
+### On
+
+- parses `on.hover` as `:hover`
+- parses `on.focus` as `:focus`
+- parses `on.active` as `:active`
+
+### Screen
+
+- parses `screen({ key: val })` as `@media screen and ({key}: {val})`
+- parses `screen.from(px)` as `@media screen and (min-width:{px / 16}em)`
+- parses `screen.to(px)` as `@media screen and (max-width:{(px - 1) / 16}em)`
+- parses `screen.between(pxFrom, pxTo)` as `@media screen (min-width:{pxFrom / 16}em) and (max-width:{(pxTo - 1) / 16}em)`
 
 ### alias
 

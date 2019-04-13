@@ -1,5 +1,7 @@
-Object.defineProperty(exports, '__esModule', { value: true })
-
-exports.alias = require('./alias')
-exports.parser = require('./parser')
-exports.default = require('./helper')
+module.exports = {
+  alias: require('./alias'),
+  attr: require('./attr'),
+  its: require('./its'),
+  on: require('./on'),
+  screen: require('./screen'),
+}
