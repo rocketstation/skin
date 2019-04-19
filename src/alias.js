@@ -2,178 +2,38 @@ const cc = require('@rocketstation/change-case')
 
 module.exports = {
   align: function(v) {
-    switch (v) {
-      case 'left':
-        return {
-          textAlign: 'left',
-        }
-
-      case 'right':
-        return {
-          textAlign: 'right',
-        }
-
-      case 'center':
-        return {
-          textAlign: 'center',
-        }
-
-      case 'stretch':
-        return {
-          textAlign: 'justify',
-        }
-      default:
-        return {}
-    }
+    var rules = {}
+    rules.textAlign = v === 'stretch' ? 'justify' : v
+    return rules
   },
   alignContent: function(v) {
-    switch (v) {
-      case 'start':
-        return {
-          alignItems: 'flex-start',
-        }
-
-      case 'end':
-        return {
-          alignItems: 'flex-end',
-        }
-
-      case 'center':
-        return {
-          alignItems: 'center',
-        }
-
-      case 'stretch':
-        return {
-          alignItems: 'stretch',
-        }
-      default:
-        return {}
+    return {
+      alignItems: v === 'start' || v === 'end' ? 'flex-' + v : v,
     }
   },
   alignMajor: function(v) {
-    switch (v) {
-      case 'start':
-        return {
-          justifyItems: 'start',
-        }
-
-      case 'end':
-        return {
-          justifyItems: 'end',
-        }
-
-      case 'center':
-        return {
-          justifyItems: 'center',
-        }
-
-      case 'stretch':
-        return {
-          justifyItems: 'stretch',
-        }
-      default:
-        return {}
+    return {
+      justifyItems: v,
     }
   },
   alignMinor: function(v) {
-    switch (v) {
-      case 'start':
-        return {
-          alignItems: 'start',
-        }
-
-      case 'end':
-        return {
-          alignItems: 'end',
-        }
-
-      case 'center':
-        return {
-          alignItems: 'center',
-        }
-
-      case 'stretch':
-        return {
-          alignItems: 'stretch',
-        }
-      default:
-        return {}
+    return {
+      alignItems: v,
     }
   },
   alignSelf: function(v) {
-    switch (v) {
-      case 'start':
-        return {
-          alignSelf: 'flex-start',
-        }
-
-      case 'end':
-        return {
-          alignSelf: 'flex-end',
-        }
-
-      case 'center':
-        return {
-          alignSelf: 'center',
-        }
-
-      case 'stretch':
-        return {
-          alignSelf: 'stretch',
-        }
-      default:
-        return {}
+    return {
+      alignSelf: v === 'start' || v === 'end' ? 'flex-' + v : v,
     }
   },
   alignSelfMajor: function(v) {
-    switch (v) {
-      case 'start':
-        return {
-          justifySelf: 'start',
-        }
-
-      case 'end':
-        return {
-          justifySelf: 'end',
-        }
-
-      case 'center':
-        return {
-          justifySelf: 'center',
-        }
-
-      case 'stretch':
-        return {
-          justifySelf: 'stretch',
-        }
-      default:
-        return {}
+    return {
+      justifySelf: v,
     }
   },
   alignSelfMinor: function(v) {
-    switch (v) {
-      case 'start':
-        return {
-          alignSelf: 'start',
-        }
-
-      case 'end':
-        return {
-          alignSelf: 'end',
-        }
-
-      case 'center':
-        return {
-          alignSelf: 'center',
-        }
-
-      case 'stretch':
-        return {
-          alignSelf: 'stretch',
-        }
-      default:
-        return {}
+    return {
+      alignSelf: v,
     }
   },
   animation: function(v) {
@@ -182,254 +42,473 @@ module.exports = {
     }
   },
   animationCount: function(v) {
+    if (v == null) return {}
     return {
-      animationIterationCount: []
-        .concat(v)
-        .map(function(v) {
-          return v === true ? 'infinite' : v
-        })
-        .join(','),
+      animationIterationCount:
+        v.constructor === Array
+          ? v.reduce(function(r, v) {
+              return r + (r.length ? ',' : '') + (v === true ? 'infinite' : v)
+            }, '')
+          : v === true
+          ? 'infinite'
+          : v,
     }
   },
   animationDelay: function(v) {
+    if (v == null) return {}
     return {
-      animationDelay: []
-        .concat(v)
-        .map(function(v) {
-          return typeof v === 'number' ? v + 'ms' : v
-        })
-        .join(','),
+      animationDelay:
+        v.constructor === Array
+          ? v.reduce(function(r, v) {
+              return (
+                r +
+                (r.length ? ',' : '') +
+                (typeof v === 'number' ? v + 'ms' : v)
+              )
+            }, '')
+          : typeof v === 'number'
+          ? v + 'ms'
+          : v,
     }
   },
   animationDirection: function(v) {
-    return {
-      animationDirection: []
-        .concat(v)
-        .map(function(v) {
+    if (v == null) return {}
+
+    if (v.constructor === Array) {
+      return {
+        animationDirection: v.reduce(function(r, v) {
           switch (v) {
-            case 1:
-              return 'normal'
-
             case -1:
-              return 'reverse'
-
-            case 2:
-              return 'alternate'
+              return r + (r.length ? ',' : '') + 'reverse'
 
             case -2:
-              return 'alternate-reverse'
+              return r + (r.length ? ',' : '') + 'alternate-reverse'
+
+            case 2:
+              return r + (r.length ? ',' : '') + 'alternate'
+
+            case 1:
+              return r + (r.length ? ',' : '') + 'normal'
+
+            default:
+              return r
           }
-        })
-        .join(','),
+        }, ''),
+      }
+    }
+
+    switch (v) {
+      case 1:
+        return {
+          animationDirection: 'normal',
+        }
+
+      case -1:
+        return {
+          animationDirection: 'reverse',
+        }
+
+      case 2:
+        return {
+          animationDirection: 'alternate',
+        }
+
+      case -2:
+        return {
+          animationDirection: 'alternate-reverse',
+        }
+
+      default:
+        return {}
     }
   },
   animationDuration: function(v) {
+    if (v == null) return {}
     return {
-      animationDuration: []
-        .concat(v)
-        .map(function(v) {
-          return typeof v === 'number' ? v + 'ms' : v
-        })
-        .join(','),
+      animationDuration:
+        v.constructor === Array
+          ? v.reduce(function(r, v) {
+              return (
+                r +
+                (r.length ? ',' : '') +
+                (typeof v === 'number' ? v + 'ms' : v)
+              )
+            }, '')
+          : typeof v === 'number'
+          ? v + 'ms'
+          : v,
     }
   },
   animationFn: function(v) {
+    if (v == null) return {}
     return {
-      animationTimingFunction: [].concat(v).join(','),
+      animationTimingFunction: v.constructor === Array ? v.join(',') : v,
     }
   },
   animationIsActive: function(v) {
+    if (v == null) return {}
     return {
-      animationPlayState: []
-        .concat(v)
-        .map(function(v) {
-          return v ? 'running' : 'paused'
-        })
-        .join(','),
+      animationPlayState:
+        v.constructor === Array
+          ? v.reduce(function(r, v) {
+              return r + (r.length ? ',' : '') + (v ? 'running' : 'paused')
+            }, '')
+          : v
+          ? 'running'
+          : 'paused',
     }
   },
   animationOrigin: function(v) {
-    return {
-      animationFillingMode: []
-        .concat(v)
-        .map(function(v) {
+    if (v == null) return {}
+
+    if (v.constructor === Array) {
+      return {
+        animationFillingMode: v.reduce(function(r, v) {
           switch (v) {
             case false:
-              return 'none'
+              return r + (r.length ? ',' : '') + 'none'
 
             case true:
-              return 'both'
+              return r + (r.length ? ',' : '') + 'both'
 
             case 1:
-              return 'forwards'
+              return r + (r.length ? ',' : '') + 'forwards'
 
             case -1:
-              return 'backwards'
+              return r + (r.length ? ',' : '') + 'backwards'
+
+            default:
+              return r
           }
-        })
-        .join(','),
+        }, ''),
+      }
+    }
+
+    switch (v) {
+      case false:
+        return {
+          animationFillingMode: 'none',
+        }
+
+      case true:
+        return {
+          animationFillingMode: 'both',
+        }
+
+      case 1:
+        return {
+          animationFillingMode: 'forwards',
+        }
+
+      case -1:
+        return {
+          animationFillingMode: 'backwards',
+        }
+
+      default:
+        return {}
     }
   },
   bg: function(v) {
+    if (v == null) return {}
+
+    if (v === false) {
+      return {
+        backgroundImage: 'none',
+      }
+    }
+
+    if (v.constructor === Array) {
+      return {
+        backgroundImage: v.reduce(function(r, v) {
+          return r + (r.length ? ',' : '') + v
+        }, ''),
+      }
+    }
+
     return {
-      backgroundImage:
-        v === false
-          ? 'none'
-          : []
-              .concat(v)
-              .map(function(v) {
-                if (typeof v === 'object') {
-                  var key
-                  var val
-
-                  for (var k in v) {
-                    if (v.hasOwnProperty(k)) {
-                      key = k
-                      val = v[k]
-                        .map(function(v) {
-                          return typeof v === 'object'
-                            ? v[0] + ' ' + v[1] + '%'
-                            : v
-                        })
-                        .join(',')
-                    }
-                  }
-
-                  return key === 'radial'
-                    ? 'radial-gradient' + '(' + val + ')'
-                    : 'linear-gradient' + '(' + key + 'deg' + ',' + val + ')'
-                }
-
-                return 'url' + '(' + v + ')'
-              })
-              .join(','),
+      backgroundImage: v,
     }
   },
-  bgMove: function(v) {
-    return {
-      backgroundPosition: []
-        .concat(v)
-        .map(function(v) {
-          if (typeof v === 'object') {
-            var next = []
+  bgMoveCol: function(v) {
+    if (v == null) return {}
 
+    if (v.constructor === Array) {
+      return {
+        backgroundPositionY: v.reduce(function(r, v) {
+          if (typeof v === 'object') {
             for (var k in v) {
               if (v.hasOwnProperty(k)) {
-                var val = k
-
-                if (v[k] !== true) {
-                  val +=
-                    ' ' +
-                    (typeof v[k] === 'number' && v[k] !== 0
-                      ? v[k] + 'rem'
-                      : v[k])
-                }
-
-                next.push(val)
+                return (
+                  r +
+                  (r.length ? ',' : '') +
+                  k +
+                  ' ' +
+                  (typeof v[k] === 'number' && v[k] !== 0 ? v[k] + 'rem' : v[k])
+                )
               }
             }
-
-            return next.join(' ')
           }
 
-          return v
-        })
-        .join(','),
+          return r + (r.length ? ',' : '') + v
+        }, ''),
+      }
+    }
+
+    if (typeof v === 'object') {
+      for (var k in v) {
+        if (v.hasOwnProperty(k)) {
+          return {
+            backgroundPositionY:
+              k +
+              ' ' +
+              (typeof v[k] === 'number' && v[k] !== 0 ? v[k] + 'rem' : v[k]),
+          }
+        }
+      }
+    }
+
+    return {
+      backgroundPositionY: v,
+    }
+  },
+  bgMoveRow: function(v) {
+    if (v == null) return {}
+
+    if (v.constructor === Array) {
+      return {
+        backgroundPositionX: v.reduce(function(r, v) {
+          if (typeof v === 'object') {
+            for (var k in v) {
+              if (v.hasOwnProperty(k)) {
+                return (
+                  r +
+                  (r.length ? ',' : '') +
+                  k +
+                  ' ' +
+                  (typeof v[k] === 'number' && v[k] !== 0 ? v[k] + 'rem' : v[k])
+                )
+              }
+            }
+          }
+
+          return r + (r.length ? ',' : '') + v
+        }, ''),
+      }
+    }
+
+    if (typeof v === 'object') {
+      for (var k in v) {
+        if (v.hasOwnProperty(k)) {
+          return {
+            backgroundPositionX:
+              k +
+              ' ' +
+              (typeof v[k] === 'number' && v[k] !== 0 ? v[k] + 'rem' : v[k]),
+          }
+        }
+      }
+    }
+
+    return {
+      backgroundPositionX: v,
     }
   },
   bgOrigin: function(v) {
-    return {
-      backgroundOrigin: []
-        .concat(v)
-        .map(function(v) {
+    if (v == null) return {}
+
+    if (v.constructor === Array) {
+      return {
+        backgroundOrigin: v.reduce(function(r, v) {
           switch (v) {
             case 'border':
-              return 'border-box'
+              return r + (r.length ? ',' : '') + 'border-box'
 
             case 'space':
-              return 'padding-box'
+              return r + (r.length ? ',' : '') + 'padding-box'
 
             case 'content':
-              return 'content-box'
+              return r + (r.length ? ',' : '') + 'content-box'
+
+            default:
+              return r
           }
-        })
-        .join(','),
+        }, ''),
+      }
+    }
+
+    switch (v) {
+      case 'border':
+        return {
+          backgroundOrigin: 'border-box',
+        }
+
+      case 'space':
+        return {
+          backgroundOrigin: 'padding-box',
+        }
+
+      case 'content':
+        return {
+          backgroundOrigin: 'content-box',
+        }
+
+      default:
+        return {}
     }
   },
   bgOverflow: function(v) {
-    return {
-      backgroundClip: []
-        .concat(v)
-        .map(function(v) {
+    if (v == null) return {}
+
+    if (v.constructor === Array) {
+      return {
+        backgroundClip: v.reduce(function(r, v) {
           switch (v) {
             case 'border':
-              return 'border-box'
+              return r + (r.length ? ',' : '') + 'border-box'
 
             case 'space':
-              return 'padding-box'
+              return r + (r.length ? ',' : '') + 'padding-box'
 
             case 'content':
-              return 'content-box'
+              return r + (r.length ? ',' : '') + 'content-box'
+
+            default:
+              return r
           }
-        })
-        .join(','),
+        }, ''),
+      }
+    }
+
+    switch (v) {
+      case 'border':
+        return {
+          backgroundClip: 'border-box',
+        }
+
+      case 'space':
+        return {
+          backgroundClip: 'padding-box',
+        }
+
+      case 'content':
+        return {
+          backgroundClip: 'content-box',
+        }
+
+      default:
+        return {}
     }
   },
   bgPosition: function(v) {
-    return {
-      backgroundAttachment: []
-        .concat(v)
-        .map(function(v) {
+    if (v == null) return {}
+
+    if (v.constructor === Array) {
+      return {
+        backgroundAttachment: v.reduce(function(r, v) {
           switch (v) {
             case 'local':
-              return 'local'
+              return r + (r.length ? ',' : '') + 'local'
 
             case 'global':
-              return 'scroll'
+              return r + (r.length ? ',' : '') + 'scroll'
 
             case false:
-              return 'fixed'
+              return r + (r.length ? ',' : '') + 'fixed'
+
+            default:
+              return r
           }
-        })
-        .join(','),
+        }, ''),
+      }
+    }
+
+    switch (v) {
+      case 'local':
+        return {
+          backgroundAttachment: 'local',
+        }
+
+      case 'global':
+        return {
+          backgroundAttachment: 'scroll',
+        }
+
+      case false:
+        return {
+          backgroundAttachment: 'fixed',
+        }
+
+      default:
+        return {}
     }
   },
   bgRepeat: function(v) {
-    return {
-      backgroundRepeat: []
-        .concat(v)
-        .map(function(v) {
+    if (v == null) return {}
+
+    if (v.constructor === Array) {
+      return {
+        backgroundRepeat: v.reduce(function(r, v) {
           switch (v) {
             case true:
-              return 'repeat'
+              return r + (r.length ? ',' : '') + 'repeat'
 
             case false:
-              return 'no-repeat'
+              return r + (r.length ? ',' : '') + 'no-repeat'
 
             case 'col':
-              return 'repeat-y'
+              return r + (r.length ? ',' : '') + 'repeat-y'
 
             case 'row':
-              return 'repeat-x'
+              return r + (r.length ? ',' : '') + 'repeat-x'
+
+            default:
+              return r
           }
-        })
-        .join(','),
+        }, ''),
+      }
+    }
+
+    switch (v) {
+      case true:
+        return {
+          backgroundRepeat: 'repeat',
+        }
+
+      case false:
+        return {
+          backgroundRepeat: 'no-repeat',
+        }
+
+      case 'col':
+        return {
+          backgroundRepeat: 'repeat-y',
+        }
+
+      case 'row':
+        return {
+          backgroundRepeat: 'repeat-x',
+        }
+
+      default:
+        return {}
     }
   },
   bgSize: function(v) {
-    return {
-      backgroundSize: []
-        .concat(v)
-        .map(function(v) {
+    if (v == null) return {}
+
+    if (v.constructor === Array) {
+      return {
+        backgroundSize: v.reduce(function(r, v) {
           switch (v) {
             case 'fill':
-              return 'cover'
+              return r + (r.length ? ',' : '') + 'cover'
 
             case 'fit':
-              return 'contain'
+              return r + (r.length ? ',' : '') + 'contain'
 
             case 'auto':
-              return 'auto'
+              return r + (r.length ? ',' : '') + 'auto'
           }
 
           if (typeof v === 'object') {
@@ -437,11 +516,42 @@ module.exports = {
             var height = v.height || 'auto'
             if (typeof height === 'number' && height !== 0) height += 'rem'
             if (typeof width === 'number' && width !== 0) width += 'rem'
-            return width + ' ' + height
+            return r + (r.length ? ',' : '') + width + ' ' + height
           }
-        })
-        .join(','),
+
+          return r
+        }, ''),
+      }
     }
+
+    switch (v) {
+      case 'fill':
+        return {
+          backgroundSize: 'cover',
+        }
+
+      case 'fit':
+        return {
+          backgroundSize: 'contain',
+        }
+
+      case 'auto':
+        return {
+          backgroundSize: 'auto',
+        }
+    }
+
+    if (typeof v === 'object') {
+      var width = v.width || 'auto'
+      var height = v.height || 'auto'
+      if (typeof height === 'number' && height !== 0) height += 'rem'
+      if (typeof width === 'number' && width !== 0) width += 'rem'
+      return {
+        backgroundSize: width + ' ' + height,
+      }
+    }
+
+    return {}
   },
   borderColor: function(v) {
     if (typeof v === 'object') {
@@ -609,15 +719,15 @@ module.exports = {
         return {
           textTransform: 'none',
         }
+
       default:
         return {}
     }
   },
   colEnd: function(v) {
-    var next = [].concat(v)
-    if (next[1]) next[0] = 'span' + ' ' + next[0]
+    if (v == null) return {}
     return {
-      gridColumnEnd: next[0],
+      gridColumnEnd: v.constructor === Array ? 'span' + ' ' + v[0] : v,
     }
   },
   colorBox: function(v) {
@@ -631,87 +741,51 @@ module.exports = {
     }
   },
   cols: function(v) {
+    if (v == null) return {}
+
+    if (v === false) {
+      return {
+        gridTemplateColumns: 'none',
+      }
+    }
+
     return {
       gridTemplateColumns:
-        v === false
-          ? 'none'
-          : []
-              .concat(v)
-              .map(function(v) {
-                var key
-                var val
-
-                if (Array.isArray(v)) {
-                  key = key === 'fill' || key === 'fit' ? 'auto-' + v : v
-                  val = v[1]
-                } else val = v
-
-                switch (true) {
-                  case typeof val === 'object': {
-                    var min = val.hasOwnProperty('min')
-                      ? typeof val.min === 'number' && val.min !== 0
-                        ? val.min + 'fr'
-                        : val.min
-                      : 'auto'
-                    var max = val.hasOwnProperty('max')
-                      ? typeof val.max === 'number' && val.max !== 0
-                        ? val.max + 'fr'
-                        : val.max
-                      : 'auto'
-                    val = 'minmax' + '(' + min + ',' + max + ')'
-                    break
-                  }
-
-                  case typeof val === 'number' && val !== 0:
-                    val += 'fr'
-                    break
-                }
-
-                return key != null ? 'repeat' + '(' + key + '' + ')' : val
-              })
-              .join(' '),
+        v.constructor === Array
+          ? v.reduce(function(r, v) {
+              return (
+                r +
+                (r.length ? ' ' : '') +
+                (typeof v === 'number' && v !== 0 ? v + 'fr' : v)
+              )
+            }, '')
+          : typeof v === 'number' && v !== 0
+          ? v + 'fr'
+          : v,
     }
   },
   colsPseudo: function(v) {
+    if (v == null) return {}
+
+    if (v === 'auto') {
+      return {
+        gridAutoColumns: 'auto',
+      }
+    }
+
     return {
       gridAutoColumns:
-        v === false
-          ? 'none'
-          : []
-              .concat(v)
-              .map(function(v) {
-                var key
-                var val
-
-                if (Array.isArray(v)) {
-                  key = key === 'fill' || key === 'fit' ? 'auto-' + v : v
-                  val = v[1]
-                } else val = v
-
-                switch (true) {
-                  case typeof val === 'object': {
-                    var min = val.hasOwnProperty('min')
-                      ? typeof val.min === 'number' && val.min !== 0
-                        ? val.min + 'fr'
-                        : val.min
-                      : 'auto'
-                    var max = val.hasOwnProperty('max')
-                      ? typeof val.max === 'number' && val.max !== 0
-                        ? val.max + 'fr'
-                        : val.max
-                      : 'auto'
-                    val = 'minmax' + '(' + min + ',' + max + ')'
-                    break
-                  }
-
-                  case typeof val === 'number' && val !== 0:
-                    val += 'fr'
-                    break
-                }
-
-                return key != null ? 'repeat' + '(' + key + '' + ')' : val
-              })
-              .join(' '),
+        v.constructor === Array
+          ? v.reduce(function(r, v) {
+              return (
+                r +
+                (r.length ? ' ' : '') +
+                (typeof v === 'number' && v !== 0 ? v + 'fr' : v)
+              )
+            }, '')
+          : typeof v === 'number' && v !== 0
+          ? v + 'fr'
+          : v,
     }
   },
   colStart: function(v) {
@@ -725,9 +799,10 @@ module.exports = {
     }
   },
   corner: function(v) {
+    if (v == null) return {}
     var rules = {}
 
-    if (typeof v === 'object' && !Array.isArray(v)) {
+    if (typeof v === 'object' && v.constructor !== Array) {
       for (var k in v) {
         if (v.hasOwnProperty(k)) {
           switch (k) {
@@ -788,10 +863,8 @@ module.exports = {
           case typeof val === 'object': {
             var row = val[0]
             var col = val[1]
-
             if (typeof row === 'number' && row !== 0) row += 'px'
             if (typeof col === 'number' && col !== 0) col += 'px'
-
             rules[rule] = row + '/' + col
             break
           }
@@ -825,26 +898,26 @@ module.exports = {
         return {
           textDecoration: 'none',
         }
+
       default:
         return {}
     }
   },
   direction: function(v) {
-    var next = [].concat(v)
-    if (next[0] === 'col') next[0] = 'column'
-    if (next[1]) next[0] += '-reverse'
+    if (v == null) return {}
     return {
-      flexDirection: next[0],
-    }
-  },
-  fill: function(v) {
-    return {
-      fill: v,
+      flexDirection:
+        v.constructor === Array
+          ? (v[0] === 'col' ? 'column' : v[0]) + '-reverse'
+          : v === 'col'
+          ? 'column'
+          : v,
     }
   },
   font: function(v) {
+    if (v == null) return {}
     return {
-      fontFamily: [].concat(v).join(','),
+      fontFamily: v.constructor === Array ? v.join(',') : v,
     }
   },
   grow: function(v) {
@@ -855,11 +928,6 @@ module.exports = {
   hasSuffix: function(v) {
     return {
       textOverflow: v ? 'ellipsis' : 'clip',
-    }
-  },
-  height: function(v) {
-    return {
-      height: v,
     }
   },
   heightMax: function(v) {
@@ -875,9 +943,15 @@ module.exports = {
   isInteractive: function(v) {
     switch (v) {
       case true:
-        return { cursor: 'pointer' }
+        return {
+          cursor: 'pointer',
+        }
+
       case false:
-        return { cursor: 'auto' }
+        return {
+          cursor: 'auto',
+        }
+
       default:
         return {}
     }
@@ -913,6 +987,7 @@ module.exports = {
         return {
           display: 'inline',
         }
+
       default:
         return {}
     }
@@ -923,25 +998,17 @@ module.exports = {
     }
   },
   modify: function(v) {
+    if (v == null) return {}
+
     if (v === false) {
-      return { transform: 'none' }
-    }
-
-    if (typeof v === 'object') {
-      var fns = []
-
-      for (var k in v) {
-        if (v.hasOwnProperty(k)) {
-          fns.push(k + '(' + [].concat(v[k]).join(',') + ')')
-        }
-      }
-
       return {
-        transform: fns.join(' '),
+        transform: 'none',
       }
     }
 
-    return { transform: v }
+    return {
+      transform: v.constructor === Array ? v.join(' ') : v,
+    }
   },
   move: function(v) {
     if (typeof v === 'object') {
@@ -1020,6 +1087,8 @@ module.exports = {
     }
   },
   overflowCol: function(v) {
+    if (v == null) return {}
+
     switch (v) {
       case true:
         return {
@@ -1032,14 +1101,15 @@ module.exports = {
         }
     }
 
-    var next = [].concat(v)
-    if (next[0] === 'auto') {
+    if (v.constructor === Array) {
       return {
-        overflowY: next[1] ? 'scroll' : 'auto',
+        overflowY: 'scroll',
       }
     }
 
-    return {}
+    return {
+      overflowY: 'auto',
+    }
   },
   overflowDirection: function(v) {
     switch (v) {
@@ -1063,6 +1133,8 @@ module.exports = {
     }
   },
   overflowRow: function(v) {
+    if (v == null) return {}
+
     switch (v) {
       case true:
         return {
@@ -1075,242 +1147,129 @@ module.exports = {
         }
     }
 
-    var next = [].concat(v)
-    if (next[0] === 'auto') {
+    if (v.constructor === Array) {
       return {
-        overflowX: next[1] ? 'scroll' : 'auto',
+        overflowX: 'scroll',
       }
     }
 
-    return {}
+    return {
+      overflowX: 'auto',
+    }
   },
   placeContent: function(v) {
-    switch (v) {
-      case 'start':
-        return {
-          justifyContent: 'flex-start',
-        }
+    if (v == null) return {}
 
-      case 'end':
-        return {
-          justifyContent: 'flex-end',
-        }
-
-      case 'center':
-        return {
-          justifyContent: 'center',
-        }
-
-      case 'space-between':
-        return {
-          justifyContent: 'space-between',
-        }
-    }
-
-    var next = [].concat(v)
-
-    if (next[0] === 'space-around') {
+    if (v.constructor === Array) {
       return {
-        justifyContent: next[1] ? 'space-evenly' : 'space-around',
+        justifyContent: 'space-evenly',
       }
     }
 
-    return {}
+    return {
+      justifyContent: v === 'start' || v === 'end' ? 'flex-' + v : v,
+    }
   },
   placeDirection: function(v) {
-    switch (v) {
-      case 'col':
-        return {
-          gridAutoFlow: 'column',
-        }
-
-      case 'row':
-        return {
-          gridAutoFlow: 'row',
-        }
-
-      default:
-        return {}
+    return {
+      gridAutoFlow: v === 'col' ? 'column' : v,
     }
   },
   placeMajor: function(v) {
-    switch (v) {
-      case 'start':
-        return {
-          justifyContent: 'start',
-        }
+    if (v == null) return {}
 
-      case 'end':
-        return {
-          justifyContent: 'end',
-        }
-
-      case 'center':
-        return {
-          justifyContent: 'center',
-        }
-
-      case 'space-between':
-        return {
-          justifyContent: 'space-between',
-        }
-    }
-
-    var next = [].concat(v)
-
-    if (next[0] === 'space-around') {
+    if (v.constructor === Array) {
       return {
-        justifyContent: next[1] ? 'space-evenly' : 'space-around',
+        justifyContent: 'space-evenly',
       }
     }
 
-    return {}
+    return {
+      justifyContent: v,
+    }
   },
   placeMinor: function(v) {
-    switch (v) {
-      case 'start':
-        return {
-          alignContent: 'start',
-        }
+    if (v == null) return {}
 
-      case 'end':
-        return {
-          alignContent: 'end',
-        }
-
-      case 'center':
-        return {
-          alignContent: 'center',
-        }
-
-      case 'space-between':
-        return {
-          alignContent: 'space-between',
-        }
-    }
-
-    var next = [].concat(v)
-
-    if (next[0] === 'space-around') {
+    if (v.constructor === Array) {
       return {
-        alignContent: next[1] ? 'space-evenly' : 'space-around',
+        alignContent: 'space-evenly',
       }
     }
 
-    return {}
+    return {
+      alignContent: v,
+    }
   },
   position: function(v) {
-    switch (v) {
-      case false:
-        return {
-          position: 'fixed',
-        }
+    if (v === false) {
+      return {
+        position: 'fixed',
+      }
+    }
 
-      case 'absolute':
-        return {
-          position: 'absolute',
-        }
+    if (v === true) {
+      return {
+        position: 'static',
+      }
+    }
 
-      case 'relative':
-        return {
-          position: 'relative',
-        }
-
-      case true:
-        return {
-          position: 'static',
-        }
-
-      default:
-        return {}
+    return {
+      position: v,
     }
   },
   rowEnd: function(v) {
-    var next = [].concat(v)
-    if (next[1]) next[0] = 'span' + ' ' + next[0]
+    if (v == null) return {}
     return {
-      gridRowEnd: next[0],
+      gridRowEnd: v.constructor === Array ? 'span' + ' ' + v[0] : v,
     }
   },
   rows: function(v) {
+    if (v == null) return {}
+
+    if (v === false) {
+      return {
+        gridTemplateRows: 'none',
+      }
+    }
+
     return {
       gridTemplateRows:
-        v === false
-          ? 'none'
-          : []
-              .concat(v)
-              .map(function(v) {
-                var key
-                var val
-
-                if (Array.isArray(v)) {
-                  key = key === 'fill' || key === 'fit' ? 'auto-' + v : v
-                  val = v[1]
-                } else val = v
-
-                switch (true) {
-                  case typeof val === 'object': {
-                    var min = val.hasOwnProperty('min')
-                      ? typeof val.min === 'number' && val.min !== 0
-                        ? val.min + 'fr'
-                        : val.min
-                      : 'auto'
-                    var max = val.hasOwnProperty('max')
-                      ? typeof val.max === 'number' && val.max !== 0
-                        ? val.max + 'fr'
-                        : val.max
-                      : 'auto'
-                    val = 'minmax' + '(' + min + ',' + max + ')'
-                    break
-                  }
-
-                  case typeof val === 'number' && val !== 0:
-                    val += 'fr'
-                    break
-                }
-
-                return key != null ? 'repeat' + '(' + key + '' + ')' : val
-              })
-              .join(' '),
+        v.constructor === Array
+          ? v.reduce(function(r, v) {
+              return (
+                r +
+                (r.length ? ' ' : '') +
+                (typeof v === 'number' && v !== 0 ? v + 'fr' : v)
+              )
+            }, '')
+          : typeof v === 'number' && v !== 0
+          ? v + 'fr'
+          : v,
     }
   },
   rowsPseudo: function(v) {
+    if (v == null) return {}
+
+    if (v === 'auto') {
+      return {
+        gridAutoRows: 'auto',
+      }
+    }
+
     return {
-      gridAutoRows: []
-        .concat(v)
-        .map(function(v) {
-          var key
-          var val
-
-          if (Array.isArray(v)) {
-            key = key === 'fill' || key === 'fit' ? 'auto-' + v : v
-            val = v[1]
-          } else val = v
-
-          switch (true) {
-            case typeof val === 'object': {
-              var min = val.hasOwnProperty('min')
-                ? typeof val.min === 'number' && val.min !== 0
-                  ? val.min + 'fr'
-                  : val.min
-                : 'auto'
-              var max = val.hasOwnProperty('max')
-                ? typeof val.max === 'number' && val.max !== 0
-                  ? val.max + 'fr'
-                  : val.max
-                : 'auto'
-              val = 'minmax' + '(' + min + ',' + max + ')'
-              break
-            }
-
-            case typeof val === 'number' && val !== 0:
-              val += 'fr'
-              break
-          }
-
-          return key != null ? 'repeat' + '(' + key + '' + ')' : val
-        })
-        .join(' '),
+      gridAutoRows:
+        v.constructor === Array
+          ? v.reduce(function(r, v) {
+              return (
+                r +
+                (r.length ? ' ' : '') +
+                (typeof v === 'number' && v !== 0 ? v + 'fr' : v)
+              )
+            }, '')
+          : typeof v === 'number' && v !== 0
+          ? v + 'fr'
+          : v,
     }
   },
   rowStart: function(v) {
@@ -1319,79 +1278,157 @@ module.exports = {
     }
   },
   shadowBox: function(v) {
-    return {
-      boxShadow:
-        v === false
-          ? 'none'
-          : []
-              .concat(v)
-              .map(function(v) {
-                if (typeof v === 'object') {
-                  var shadow = [
-                    v.row
-                      ? typeof v.row === 'number' && v.row !== 0
-                        ? v.row + 'px'
-                        : v.row
-                      : 0,
-                    v.col
-                      ? typeof v.col === 'number' && v.col !== 0
-                        ? v.col + 'px'
-                        : v.col
-                      : 0,
-                    v.blur
-                      ? typeof v.blur === 'number' && v.blur !== 0
-                        ? v.blur + 'px'
-                        : v.blur
-                      : 0,
-                    v.size
-                      ? typeof v.size === 'number' && v.size !== 0
-                        ? v.size + 'px'
-                        : v.size
-                      : 0,
-                  ]
-                  if (v.color) shadow.push(v.color)
-                  if (v.isReversed) shadow.push('inset')
-                  return shadow.join(' ')
-                }
+    if (v == null) return {}
 
-                return v
-              })
-              .join(','),
+    if (v === false) {
+      return {
+        boxShadow: 'none',
+      }
+    }
+
+    if (v.constructor === Array) {
+      return {
+        boxShadow: v.reduce(function(r, v) {
+          if (typeof v === 'object') {
+            return (
+              r +
+              (r.length ? ',' : '') +
+              (v.row
+                ? typeof v.row === 'number' && v.row !== 0
+                  ? v.row + 'px'
+                  : v.row
+                : 0) +
+              ' ' +
+              (v.col
+                ? typeof v.col === 'number' && v.col !== 0
+                  ? v.col + 'px'
+                  : v.col
+                : 0) +
+              ' ' +
+              (v.blur
+                ? typeof v.blur === 'number' && v.blur !== 0
+                  ? v.blur + 'px'
+                  : v.blur
+                : 0) +
+              ' ' +
+              (v.size
+                ? typeof v.size === 'number' && v.size !== 0
+                  ? v.size + 'px'
+                  : v.size
+                : 0) +
+              (v.color ? ' ' + v.color : '') +
+              (v.isReversed ? ' ' + 'inset' : '')
+            )
+          }
+
+          return r + (r.length ? ',' : '') + v
+        }, ''),
+      }
+    }
+
+    if (typeof v === 'object') {
+      return {
+        boxShadow:
+          (v.row
+            ? typeof v.row === 'number' && v.row !== 0
+              ? v.row + 'px'
+              : v.row
+            : 0) +
+          ' ' +
+          (v.col
+            ? typeof v.col === 'number' && v.col !== 0
+              ? v.col + 'px'
+              : v.col
+            : 0) +
+          ' ' +
+          (v.blur
+            ? typeof v.blur === 'number' && v.blur !== 0
+              ? v.blur + 'px'
+              : v.blur
+            : 0) +
+          ' ' +
+          (v.size
+            ? typeof v.size === 'number' && v.size !== 0
+              ? v.size + 'px'
+              : v.size
+            : 0) +
+          (v.color ? ' ' + v.color : '') +
+          (v.isReversed ? ' ' + 'inset' : ''),
+      }
+    }
+
+    return {
+      boxShadow: v,
     }
   },
   shadowText: function(v) {
-    return {
-      textShadow:
-        v === false
-          ? 'none'
-          : []
-              .concat(v)
-              .map(function(v) {
-                if (typeof v === 'object') {
-                  var shadow = [
-                    v.row
-                      ? typeof v.row === 'number' && v.row !== 0
-                        ? v.row + 'px'
-                        : v.row
-                      : 0,
-                    v.col
-                      ? typeof v.col === 'number' && v.col !== 0
-                        ? v.col + 'px'
-                        : v.col
-                      : 0,
-                    v.blur
-                      ? typeof v.blur === 'number' && v.blur !== 0
-                        ? v.blur + 'px'
-                        : v.blur
-                      : 0,
-                  ]
-                  if (v.color) shadow.push(v.color)
-                  return shadow.join(' ')
-                }
+    if (v == null) return {}
 
-                return v
-              })
-              .join(','),
+    if (v === false) {
+      return {
+        textShadow: 'none',
+      }
+    }
+
+    if (v.constructor === Array) {
+      return {
+        textShadow: v.reduce(function(r, v) {
+          if (typeof v === 'object') {
+            return (
+              r +
+              (r.length ? ',' : '') +
+              (v.row
+                ? typeof v.row === 'number' && v.row !== 0
+                  ? v.row + 'px'
+                  : v.row
+                : 0) +
+              ' ' +
+              (v.col
+                ? typeof v.col === 'number' && v.col !== 0
+                  ? v.col + 'px'
+                  : v.col
+                : 0) +
+              ' ' +
+              (v.blur
+                ? typeof v.blur === 'number' && v.blur !== 0
+                  ? v.blur + 'px'
+                  : v.blur
+                : 0) +
+              (v.color ? ' ' + v.color : '')
+            )
+          }
+
+          return r + (r.length ? ',' : '') + v
+        }, ''),
+      }
+    }
+
+    if (typeof v === 'object') {
+      return {
+        textShadow:
+          (v.row
+            ? typeof v.row === 'number' && v.row !== 0
+              ? v.row + 'px'
+              : v.row
+            : 0) +
+          ' ' +
+          (v.col
+            ? typeof v.col === 'number' && v.col !== 0
+              ? v.col + 'px'
+              : v.col
+            : 0) +
+          ' ' +
+          (v.blur
+            ? typeof v.blur === 'number' && v.blur !== 0
+              ? v.blur + 'px'
+              : v.blur
+            : 0) +
+          (v.color ? ' ' + v.color : ''),
+      }
+    }
+
+    return {
+      textShadow: v,
     }
   },
   shrink: function(v) {
@@ -1405,6 +1442,8 @@ module.exports = {
     }
   },
   spaceBreak: function(v) {
+    if (v == null) return {}
+
     switch (v) {
       case false:
         return {
@@ -1415,12 +1454,15 @@ module.exports = {
         return {
           whiteSpace: 'normal',
         }
+
+      case 'raw':
+        return {
+          whiteSpace: 'pre',
+        }
     }
 
-    var next = [].concat(v)
-
-    if (next[0] === 'raw') {
-      switch (next[1]) {
+    if (v.constructor === Array) {
+      switch (v[1]) {
         case true:
           return {
             whiteSpace: 'pre-wrap',
@@ -1430,10 +1472,6 @@ module.exports = {
           return {
             whiteSpace: 'pre-line',
           }
-      }
-
-      return {
-        whiteSpace: 'pre',
       }
     }
 
@@ -1557,8 +1595,9 @@ module.exports = {
     }
   },
   strokeDashes: function(v) {
+    if (v == null) return {}
     return {
-      strokeDasharray: [].concat(v).join(' '),
+      strokeDasharray: v.constructor === Array ? v.join(' ') : v,
     }
   },
   strokeSize: function(v) {
@@ -1573,92 +1612,111 @@ module.exports = {
   },
   template: function(v) {
     return {
-      gridTemplateAreas: v
-        .map(function(v) {
-          return (
-            '"' +
-            []
-              .concat(v)
-              .map(function(v) {
-                return v || '.'
-              })
-              .join(' ') +
-            '"'
-          )
-        })
-        .join(''),
+      gridTemplateAreas: v.reduce(function(r, v) {
+        return (
+          r +
+          '"' +
+          v.reduce(function(r, v) {
+            return r + (r.length ? ' ' : '') + (v || '.')
+          }, '') +
+          '"'
+        )
+      }, ''),
     }
   },
   transition: function(v) {
-    var rules = {
-      transitionDelay: [],
-      transitionDuration: [],
-      transitionProperty: [],
-      transitionTimingFunction: [],
+    if (v == null) return {}
+    if (v === false) {
+      return {
+        transitionProperty: 'none',
+      }
     }
 
-    for (var key in v) {
-      if (v.hasOwnProperty(key)) {
-        var val = v[key]
-        if (typeof val !== 'object') {
-          val = {
-            duration: val,
+    if (v.constructor === Array) {
+      return {
+        transitionProperty: v.reduce(function(r, v) {
+          switch (v) {
+            case 'colorBox':
+              return r + (r.length ? ',' : '') + 'background-color'
+
+            case 'colorText':
+              return r + (r.length ? ',' : '') + 'color'
+
+            case 'modify':
+              return r + (r.length ? ',' : '') + 'transform'
+
+            default:
+              return r + (r.length ? ',' : '') + cc.k(v)
           }
-        }
-
-        switch (key) {
-          case 'colorBox':
-            rules.transitionProperty.push('background-color')
-            break
-
-          case 'colorText':
-            rules.transitionProperty.push('color')
-            break
-
-          case 'modify':
-            rules.transitionProperty.push('transform')
-            break
-
-          default:
-            rules.transitionProperty.push(cc.k(key))
-        }
-
-        rules.transitionDelay.push(
-          val.hasOwnProperty('delay')
-            ? typeof val.delay === 'number'
-              ? val.delay + 'ms'
-              : val.delay
-            : '0ms'
-        )
-        rules.transitionDuration.push(
-          val.hasOwnProperty('duration')
-            ? typeof val.duration === 'number'
-              ? val.duration + 'ms'
-              : val.duration
-            : '0ms'
-        )
-        rules.transitionTimingFunction.push(
-          val.hasOwnProperty('fn') ? val.fn : 'ease'
-        )
+        }, ''),
       }
     }
 
-    for (var rule in rules) {
-      if (rules.hasOwnProperty(rule)) {
-        rules[rule] = rules[rule].join(',')
-      }
-    }
+    switch (v) {
+      case 'colorBox':
+        return {
+          transitionProperty: 'background-color',
+        }
 
-    return rules
+      case 'colorText':
+        return {
+          transitionProperty: 'color',
+        }
+
+      case 'modify':
+        return {
+          transitionProperty: 'transform',
+        }
+
+      default:
+        return {
+          transitionProperty: cc.k(v),
+        }
+    }
+  },
+  transitionDelay: function(v) {
+    if (v == null) return {}
+    return {
+      transitionDelay:
+        v.constructor === Array
+          ? v.reduce(function(r, v) {
+              return (
+                r +
+                (r.length ? ',' : '') +
+                (typeof v === 'number' ? v + 'ms' : v)
+              )
+            }, '')
+          : typeof v === 'number'
+          ? v + 'ms'
+          : v,
+    }
+  },
+  transitionDuration: function(v) {
+    if (v == null) return {}
+    return {
+      transitionDuration:
+        v.constructor === Array
+          ? v.reduce(function(r, v) {
+              return (
+                r +
+                (r.length ? ',' : '') +
+                (typeof v === 'number' ? v + 'ms' : v)
+              )
+            }, '')
+          : typeof v === 'number'
+          ? v + 'ms'
+          : v,
+    }
+  },
+  transitionFn: function(v) {
+    if (v == null) return {}
+    return {
+      transitionTimingFunction: v.constructor === Array ? v.join(',') : v,
+    }
   },
   weight: function(v) {
     return {
       fontWeight: v,
-    }
-  },
-  width: function(v) {
-    return {
-      width: v,
     }
   },
   widthMax: function(v) {

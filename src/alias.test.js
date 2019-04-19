@@ -1,4 +1,4 @@
-const fn = require('./alias')
+const alias = require('./alias')
 
 const fixtures = {
   align: [
@@ -235,19 +235,43 @@ const fixtures = {
     {
       in: 1,
       out: {
-        animationIterationCount: '1',
+        animationIterationCount: 1,
+      },
+    },
+    {
+      in: [1, 1],
+      out: {
+        animationIterationCount: '1,1',
       },
     },
   ],
   animationDelay: [
+    {
+      in: [0, '0ms'],
+      out: {
+        animationDelay: '0ms,0ms',
+      },
+    },
     {
       in: 0,
       out: {
         animationDelay: '0ms',
       },
     },
+    {
+      in: '0ms',
+      out: {
+        animationDelay: '0ms',
+      },
+    },
   ],
   animationDirection: [
+    {
+      in: [1, -1, 2, -2, 'invalid'],
+      out: {
+        animationDirection: 'normal,reverse,alternate,alternate-reverse',
+      },
+    },
     {
       in: 1,
       out: {
@@ -272,8 +296,18 @@ const fixtures = {
         animationDirection: 'alternate-reverse',
       },
     },
+    {
+      in: 'invalid',
+      out: {},
+    },
   ],
   animationDuration: [
+    {
+      in: [250, '750ms'],
+      out: {
+        animationDuration: '250ms,750ms',
+      },
+    },
     {
       in: 250,
       out: {
@@ -297,6 +331,12 @@ const fixtures = {
   ],
   animationIsActive: [
     {
+      in: [true, false],
+      out: {
+        animationPlayState: 'running,paused',
+      },
+    },
+    {
       in: true,
       out: {
         animationPlayState: 'running',
@@ -310,6 +350,12 @@ const fixtures = {
     },
   ],
   animationOrigin: [
+    {
+      in: [true, false, -1, 1, 'invalid'],
+      out: {
+        animationFillingMode: 'both,none,backwards,forwards',
+      },
+    },
     {
       in: true,
       out: {
@@ -334,26 +380,20 @@ const fixtures = {
         animationFillingMode: 'forwards',
       },
     },
+    {
+      in: 'invalid',
+      out: {},
+    },
   ],
   bg: [
     {
-      in: {
-        radial: [['white', 0], ['black', 100]],
-      },
+      in: ['url(bg.svg)', 'url(bg.png)', 'url(bg.jpg)'],
       out: {
-        backgroundImage: 'radial-gradient(white 0%,black 100%)',
+        backgroundImage: 'url(bg.svg),url(bg.png),url(bg.jpg)',
       },
     },
     {
-      in: {
-        360: ['white', 'black'],
-      },
-      out: {
-        backgroundImage: 'linear-gradient(360deg,white,black)',
-      },
-    },
-    {
-      in: 'bg.png',
+      in: 'url(bg.png)',
       out: {
         backgroundImage: 'url(bg.png)',
       },
@@ -365,33 +405,67 @@ const fixtures = {
       },
     },
   ],
-  bgMove: [
+  bgMoveCol: [
+    {
+      in: [
+        'center',
+        {
+          top: '100%',
+        },
+      ],
+      out: {
+        backgroundPositionY: 'center,top 100%',
+      },
+    },
     {
       in: 'center',
       out: {
-        backgroundPosition: 'center',
+        backgroundPositionY: 'center',
       },
     },
     {
       in: {
-        bottom: true,
-        right: true,
+        top: '100%',
       },
       out: {
-        backgroundPosition: 'bottom right',
+        backgroundPositionY: 'top 100%',
+      },
+    },
+  ],
+  bgMoveRow: [
+    {
+      in: [
+        'center',
+        {
+          left: '100%',
+        },
+      ],
+      out: {
+        backgroundPositionX: 'center,left 100%',
+      },
+    },
+    {
+      in: 'center',
+      out: {
+        backgroundPositionX: 'center',
       },
     },
     {
       in: {
         left: '100%',
-        top: 1,
       },
       out: {
-        backgroundPosition: 'left 100% top 1rem',
+        backgroundPositionX: 'left 100%',
       },
     },
   ],
   bgOrigin: [
+    {
+      in: ['border', 'space', 'content', 'invalid'],
+      out: {
+        backgroundOrigin: 'border-box,padding-box,content-box',
+      },
+    },
     {
       in: 'border',
       out: {
@@ -410,8 +484,18 @@ const fixtures = {
         backgroundOrigin: 'content-box',
       },
     },
+    {
+      in: 'invalid',
+      out: {},
+    },
   ],
   bgOverflow: [
+    {
+      in: ['border', 'space', 'content', 'invalid'],
+      out: {
+        backgroundClip: 'border-box,padding-box,content-box',
+      },
+    },
     {
       in: 'border',
       out: {
@@ -430,8 +514,18 @@ const fixtures = {
         backgroundClip: 'content-box',
       },
     },
+    {
+      in: 'invalid',
+      out: {},
+    },
   ],
   bgPosition: [
+    {
+      in: ['local', 'global', false, 'invalid'],
+      out: {
+        backgroundAttachment: 'local,scroll,fixed',
+      },
+    },
     {
       in: 'local',
       out: {
@@ -450,8 +544,18 @@ const fixtures = {
         backgroundAttachment: 'fixed',
       },
     },
+    {
+      in: 'invalid',
+      out: {},
+    },
   ],
   bgRepeat: [
+    {
+      in: [false, true, 'col', 'row', 'invalid'],
+      out: {
+        backgroundRepeat: 'no-repeat,repeat,repeat-y,repeat-x',
+      },
+    },
     {
       in: false,
       out: {
@@ -476,8 +580,27 @@ const fixtures = {
         backgroundRepeat: 'repeat-x',
       },
     },
+    {
+      in: 'invalid',
+      out: {},
+    },
   ],
   bgSize: [
+    {
+      in: [
+        'fill',
+        'fit',
+        'auto',
+        {
+          height: 1,
+          width: '100%',
+        },
+        'ivalid',
+      ],
+      out: {
+        backgroundSize: 'cover,contain,auto,100% 1rem',
+      },
+    },
     {
       in: 'fill',
       out: {
@@ -504,6 +627,10 @@ const fixtures = {
       out: {
         backgroundSize: '100% 1rem',
       },
+    },
+    {
+      in: 'ivalid',
+      out: {},
     },
   ],
   borderColor: [
@@ -713,36 +840,34 @@ const fixtures = {
       color: 'hsla(0,0%,0%,1)',
     },
   },
-  cols: {
-    in: [
-      1,
-      'auto',
-      '100%',
-      [3, 'auto'],
-      {
-        max: 1,
-        min: 1,
+  cols: [
+    {
+      in: false,
+      out: {
+        gridTemplateColumns: 'none',
       },
-    ],
-    out: {
-      gridTemplateColumns: '1fr auto 100% repeat(3,auto) minmax(1fr,1fr)',
     },
-  },
-  colsPseudo: {
-    in: [
-      1,
-      'auto',
-      '100%',
-      [3, 'auto'],
-      {
-        max: 1,
-        min: 1,
+    {
+      in: [1, 'auto', '100%'],
+      out: {
+        gridTemplateColumns: '1fr auto 100%',
       },
-    ],
-    out: {
-      gridAutoColumns: '1fr auto 100% repeat(3,auto) minmax(1fr,1fr)',
     },
-  },
+  ],
+  colsPseudo: [
+    {
+      in: 'auto',
+      out: {
+        gridAutoColumns: 'auto',
+      },
+    },
+    {
+      in: [1, 'auto', '100%'],
+      out: {
+        gridAutoColumns: '1fr auto 100%',
+      },
+    },
+  ],
   colStart: {
     in: 1,
     out: {
@@ -885,12 +1010,6 @@ const fixtures = {
       },
     },
   ],
-  fill: {
-    in: 'black',
-    out: {
-      fill: 'black',
-    },
-  },
   font: {
     in: ['serif', 'sans-serif'],
     out: {
@@ -917,12 +1036,6 @@ const fixtures = {
       },
     },
   ],
-  height: {
-    in: 0,
-    out: {
-      height: 0,
-    },
-  },
   heightMax: [
     {
       in: false,
@@ -1025,12 +1138,9 @@ const fixtures = {
       },
     },
     {
-      in: {
-        translateX: 0,
-        translateY: 0,
-      },
+      in: ['rotate(360deg)', 'rotate(360deg)', 'rotate(360deg)'],
       out: {
-        transform: 'translateX(0) translateY(0)',
+        transform: 'rotate(360deg) rotate(360deg) rotate(360deg)',
       },
     },
     {
@@ -1401,36 +1511,34 @@ const fixtures = {
       },
     },
   ],
-  rows: {
-    in: [
-      1,
-      'auto',
-      '100%',
-      [3, 'auto'],
-      {
-        max: 1,
-        min: 1,
+  rows: [
+    {
+      in: false,
+      out: {
+        gridTemplateRows: 'none',
       },
-    ],
-    out: {
-      gridTemplateRows: '1fr auto 100% repeat(3,auto) minmax(1fr,1fr)',
     },
-  },
-  rowsPseudo: {
-    in: [
-      1,
-      'auto',
-      '100%',
-      [3, 'auto'],
-      {
-        max: 1,
-        min: 1,
+    {
+      in: [1, 'auto', '100%'],
+      out: {
+        gridTemplateRows: '1fr auto 100%',
       },
-    ],
-    out: {
-      gridAutoRows: '1fr auto 100% repeat(3,auto) minmax(1fr,1fr)',
     },
-  },
+  ],
+  rowsPseudo: [
+    {
+      in: 'auto',
+      out: {
+        gridAutoRows: 'auto',
+      },
+    },
+    {
+      in: [1, 'auto', '100%'],
+      out: {
+        gridAutoRows: '1fr auto 100%',
+      },
+    },
+  ],
   rowStart: {
     in: 1,
     out: {
@@ -1445,13 +1553,8 @@ const fixtures = {
       },
     },
     {
-      in: '1px 1px 1px 1px hsla(0,0%,0%,1) inset',
-      out: {
-        boxShadow: '1px 1px 1px 1px hsla(0,0%,0%,1) inset',
-      },
-    },
-    {
       in: [
+        '1px 1px 1px 1px hsla(0,0%,0%,1) inset',
         {
           blur: 1,
           col: 1,
@@ -1462,6 +1565,26 @@ const fixtures = {
         },
       ],
       out: {
+        boxShadow:
+          '1px 1px 1px 1px hsla(0,0%,0%,1) inset,1px 1px 1px 1px hsla(0,0%,0%,1) inset',
+      },
+    },
+    {
+      in: '1px 1px 1px 1px hsla(0,0%,0%,1) inset',
+      out: {
+        boxShadow: '1px 1px 1px 1px hsla(0,0%,0%,1) inset',
+      },
+    },
+    {
+      in: {
+        blur: 1,
+        col: 1,
+        color: 'hsla(0,0%,0%,1)',
+        isReversed: true,
+        row: 1,
+        size: 1,
+      },
+      out: {
         boxShadow: '1px 1px 1px 1px hsla(0,0%,0%,1) inset',
       },
     },
@@ -1471,6 +1594,20 @@ const fixtures = {
       in: false,
       out: {
         textShadow: 'none',
+      },
+    },
+    {
+      in: [
+        '1px 1px 1px hsla(0,0%,0%,1)',
+        {
+          blur: 1,
+          col: 1,
+          color: 'hsla(0,0%,0%,1)',
+          row: 1,
+        },
+      ],
+      out: {
+        textShadow: '1px 1px 1px hsla(0,0%,0%,1),1px 1px 1px hsla(0,0%,0%,1)',
       },
     },
     {
@@ -1537,6 +1674,10 @@ const fixtures = {
       out: {
         whiteSpace: 'pre-line',
       },
+    },
+    {
+      in: 'invalid',
+      out: {},
     },
   ],
   spaceChar: {
@@ -1675,41 +1816,84 @@ const fixtures = {
   },
   transition: [
     {
-      in: {
-        colorBox: 500,
-        colorText: 500,
-        modify: 500,
-      },
+      in: false,
+      out: { transitionProperty: 'none' },
+    },
+    {
+      in: ['colorBox', 'colorText', 'modify', 'borderColor'],
       out: {
-        transitionDelay: '0ms,0ms,0ms',
-        transitionDuration: '500ms,500ms,500ms',
-        transitionProperty: 'background-color,color,transform',
-        transitionTimingFunction: 'ease,ease,ease',
+        transitionProperty: 'background-color,color,transform,border-color',
       },
     },
     {
-      in: {
-        borderColor: {
-          delay: 500,
-          duration: 500,
-          fn: 'linear',
-        },
-      },
+      in: 'colorBox',
       out: {
-        transitionDelay: '500ms',
-        transitionDuration: '500ms',
+        transitionProperty: 'background-color',
+      },
+    },
+    {
+      in: 'colorText',
+      out: {
+        transitionProperty: 'color',
+      },
+    },
+    {
+      in: 'modify',
+      out: {
+        transitionProperty: 'transform',
+      },
+    },
+    {
+      in: 'borderColor',
+      out: {
         transitionProperty: 'border-color',
-        transitionTimingFunction: 'linear',
+      },
+    },
+  ],
+  transitionDelay: [
+    {
+      in: [0, '0ms'],
+      out: {
+        transitionDelay: '0ms,0ms',
       },
     },
     {
-      in: {
-        color: {},
-      },
+      in: 0,
       out: {
         transitionDelay: '0ms',
-        transitionDuration: '0ms',
-        transitionProperty: 'color',
+      },
+    },
+    {
+      in: '0ms',
+      out: {
+        transitionDelay: '0ms',
+      },
+    },
+  ],
+  transitionDuration: [
+    {
+      in: [250, '750ms'],
+      out: {
+        transitionDuration: '250ms,750ms',
+      },
+    },
+    {
+      in: 250,
+      out: {
+        transitionDuration: '250ms',
+      },
+    },
+    {
+      in: '750ms',
+      out: {
+        transitionDuration: '750ms',
+      },
+    },
+  ],
+  transitionFn: [
+    {
+      in: 'ease',
+      out: {
         transitionTimingFunction: 'ease',
       },
     },
@@ -1718,12 +1902,6 @@ const fixtures = {
     in: 400,
     out: {
       fontWeight: 400,
-    },
-  },
-  width: {
-    in: 0,
-    out: {
-      width: 0,
     },
   },
   widthMax: [
@@ -1751,7 +1929,7 @@ const fixtures = {
 Object.entries(fixtures).forEach(([k, v]) => {
   test(k, () => {
     ;[].concat(v).forEach((v) => {
-      expect(fn[k](v.in)).toEqual(v.out)
+      expect(alias[k](v.in)).toEqual(v.out)
     })
   })
 })

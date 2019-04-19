@@ -27,12 +27,12 @@ const MyComponent = ({ name, ...props }) =>
       onClick: () => {
         console.log('test')
       },
-      skin: ({ theme: t }) => ({
-        colorBox: t.box.color.major,
-        colorText: t.text.color.major,
+      skin: ({ theme }) => ({
+        colorBox: theme.box.color.major,
+        colorText: theme.text.color.major,
         [skin.on.hover]: {
-          colorBox: t.text.color.major,
-          colorText: t.box.color.major,
+          colorBox: theme.text.color.major,
+          colorText: theme.box.color.major,
         },
         [skin.screen.from(960)]: { size: '125%' }
       }),
@@ -58,6 +58,35 @@ ReactDOM.render(
 ```
 
 ## API
+
+### Skin
+
+it contains style functions
+
+- parses `img()` as `url()`
+- parses `radial()` as `radial-gradient()`
+- parses `linear()` as `linear-gradient()`
+- parses `matrix()` as `matrix()`
+- parses `matrix3d()` as `matrix3d()`
+- parses `translate()` as `translate()`
+- parses `translate3d()` as `translate3d()`
+- parses `translateX()` as `translateX()`
+- parses `translateY()` as `translateY()`
+- parses `translateZ()` as `translateZ()`
+- parses `scale()` as `scale()`
+- parses `scale3d()` as `scale3d()`
+- parses `scaleX()` as `scaleX()`
+- parses `scaleY()` as `scaleY()`
+- parses `scaleZ()` as `scaleZ()`
+- parses `rotate()` as `rotate()`
+- parses `rotate3d()` as `rotate3d()`
+- parses `rotateX()` as `rotateX()`
+- parses `rotateY()` as `rotateY()`
+- parses `rotateZ()` as `rotateZ()`
+- parses `skew()` as `skew()`
+- parses `skewX()` as `skewX()`
+- parses `skewY()` as `skewY()`
+- parses `perspective()` as `perspective()`
 
 ### Attr
 
@@ -204,17 +233,21 @@ it contains props for Fela Plugin Custom Property
 
 - parses one or more values
 - parses `false` as `'none'`
-- parses `{ radial: ['black', ['white', 50], 'black'] }` as `'radial-gradient(black, white 50%, black)'`
-- parses `{ 360: ['black', ['white', 50], 'black'] }` as `'linear-gradient(360deg, black, white 50%, black)'`
-- parses string as `'url({string})'`
 
-#### `bgMove` -> `backgroundPosition`
+#### `bgMoveCol` -> `backgroundPositionY`
 
 - parses one or more values
-- parses `{ [sideRow]: val, [sideCol]: val }` as `'{sideRow} {val} {sideCol} {val}'`
-- parses `{ [sideRow]: 0, [sideCol]: 0 }` as `'{sideRow} 0 {sideCol} 0'`
-- parses `{ [sideRow]: number, [sideCol]: number }` as `'{sideRow} {number}rem {sideCol} {number}rem'`
-- parses `{ [sideRow]: true, [sideCol]: true }` as `'{sideRow} {sideCol}'`
+- parses `{ [sideRow]: val }` as `'{sideRow} {val}'`
+- parses `{ [sideRow]: 0 }` as `'{sideRow} 0'`
+- parses `{ [sideRow]: number }` as `'{sideRow} {number}rem'`
+- parses any valid value
+
+#### `bgMoveRow` -> `backgroundPositionX`
+
+- parses one or more values
+- parses `{ [sideCol]: val }` as `'{sideCol} {val}'`
+- parses `{ [sideCol]: 0 }` as `'{sideCol} 0'`
+- parses `{ [sideCol]: number }` as `'{sideCol} {number}rem'`
 - parses any valid value
 
 #### `bgOrigin` -> `backgroundOrigin`
@@ -627,7 +660,9 @@ it contains props for Fela Plugin Custom Property
 
 #### `modify` -> `transform`
 
-- parses `{ key: [val, val, val] }` as `key(val, val, val)`
+- parses `false` as `none`
+- parses one or more values
+- parses any valid value
 
 #### `weight` -> `fontWeight`
 
@@ -649,16 +684,27 @@ it contains props for Fela Plugin Custom Property
 #### `transition` -> `transitionProperty transitionDelay transitionDuration transitionTimingFunction`
 
 - parses one or more values
-- parses from object props to transition rules
-- parses from object key in camel case to animation property in kebab case
+- parses any valid value
 - parses `'colorBox'` as `'background-color'`
 - parses `'colorText'` as `'color'`
 - parses `'modify'` as `'transform'`
-- if val is object
-  - parses `duration` as `transitionDuration`
-  - parses `delay` as `transitionDelay`
-  - parses `fn` as `transitionTimingFunction`
-- if val is not object, parses it as animation duration and sets default for other rules
+
+#### `animationDelay` -> `animationDelay`
+
+- parses one or more values
+- parses number as ms
+- parses any valid value
+
+#### `animationDuration` -> `animationDuration`
+
+- parses one or more values
+- parses number as `'{number}ms'`
+- parses any valid value
+
+#### `animationFn` -> `animationTimingFunction`
+
+- parses one or more values
+- parses any valid value
 
 #### `custom`
 
