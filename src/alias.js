@@ -727,7 +727,8 @@ module.exports = {
   colEnd: function(v) {
     if (v == null) return {}
     return {
-      gridColumnEnd: v.constructor === Array ? 'span' + ' ' + v[0] : v,
+      gridColumnEnd:
+        v.constructor === Array && v[1] === true ? 'span' + ' ' + v[0] : v,
     }
   },
   colorBox: function(v) {
@@ -907,7 +908,7 @@ module.exports = {
     if (v == null) return {}
     return {
       flexDirection:
-        v.constructor === Array
+        v.constructor === Array && v[1] === true
           ? (v[0] === 'col' ? 'column' : v[0]) + '-reverse'
           : v === 'col'
           ? 'column'
@@ -1101,7 +1102,7 @@ module.exports = {
         }
     }
 
-    if (v.constructor === Array) {
+    if (v.constructor === Array && v[0] === 'auto' && v[1] === true) {
       return {
         overflowY: 'scroll',
       }
@@ -1147,7 +1148,7 @@ module.exports = {
         }
     }
 
-    if (v.constructor === Array) {
+    if (v.constructor === Array && v[0] === 'auto' && v[1] === true) {
       return {
         overflowX: 'scroll',
       }
@@ -1160,7 +1161,7 @@ module.exports = {
   placeContent: function(v) {
     if (v == null) return {}
 
-    if (v.constructor === Array) {
+    if (v.constructor === Array && v[0] === 'space-around' && v[1] === true) {
       return {
         justifyContent: 'space-evenly',
       }
@@ -1178,7 +1179,7 @@ module.exports = {
   placeMajor: function(v) {
     if (v == null) return {}
 
-    if (v.constructor === Array) {
+    if (v.constructor === Array && v[0] === 'space-around' && v[1] === true) {
       return {
         justifyContent: 'space-evenly',
       }
@@ -1191,7 +1192,7 @@ module.exports = {
   placeMinor: function(v) {
     if (v == null) return {}
 
-    if (v.constructor === Array) {
+    if (v.constructor === Array && v[0] === 'space-around' && v[1] === true) {
       return {
         alignContent: 'space-evenly',
       }
@@ -1221,7 +1222,8 @@ module.exports = {
   rowEnd: function(v) {
     if (v == null) return {}
     return {
-      gridRowEnd: v.constructor === Array ? 'span' + ' ' + v[0] : v,
+      gridRowEnd:
+        v.constructor === Array && v[1] === true ? 'span' + ' ' + v[0] : v,
     }
   },
   rows: function(v) {
@@ -1461,7 +1463,7 @@ module.exports = {
         }
     }
 
-    if (v.constructor === Array) {
+    if (v.constructor === Array && v[0] === 'raw') {
       switch (v[1]) {
         case true:
           return {
