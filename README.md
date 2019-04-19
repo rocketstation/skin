@@ -64,8 +64,8 @@ ReactDOM.render(
 it contains style functions
 
 - parses `img()` as `url()`
-- parses `radial()` as `radial-gradient()`
-- parses `linear()` as `linear-gradient()`
+- parses `radial(...bps)` as `radial-gradient(...bps)`
+- parses `linear(deg, ...bps)` as `linear-gradient(deg, ...bps)`
 - parses `matrix()` as `matrix()`
 - parses `matrix3d()` as `matrix3d()`
 - parses `translate()` as `translate()`
@@ -681,7 +681,7 @@ it contains props for Fela Plugin Custom Property
 
 - parses any valid value
 
-#### `transition` -> `transitionProperty transitionDelay transitionDuration transitionTimingFunction`
+#### `transition` -> `transitionProperty`
 
 - parses one or more values
 - parses any valid value
@@ -689,19 +689,19 @@ it contains props for Fela Plugin Custom Property
 - parses `'colorText'` as `'color'`
 - parses `'modify'` as `'transform'`
 
-#### `animationDelay` -> `animationDelay`
+#### `transitionDelay` -> `transitionDelay`
 
 - parses one or more values
 - parses number as ms
 - parses any valid value
 
-#### `animationDuration` -> `animationDuration`
+#### `transitionDuration` -> `transitionDuration`
 
 - parses one or more values
 - parses number as `'{number}ms'`
 - parses any valid value
 
-#### `animationFn` -> `animationTimingFunction`
+#### `transitionFn` -> `transitionTimingFunction`
 
 - parses one or more values
 - parses any valid value
