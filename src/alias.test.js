@@ -407,14 +407,9 @@ const fixtures = {
   ],
   bgMoveCol: [
     {
-      in: [
-        'center',
-        {
-          top: '100%',
-        },
-      ],
+      in: ['center', 1],
       out: {
-        backgroundPositionY: 'center,top 100%',
+        backgroundPositionY: 'center,1rem',
       },
     },
     {
@@ -423,39 +418,18 @@ const fixtures = {
         backgroundPositionY: 'center',
       },
     },
-    {
-      in: {
-        top: '100%',
-      },
-      out: {
-        backgroundPositionY: 'top 100%',
-      },
-    },
   ],
   bgMoveRow: [
     {
-      in: [
-        'center',
-        {
-          left: '100%',
-        },
-      ],
+      in: ['center', 1],
       out: {
-        backgroundPositionX: 'center,left 100%',
+        backgroundPositionX: 'center,1rem',
       },
     },
     {
       in: 'center',
       out: {
         backgroundPositionX: 'center',
-      },
-    },
-    {
-      in: {
-        left: '100%',
-      },
-      out: {
-        backgroundPositionX: 'left 100%',
       },
     },
   ],

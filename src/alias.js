@@ -233,85 +233,33 @@ module.exports = {
   bgMoveCol: function(v) {
     if (v == null) return {}
 
-    if (v.constructor === Array) {
-      return {
-        backgroundPositionY: v.reduce(function(r, v) {
-          if (typeof v === 'object') {
-            for (var k in v) {
-              if (v.hasOwnProperty(k)) {
-                return (
-                  r +
-                  (r.length ? ',' : '') +
-                  k +
-                  ' ' +
-                  (typeof v[k] === 'number' && v[k] !== 0 ? v[k] + 'rem' : v[k])
-                )
-              }
-            }
-          }
-
-          return r + (r.length ? ',' : '') + v
-        }, ''),
-      }
-    }
-
-    if (typeof v === 'object') {
-      for (var k in v) {
-        if (v.hasOwnProperty(k)) {
-          return {
-            backgroundPositionY:
-              k +
-              ' ' +
-              (typeof v[k] === 'number' && v[k] !== 0 ? v[k] + 'rem' : v[k]),
-          }
-        }
-      }
-    }
-
     return {
-      backgroundPositionY: v,
+      backgroundPositionY:
+        v.constructor === Array
+          ? v.reduce(function(r, v) {
+              return (
+                r +
+                (r.length ? ',' : '') +
+                (typeof v === 'number' && v !== 0 ? v + 'rem' : v)
+              )
+            }, '')
+          : v,
     }
   },
   bgMoveRow: function(v) {
     if (v == null) return {}
 
-    if (v.constructor === Array) {
-      return {
-        backgroundPositionX: v.reduce(function(r, v) {
-          if (typeof v === 'object') {
-            for (var k in v) {
-              if (v.hasOwnProperty(k)) {
-                return (
-                  r +
-                  (r.length ? ',' : '') +
-                  k +
-                  ' ' +
-                  (typeof v[k] === 'number' && v[k] !== 0 ? v[k] + 'rem' : v[k])
-                )
-              }
-            }
-          }
-
-          return r + (r.length ? ',' : '') + v
-        }, ''),
-      }
-    }
-
-    if (typeof v === 'object') {
-      for (var k in v) {
-        if (v.hasOwnProperty(k)) {
-          return {
-            backgroundPositionX:
-              k +
-              ' ' +
-              (typeof v[k] === 'number' && v[k] !== 0 ? v[k] + 'rem' : v[k]),
-          }
-        }
-      }
-    }
-
     return {
-      backgroundPositionX: v,
+      backgroundPositionX:
+        v.constructor === Array
+          ? v.reduce(function(r, v) {
+              return (
+                r +
+                (r.length ? ',' : '') +
+                (typeof v === 'number' && v !== 0 ? v + 'rem' : v)
+              )
+            }, '')
+          : v,
     }
   },
   bgOrigin: function(v) {

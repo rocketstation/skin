@@ -237,17 +237,11 @@ it contains props for Fela Plugin Custom Property
 #### `bgMoveCol` -> `backgroundPositionY`
 
 - parses one or more values
-- parses `{ [sideRow]: val }` as `'{sideRow} {val}'`
-- parses `{ [sideRow]: 0 }` as `'{sideRow} 0'`
-- parses `{ [sideRow]: number }` as `'{sideRow} {number}rem'`
 - parses any valid value
 
 #### `bgMoveRow` -> `backgroundPositionX`
 
 - parses one or more values
-- parses `{ [sideCol]: val }` as `'{sideCol} {val}'`
-- parses `{ [sideCol]: 0 }` as `'{sideCol} 0'`
-- parses `{ [sideCol]: number }` as `'{sideCol} {number}rem'`
 - parses any valid value
 
 #### `bgOrigin` -> `backgroundOrigin`
