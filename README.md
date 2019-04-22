@@ -648,8 +648,7 @@ it contains props for Fela Plugin Custom Property
 
 #### `template` -> `gridTemplateAreas`
 
-- parses `[[...],[...],[...]]` as `'"...""...""..."'`
-- parses `null` as `'.'`
+- parses `['...','...','...']` as `'"...""...""..."'`
 - parses any valid value
 
 #### `modify` -> `transform`

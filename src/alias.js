@@ -1575,18 +1575,17 @@ module.exports = {
     }
   },
   template: function(v) {
-    return {
-      gridTemplateAreas: v.reduce(function(r, v) {
-        return (
-          r +
-          '"' +
-          v.reduce(function(r, v) {
-            return r + (r.length ? ' ' : '') + (v || '.')
-          }, '') +
-          '"'
-        )
-      }, ''),
+    if (v == null) return {}
+
+    if (v.constructor === Array) {
+      return {
+        gridTemplateAreas: v.reduce(function(r, v) {
+          return r + '"' + v + '"'
+        }, ''),
+      }
     }
+
+    return { gridTemplateAreas: v }
   },
   transition: function(v) {
     if (v == null) return {}

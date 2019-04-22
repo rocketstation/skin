@@ -1788,18 +1788,28 @@ const fixtures = {
       strokeDashoffset: 1,
     },
   },
-  template: {
-    in: [
-      ['header', 'header', 'header'],
-      ['minor', 'majorHeader', null],
-      ['minor', 'majorFooter', null],
-      ['footer', 'footer', 'footer'],
-    ],
-    out: {
-      gridTemplateAreas:
-        '"header header header""minor majorHeader .""minor majorFooter .""footer footer footer"',
+  template: [
+    {
+      in: [
+        ['header header header'],
+        ['minor majorHeader .'],
+        ['minor majorFooter .'],
+        ['footer footer footer'],
+      ],
+      out: {
+        gridTemplateAreas:
+          '"header header header""minor majorHeader .""minor majorFooter .""footer footer footer"',
+      },
     },
-  },
+    {
+      in:
+        '"header header header""minor majorHeader .""minor majorFooter .""footer footer footer"',
+      out: {
+        gridTemplateAreas:
+          '"header header header""minor majorHeader .""minor majorFooter .""footer footer footer"',
+      },
+    },
+  ],
   transition: [
     {
       in: false,
