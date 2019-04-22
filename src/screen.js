@@ -1,36 +1,36 @@
 var screen = function(screen) {
-  var queries = ['@media screen']
+  var queries = '@media screen'
 
   for (var query in screen) {
     if (screen.hasOwnProperty(query)) {
-      var val = screen[query]
-
-      switch (query) {
-        case 'from':
-          queries.push('(min-width:' + val / 16 + 'em' + ')')
-          break
-        case 'to':
-          queries.push('(max-width:' + (val - 1) / 16 + 'em' + ')')
-          break
-        default:
-          queries.push('(' + query + ':' + val + ')')
-      }
+      queries += ' and ' + '(' + query + ':' + screen[query] + ')'
     }
   }
 
-  return queries.join(' and ')
+  return queries
 }
 
 screen.between = function(from, to) {
-  return screen({ from: from, to: to })
+  return (
+    '@media screen and ' +
+    '(min-width:' +
+    from / 16 +
+    'em' +
+    ')' +
+    ' and ' +
+    '(max-width:' +
+    (to - 1) / 16 +
+    'em' +
+    ')'
+  )
 }
 
 screen.from = function(from) {
-  return screen({ from: from })
+  return '@media screen and ' + '(min-width:' + from / 16 + 'em' + ')'
 }
 
 screen.to = function(to) {
-  return screen({ to: to })
+  return '@media screen and ' + '(max-width:' + (to - 1) / 16 + 'em' + ')'
 }
 
 module.exports = screen
