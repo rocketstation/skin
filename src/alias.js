@@ -674,9 +674,14 @@ module.exports = {
   },
   colEnd: function(v) {
     if (v == null) return {}
+
+    if (v.constructor === Array) {
+      return {
+        gridColumnEnd: v[1] === true ? 'span' + ' ' + v[0] : v[0],
+      }
+    }
     return {
-      gridColumnEnd:
-        v.constructor === Array && v[1] === true ? 'span' + ' ' + v[0] : v,
+      gridColumnEnd: v,
     }
   },
   colorBox: function(v) {
@@ -854,13 +859,17 @@ module.exports = {
   },
   direction: function(v) {
     if (v == null) return {}
+
+    if (v.constructor === Array) {
+      return {
+        flexDirection:
+          (v[0] === 'col' ? 'column' : v[0]) +
+          (v[1] === true ? '-reverse' : ''),
+      }
+    }
+
     return {
-      flexDirection:
-        v.constructor === Array && v[1] === true
-          ? (v[0] === 'col' ? 'column' : v[0]) + '-reverse'
-          : v === 'col'
-          ? 'column'
-          : v,
+      flexDirection: v === 'col' ? 'column' : v,
     }
   },
   font: function(v) {
@@ -1169,9 +1178,14 @@ module.exports = {
   },
   rowEnd: function(v) {
     if (v == null) return {}
+
+    if (v.constructor === Array) {
+      return {
+        gridRowEnd: v[1] === true ? 'span' + ' ' + v[0] : v[0],
+      }
+    }
     return {
-      gridRowEnd:
-        v.constructor === Array && v[1] === true ? 'span' + ' ' + v[0] : v,
+      gridRowEnd: v,
     }
   },
   rows: function(v) {

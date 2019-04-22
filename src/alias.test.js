@@ -972,6 +972,12 @@ const fixtures = {
       },
     },
     {
+      in: ['row', false],
+      out: {
+        flexDirection: 'row',
+      },
+    },
+    {
       in: 'col',
       out: {
         flexDirection: 'column',
@@ -981,6 +987,12 @@ const fixtures = {
       in: ['col', true],
       out: {
         flexDirection: 'column-reverse',
+      },
+    },
+    {
+      in: ['col', false],
+      out: {
+        flexDirection: 'column',
       },
     },
   ],
