@@ -1791,6 +1791,18 @@ const fixtures = {
   template: [
     {
       in: [
+        ['header', 'header', 'header'],
+        ['minor', 'majorHeader', '.'],
+        ['minor', 'majorFooter', '.'],
+        ['footer', 'footer', 'footer'],
+      ],
+      out: {
+        gridTemplateAreas:
+          '"header header header""minor majorHeader .""minor majorFooter .""footer footer footer"',
+      },
+    },
+    {
+      in: [
         ['header header header'],
         ['minor majorHeader .'],
         ['minor majorFooter .'],
