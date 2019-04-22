@@ -1,28 +1,3 @@
-var parseNth = function(kind) {
-  var next = ':nth-'
-
-  switch (kind) {
-    case 'first':
-      next += 'child'
-      break
-    case 'last':
-      next += 'last-child'
-      break
-  }
-
-  return function(every, from) {
-    return (
-      next +
-      '(' +
-      (every == null ? 0 : every) +
-      'n' +
-      '+' +
-      (from == null ? 1 : from) +
-      ')'
-    )
-  }
-}
-
 var its = function(v) {
   return '&' + ' ' + v
 }
@@ -34,13 +9,29 @@ its.before = '::before'
 its.children = '>*'
 
 its.first = function(every, from) {
-  return parseNth('first')(every, from)
+  return (
+    ':nth-child' +
+    '(' +
+    (every == null ? 0 : every) +
+    'n' +
+    '+' +
+    (from == null ? 1 : from) +
+    ')'
+  )
 }
 
 its.highlight = '::selection'
 
 its.last = function(every, from) {
-  return parseNth('last')(every, from)
+  return (
+    ':nth-last-child' +
+    '(' +
+    (every == null ? 0 : every) +
+    'n' +
+    '+' +
+    (from == null ? 1 : from) +
+    ')'
+  )
 }
 
 its.nextMultiple = '&~*'
