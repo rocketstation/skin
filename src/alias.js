@@ -685,11 +685,15 @@ module.exports = {
     }
   },
   colorBox: function(v) {
+    if (v === false) return { backgroundColor: 'transparent' }
+
     return {
       backgroundColor: v,
     }
   },
   colorText: function(v) {
+    if (v === false) return { color: 'transparent' }
+
     return {
       color: v,
     }

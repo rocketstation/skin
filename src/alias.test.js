@@ -802,18 +802,34 @@ const fixtures = {
       },
     },
   ],
-  colorBox: {
-    in: 'hsla(0,0%,0%,1)',
-    out: {
-      backgroundColor: 'hsla(0,0%,0%,1)',
+  colorBox: [
+    {
+      in: false,
+      out: {
+        backgroundColor: 'transparent',
+      },
     },
-  },
-  colorText: {
-    in: 'hsla(0,0%,0%,1)',
-    out: {
-      color: 'hsla(0,0%,0%,1)',
+    {
+      in: 'hsla(0,0%,0%,1)',
+      out: {
+        backgroundColor: 'hsla(0,0%,0%,1)',
+      },
     },
-  },
+  ],
+  colorText: [
+    {
+      in: false,
+      out: {
+        color: 'transparent',
+      },
+    },
+    {
+      in: 'hsla(0,0%,0%,1)',
+      out: {
+        color: 'hsla(0,0%,0%,1)',
+      },
+    },
+  ],
   cols: [
     {
       in: false,

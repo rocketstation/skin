@@ -314,10 +314,12 @@ it contains props for Fela Plugin Custom Property
 #### `colorBox` -> `backgroundColor`
 
 - parses any valid value
+- parses `false` as `'transparent'`
 
 #### `colorText` -> `color`
 
 - parses any valid value
+- parses `false` as `'transparent'`
 
 #### `cols` -> `gridTemplateColumns`
 
