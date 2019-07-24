@@ -500,9 +500,10 @@ module.exports = {
     return {}
   },
   borderColor: function(v) {
+    var next
+
     if (typeof v === 'object') {
       var rules = {}
-      var next
 
       for (var k in v) {
         if (Object.prototype.hasOwnProperty.call(v, k)) {
@@ -550,62 +551,76 @@ module.exports = {
     }
   },
   borderKind: function(v) {
-    var rules = {}
+    var next
 
     if (typeof v === 'object') {
+      var rules = {}
+
       for (var k in v) {
         if (Object.prototype.hasOwnProperty.call(v, k)) {
+          next = v[k]
+
+          switch (next) {
+            case true:
+              next = 'solid'
+              break
+
+            case false:
+              next = 'none'
+              break
+          }
+
           switch (k) {
             case 'left':
-              rules.borderLeftStyle = v[k]
+              rules.borderLeftStyle = next
               break
 
             case 'right':
-              rules.borderRightStyle = v[k]
+              rules.borderRightStyle = next
               break
 
             case 'top':
-              rules.borderTopStyle = v[k]
+              rules.borderTopStyle = next
               break
 
             case 'bottom':
-              rules.borderBottomStyle = v[k]
+              rules.borderBottomStyle = next
               break
 
             case 'row':
-              rules.borderLeftStyle = v[k]
-              rules.borderRightStyle = v[k]
+              rules.borderLeftStyle = next
+              rules.borderRightStyle = next
               break
 
             case 'col':
-              rules.borderTopStyle = v[k]
-              rules.borderBottomStyle = v[k]
+              rules.borderTopStyle = next
+              rules.borderBottomStyle = next
               break
           }
         }
       }
-    } else {
-      rules.borderBottomStyle = v
-      rules.borderLeftStyle = v
-      rules.borderRightStyle = v
-      rules.borderTopStyle = v
+
+      return rules
     }
 
-    for (var rule in rules) {
-      if (Object.prototype.hasOwnProperty.call(rules, rule)) {
-        switch (rules[rule]) {
-          case true:
-            rules[rule] = 'solid'
-            break
+    next = v
 
-          case false:
-            rules[rule] = 'none'
-            break
-        }
-      }
+    switch (next) {
+      case true:
+        next = 'solid'
+        break
+
+      case false:
+        next = 'none'
+        break
     }
 
-    return rules
+    return {
+      borderBottomStyle: next,
+      borderLeftStyle: next,
+      borderRightStyle: next,
+      borderTopStyle: next,
+    }
   },
   borderSize: function(v) {
     if (typeof v === 'object') {
@@ -1087,6 +1102,44 @@ module.exports = {
   origin: function(v) {
     return {
       flexBasis: v,
+    }
+  },
+  outlineColor: function(v) {
+    if (v === false) {
+      return {
+        outlineColor: 'transparent',
+      }
+    }
+
+    return {
+      outlineColor: v,
+    }
+  },
+  outlineKind: function(v) {
+    if (v === true) {
+      return {
+        outlineStyle: 'solid',
+      }
+    }
+
+    if (v === false) {
+      return {
+        outlineStyle: 'none',
+      }
+    }
+
+    return {
+      outlineStyle: v,
+    }
+  },
+  outlineSize: function(v) {
+    return {
+      outlineWidth: v,
+    }
+  },
+  outlineSpace: function(v) {
+    return {
+      outlineOffset: v,
     }
   },
   overflowCol: function(v) {
@@ -1673,6 +1726,12 @@ module.exports = {
     if (v === true) {
       return {
         columnRuleStyle: 'solid',
+      }
+    }
+
+    if (v === false) {
+      return {
+        columnRuleStyle: 'none',
       }
     }
 

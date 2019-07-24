@@ -1314,6 +1314,38 @@ const fixtures = {
       flexBasis: 0,
     },
   },
+  outlineColor: [
+    {
+      in: false,
+      out: { outlineColor: 'transparent' },
+    },
+    {
+      in: 'hsla(0,0%,0%,0)',
+      out: { outlineColor: 'hsla(0,0%,0%,0)' },
+    },
+  ],
+  outlineKind: [
+    {
+      in: false,
+      out: { outlineStyle: 'none' },
+    },
+    {
+      in: true,
+      out: { outlineStyle: 'solid' },
+    },
+    {
+      in: 'solid',
+      out: { outlineStyle: 'solid' },
+    },
+  ],
+  outlineSize: {
+    in: 1,
+    out: { outlineWidth: 1 },
+  },
+  outlineSpace: {
+    in: 1,
+    out: { outlineOffset: 1 },
+  },
   overflowCol: [
     {
       in: void 0,
@@ -1948,6 +1980,12 @@ const fixtures = {
       in: true,
       out: {
         columnRuleStyle: 'solid',
+      },
+    },
+    {
+      in: false,
+      out: {
+        columnRuleStyle: 'none',
       },
     },
     {

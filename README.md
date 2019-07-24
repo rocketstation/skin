@@ -723,6 +723,7 @@ it contains props for Fela Plugin Custom Property
 
 - parses any valid value
 - parses `true` as `'solid'`
+- parses `false` as `'none'`
 
 #### `textColsBorderSize` -> `columnRuleWidth`
 
@@ -733,6 +734,25 @@ it contains props for Fela Plugin Custom Property
 - parses any valid value
 
 #### `textColsSize` -> `columnWidth`
+
+- parses any valid value
+
+#### `outlineColor` -> `outlineColor`
+
+- parses any valid value
+- parses `false` as `'transparent'`
+
+#### `outlineKind` -> `outlineStyle`
+
+- parses any valid value
+- parses `true` as `'solid'`
+- parses `false` as `'none'`
+
+#### `outlineSize` -> `outlineWidth`
+
+- parses any valid value
+
+#### `outlineSpace` -> `outlineOffset`
 
 - parses any valid value
 
