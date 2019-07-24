@@ -609,12 +609,35 @@ const fixtures = {
   ],
   borderColor: [
     {
+      in: false,
+      out: {
+        borderBottomColor: 'transparent',
+        borderLeftColor: 'transparent',
+        borderRightColor: 'transparent',
+        borderTopColor: 'transparent',
+      },
+    },
+    {
       in: 'hsla(0,0%,0%,1)',
       out: {
         borderBottomColor: 'hsla(0,0%,0%,1)',
         borderLeftColor: 'hsla(0,0%,0%,1)',
         borderRightColor: 'hsla(0,0%,0%,1)',
         borderTopColor: 'hsla(0,0%,0%,1)',
+      },
+    },
+    {
+      in: {
+        bottom: false,
+        left: false,
+        right: false,
+        top: false,
+      },
+      out: {
+        borderBottomColor: 'transparent',
+        borderLeftColor: 'transparent',
+        borderRightColor: 'transparent',
+        borderTopColor: 'transparent',
       },
     },
     {
@@ -641,6 +664,18 @@ const fixtures = {
         borderLeftColor: 'hsla(0,0%,0%,1)',
         borderRightColor: 'hsla(0,0%,0%,1)',
         borderTopColor: 'hsla(0,0%,0%,1)',
+      },
+    },
+    {
+      in: {
+        col: false,
+        row: false,
+      },
+      out: {
+        borderBottomColor: 'transparent',
+        borderLeftColor: 'transparent',
+        borderRightColor: 'transparent',
+        borderTopColor: 'transparent',
       },
     },
   ],
@@ -1012,6 +1047,20 @@ const fixtures = {
       },
     },
   ],
+  fill: [
+    {
+      in: false,
+      out: {
+        fill: 'transparent',
+      },
+    },
+    {
+      in: 'hsla(0,0%,0%,1)',
+      out: {
+        fill: 'hsla(0,0%,0%,1)',
+      },
+    },
+  ],
   font: {
     in: ['serif', 'sans-serif'],
     out: {
@@ -1149,6 +1198,30 @@ const fixtures = {
       in: 'rotate(360deg)',
       out: {
         transform: 'rotate(360deg)',
+      },
+    },
+  ],
+  modifyOrigin: [
+    {
+      in: void 0,
+      out: {},
+    },
+    {
+      in: 'center',
+      out: {
+        transformOrigin: 'center',
+      },
+    },
+    {
+      in: 1,
+      out: {
+        transformOrigin: '1rem',
+      },
+    },
+    {
+      in: ['50%', '50%', 1],
+      out: {
+        transformOrigin: '50% 50% 1rem',
       },
     },
   ],
@@ -1376,6 +1449,18 @@ const fixtures = {
       in: 'col',
       out: {
         gridAutoFlow: 'column',
+      },
+    },
+    {
+      in: ['col', true],
+      out: {
+        gridAutoFlow: 'column dense',
+      },
+    },
+    {
+      in: ['row', true],
+      out: {
+        gridAutoFlow: 'row dense',
       },
     },
     {
@@ -1838,10 +1923,64 @@ const fixtures = {
       },
     },
   ],
+  textColsAmount: {
+    in: 1,
+    out: {
+      columnCount: 1,
+    },
+  },
+  textColsBorderColor: [
+    {
+      in: false,
+      out: {
+        columnRuleColor: 'transparent',
+      },
+    },
+    {
+      in: 'hsla(0,0,0,0)',
+      out: {
+        columnRuleColor: 'hsla(0,0,0,0)',
+      },
+    },
+  ],
+  textColsBorderKind: [
+    {
+      in: true,
+      out: {
+        columnRuleStyle: 'solid',
+      },
+    },
+    {
+      in: 'solid',
+      out: {
+        columnRuleStyle: 'solid',
+      },
+    },
+  ],
+  textColsBorderSize: {
+    in: 1,
+    out: {
+      columnRuleWidth: 1,
+    },
+  },
+  textColsSpace: {
+    in: 0,
+    out: {
+      columnGap: 0,
+    },
+  },
+  textColsWidth: {
+    in: 0,
+    out: {
+      columnWidth: 0,
+    },
+  },
   transition: [
     {
       in: false,
-      out: { transitionProperty: 'none' },
+      out: {
+        transitionProperty: 'none',
+      },
     },
     {
       in: ['colorBox', 'colorText', 'modify', 'borderColor'],

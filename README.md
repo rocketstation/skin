@@ -286,6 +286,7 @@ it contains props for Fela Plugin Custom Property
 
 - parses sides `{ left, right, top, bottom, row, col }`
 - parses any valid value
+- parses `false` as `'transparent'`
 
 #### `borderKind` -> `borderBottomStyle borderLeftStyle borderRightStyle borderTopStyle`
 
@@ -380,6 +381,7 @@ it contains props for Fela Plugin Custom Property
 #### `fill` -> `fill`
 
 - parses any valid value
+- parses `false` as `'transparent'`
 
 #### `font` -> `fontFamily`
 
@@ -660,6 +662,12 @@ it contains props for Fela Plugin Custom Property
 - parses one or more values
 - parses any valid value
 
+#### `modifyOrigin` -> `transformOrigin`
+
+- parses any valid value
+- parses one or more values
+- parses number as `'{number}rem'`
+
 #### `weight` -> `fontWeight`
 
 - parses any valid value
@@ -700,6 +708,32 @@ it contains props for Fela Plugin Custom Property
 #### `transitionFn` -> `transitionTimingFunction`
 
 - parses one or more values
+- parses any valid value
+
+#### `textColsAmount` -> `columnCount`
+
+- parses any valid value
+
+#### `textColsBorderColor` -> `columnRuleColor`
+
+- parses any valid value
+- parses `false` as `'transparent'`
+
+#### `textColsBorderKind` -> `columnRuleStyle`
+
+- parses any valid value
+- parses `true` as `'solid'`
+
+#### `textColsBorderSize` -> `columnRuleWidth`
+
+- parses any valid value
+
+#### `textColsSpace` -> `columnGap`
+
+- parses any valid value
+
+#### `textColsSize` -> `columnWidth`
+
 - parses any valid value
 
 #### `custom`

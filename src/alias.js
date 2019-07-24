@@ -232,7 +232,6 @@ module.exports = {
   },
   bgMoveCol: function(v) {
     if (v == null) return {}
-
     return {
       backgroundPositionY:
         v.constructor === Array
@@ -248,7 +247,6 @@ module.exports = {
   },
   bgMoveRow: function(v) {
     if (v == null) return {}
-
     return {
       backgroundPositionX:
         v.constructor === Array
@@ -504,34 +502,37 @@ module.exports = {
   borderColor: function(v) {
     if (typeof v === 'object') {
       var rules = {}
+      var next
 
       for (var k in v) {
-        if (v.hasOwnProperty(k)) {
+        if (Object.prototype.hasOwnProperty.call(v, k)) {
+          next = v[k] === false ? 'transparent' : v[k]
+
           switch (k) {
             case 'left':
-              rules.borderLeftColor = v[k]
+              rules.borderLeftColor = next
               break
 
             case 'right':
-              rules.borderRightColor = v[k]
+              rules.borderRightColor = next
               break
 
             case 'top':
-              rules.borderTopColor = v[k]
+              rules.borderTopColor = next
               break
 
             case 'bottom':
-              rules.borderBottomColor = v[k]
+              rules.borderBottomColor = next
               break
 
             case 'row':
-              rules.borderLeftColor = v[k]
-              rules.borderRightColor = v[k]
+              rules.borderLeftColor = next
+              rules.borderRightColor = next
               break
 
             case 'col':
-              rules.borderTopColor = v[k]
-              rules.borderBottomColor = v[k]
+              rules.borderTopColor = next
+              rules.borderBottomColor = next
               break
           }
         }
@@ -540,11 +541,12 @@ module.exports = {
       return rules
     }
 
+    next = v === false ? 'transparent' : v
     return {
-      borderBottomColor: v,
-      borderLeftColor: v,
-      borderRightColor: v,
-      borderTopColor: v,
+      borderBottomColor: next,
+      borderLeftColor: next,
+      borderRightColor: next,
+      borderTopColor: next,
     }
   },
   borderKind: function(v) {
@@ -552,7 +554,7 @@ module.exports = {
 
     if (typeof v === 'object') {
       for (var k in v) {
-        if (v.hasOwnProperty(k)) {
+        if (Object.prototype.hasOwnProperty.call(v, k)) {
           switch (k) {
             case 'left':
               rules.borderLeftStyle = v[k]
@@ -590,7 +592,7 @@ module.exports = {
     }
 
     for (var rule in rules) {
-      if (rules.hasOwnProperty(rule)) {
+      if (Object.prototype.hasOwnProperty.call(rules, rule)) {
         switch (rules[rule]) {
           case true:
             rules[rule] = 'solid'
@@ -610,7 +612,7 @@ module.exports = {
       var rules = {}
 
       for (var k in v) {
-        if (v.hasOwnProperty(k)) {
+        if (Object.prototype.hasOwnProperty.call(v, k)) {
           switch (k) {
             case 'left':
               rules.borderLeftWidth = v[k]
@@ -680,19 +682,28 @@ module.exports = {
         gridColumnEnd: v[1] === true ? 'span' + ' ' + v[0] : v[0],
       }
     }
+
     return {
       gridColumnEnd: v,
     }
   },
   colorBox: function(v) {
-    if (v === false) return { backgroundColor: 'transparent' }
+    if (v === false) {
+      return {
+        backgroundColor: 'transparent',
+      }
+    }
 
     return {
       backgroundColor: v,
     }
   },
   colorText: function(v) {
-    if (v === false) return { color: 'transparent' }
+    if (v === false) {
+      return {
+        color: 'transparent',
+      }
+    }
 
     return {
       color: v,
@@ -762,7 +773,7 @@ module.exports = {
 
     if (typeof v === 'object' && v.constructor !== Array) {
       for (var k in v) {
-        if (v.hasOwnProperty(k)) {
+        if (Object.prototype.hasOwnProperty.call(v, k)) {
           switch (k) {
             case 'left':
               rules.borderTopLeftRadius = v[k]
@@ -810,7 +821,7 @@ module.exports = {
     }
 
     for (var rule in rules) {
-      if (rules.hasOwnProperty(rule)) {
+      if (Object.prototype.hasOwnProperty.call(rules, rule)) {
         var val = rules[rule]
 
         switch (true) {
@@ -874,6 +885,17 @@ module.exports = {
 
     return {
       flexDirection: v === 'col' ? 'column' : v,
+    }
+  },
+  fill: function(v) {
+    if (v === false) {
+      return {
+        fill: 'transparent',
+      }
+    }
+
+    return {
+      fill: v,
     }
   },
   font: function(v) {
@@ -972,12 +994,31 @@ module.exports = {
       transform: v.constructor === Array ? v.join(' ') : v,
     }
   },
+  modifyOrigin: function(v) {
+    if (v == null) return {}
+
+    if (v.constructor === Array) {
+      return {
+        transformOrigin: v.reduce(function(r, v, i, a) {
+          return (
+            r +
+            (r.length ? ' ' : '') +
+            (typeof v === 'number' && v !== 0 ? v + 'rem' : v)
+          )
+        }, ''),
+      }
+    }
+
+    return {
+      transformOrigin: typeof v === 'number' && v !== 0 ? v + 'rem' : v,
+    }
+  },
   move: function(v) {
     if (typeof v === 'object') {
       var rules = {}
 
       for (var k in v) {
-        if (v.hasOwnProperty(k)) {
+        if (Object.prototype.hasOwnProperty.call(v, k)) {
           switch (k) {
             case 'left':
               rules.left = v[k]
@@ -1133,6 +1174,14 @@ module.exports = {
     }
   },
   placeDirection: function(v) {
+    if (v == null) return {}
+
+    if (v.constructor === Array && v[1] === true) {
+      return {
+        gridAutoFlow: (v[0] === 'col' ? 'column' : v[0]) + ' ' + 'dense',
+      }
+    }
+
     return {
       gridAutoFlow: v === 'col' ? 'column' : v,
     }
@@ -1188,6 +1237,7 @@ module.exports = {
         gridRowEnd: v[1] === true ? 'span' + ' ' + v[0] : v[0],
       }
     }
+
     return {
       gridRowEnd: v,
     }
@@ -1460,7 +1510,7 @@ module.exports = {
       var rules = {}
 
       for (var k in v) {
-        if (v.hasOwnProperty(k)) {
+        if (Object.prototype.hasOwnProperty.call(v, k)) {
           switch (k) {
             case 'left':
               rules.paddingLeft = v[k]
@@ -1506,7 +1556,7 @@ module.exports = {
       var rules = {}
 
       for (var k in v) {
-        if (v.hasOwnProperty(k)) {
+        if (Object.prototype.hasOwnProperty.call(v, k)) {
           switch (k) {
             case 'left':
               rules.marginLeft = v[k]
@@ -1599,10 +1649,55 @@ module.exports = {
       }
     }
 
-    return { gridTemplateAreas: v }
+    return {
+      gridTemplateAreas: v,
+    }
+  },
+  textColsAmount: function(v) {
+    return {
+      columnCount: v,
+    }
+  },
+  textColsBorderColor: function(v) {
+    if (v === false) {
+      return {
+        columnRuleColor: 'transparent',
+      }
+    }
+
+    return {
+      columnRuleColor: v,
+    }
+  },
+  textColsBorderKind: function(v) {
+    if (v === true) {
+      return {
+        columnRuleStyle: 'solid',
+      }
+    }
+
+    return {
+      columnRuleStyle: v,
+    }
+  },
+  textColsBorderSize: function(v) {
+    return {
+      columnRuleWidth: v,
+    }
+  },
+  textColsSpace: function(v) {
+    return {
+      columnGap: v,
+    }
+  },
+  textColsWidth: function(v) {
+    return {
+      columnWidth: v,
+    }
   },
   transition: function(v) {
     if (v == null) return {}
+
     if (v === false) {
       return {
         transitionProperty: 'none',

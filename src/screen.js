@@ -2,7 +2,7 @@ var screen = function(screen) {
   var queries = '@media screen'
 
   for (var query in screen) {
-    if (screen.hasOwnProperty(query)) {
+    if (Object.prototype.hasOwnProperty.call(screen, query)) {
       queries += ' and ' + '(' + query + ':' + screen[query] + ')'
     }
   }
