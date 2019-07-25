@@ -12,6 +12,8 @@ npm i @rocketstation/skin
 
 ```javascript
 import * as skin from '@rocketstation/skin'
+import * as alias from '@rocketstation/skin/alias'
+
 import $ from '@rocketstation/black-box'
 
 import { createRenderer } from 'fela'
@@ -30,11 +32,11 @@ const MyComponent = ({ name, ...props }) =>
       skin: ({ theme }) => ({
         colorBox: theme.box.color.major,
         colorText: theme.text.color.major,
-        [skin.on.hover]: {
+        [skin.onHover]: {
           colorBox: theme.text.color.major,
           colorText: theme.box.color.major,
         },
-        [skin.screen.from(960)]: { size: '125%' }
+        [skin.screenFrom(960)]: { size: '125%' }
       }),
       ...props,
     },
@@ -44,7 +46,7 @@ const MyComponent = ({ name, ...props }) =>
   )
 
 const renderer = createRenderer({
-  plugins: [pluginCustomProperty(skin.alias)],
+  plugins: [pluginCustomProperty(alias)],
 })
 
 ReactDOM.render(
@@ -59,707 +61,365 @@ ReactDOM.render(
 
 ## API
 
-### Skin
-
-it contains style functions
-
-- parses `img()` as `url()`
-- parses `radial(...bps)` as `radial-gradient(...bps)`
-- parses `linear(deg, ...bps)` as `linear-gradient(deg, ...bps)`
-- parses `matrix()` as `matrix()`
-- parses `matrix3d()` as `matrix3d()`
-- parses `translate()` as `translate()`
-- parses `translate3d()` as `translate3d()`
-- parses `translateX()` as `translateX()`
-- parses `translateY()` as `translateY()`
-- parses `translateZ()` as `translateZ()`
-- parses `scale()` as `scale()`
-- parses `scale3d()` as `scale3d()`
-- parses `scaleX()` as `scaleX()`
-- parses `scaleY()` as `scaleY()`
-- parses `scaleZ()` as `scaleZ()`
-- parses `rotate()` as `rotate()`
-- parses `rotate3d()` as `rotate3d()`
-- parses `rotateX()` as `rotateX()`
-- parses `rotateY()` as `rotateY()`
-- parses `rotateZ()` as `rotateZ()`
-- parses `skew()` as `skew()`
-- parses `skewX()` as `skewX()`
-- parses `skewY()` as `skewY()`
-- parses `perspective()` as `perspective()`
-
-### Attr
-
-- parses `attr(key).contains(val)` as `[{key}~={val}]`
-- parses `attr(key).containsStr(val)` as `[{key}*="{val}"]`
-- parses `attr(key).endsWithStr(val)` as `[{key}$="{val}"]`
-- parses `attr(key).equals(val)` as `[{key}={val}]`
-- parses `attr(key).is` as `[{key}]`
-- parses `attr(key).starts(val)` as `[{key}|={val}]`
-- parses `attr(key).startsWithStr(val)` as `[{key}^="{val}"]`
-
-### Its
-
-- parses `its(val)` as `& {val}`
-- parses `its.after` as `::after`
-- parses `its.before` as `::before`
-- parses `its.children` as `>*`
-- parses `its.first()` as `:nth-child(0n+1)`
-- parses `its.first(every,from)` as `:nth-child({every}n+{from})`
-- parses `its.last()` as `:nth-last-child(0n+1)`
-- parses `its.last(every,from)` as `:nth-last-child({every}n+{from})`
-- parses `its.highlight` as `::selection`
-- parses `its.nextMultiple` as `&~*`
-- parses `its.nextSingle` as `&+*`
-- parses `its.placeholder` as `::placeholder`
-
-### On
-
-- parses `on.hover` as `:hover`
-- parses `on.focus` as `:focus`
-- parses `on.active` as `:active`
 
-### Screen
-
-- parses `screen({ key: val })` as `@media screen and ({key}: {val})`
-- parses `screen.from(px)` as `@media screen and (min-width:{px / 16}em)`
-- parses `screen.to(px)` as `@media screen and (max-width:{(px - 1) / 16}em)`
-- parses `screen.between(pxFrom, pxTo)` as `@media screen (min-width:{pxFrom / 16}em) and (max-width:{(pxTo - 1) / 16}em)`
 
-### alias
 
-it contains props for Fela Plugin Custom Property
+### Services
 
-#### `align` -> `textAlign`
 
-- parses `'left'` as `'left'`
-- parses `'right'` as `'right'`
-- parses `'center'` as `'center'`
-- parses `'stretch'` as `'justify'`
+[attr](src/attr/README.md)
 
-#### `alignMajor` -> `justifyItems`
+[attr-contains](src/attr-contains/README.md)
 
-- parses `'start'` as `'start'`
-- parses `'end'` as `'end'`
-- parses `'center'` as `'center'`
-- parses `'stretch'` as `'stretch'`
+[attr-contains-str](src/attr-contains-str/README.md)
 
-#### `alignMinor` -> `alignItems`
+[attr-ends-with-str](src/attr-ends-with-str/README.md)
 
-- parses `'start'` as `'start'`
-- parses `'end'` as `'end'`
-- parses `'center'` as `'center'`
-- parses `'stretch'` as `'stretch'`
+[attr-equals](src/attr-equals/README.md)
 
-#### `alignContent` -> `alignItems`
+[attr-starts](src/attr-starts/README.md)
 
-- parses `'start'` as `'flex-start'`
-- parses `'end'` as `'flex-end'`
-- parses `'center'` as `'center'`
-- parses `'stretch'` as `'stretch'`
+[attr-starts-with-str](src/attr-starts-with-str/README.md)
 
-#### `alignSelfMajor` -> `justifySelf`
+[img](src/img/README.md)
 
-- parses `'start'` as `'start'`
-- parses `'end'` as `'end'`
-- parses `'center'` as `'center'`
-- parses `'stretch'` as `'stretch'`
+[its](src/its/README.md)
 
-#### `alignSelfMinor` -> `alignSelf`
+[its-after](src/its-after/README.md)
 
-- parses `'start'` as `'start'`
-- parses `'end'` as `'end'`
-- parses `'center'` as `'center'`
-- parses `'stretch'` as `'stretch'`
+[its-before](src/its-before/README.md)
 
-#### `alignSelf` -> `alignSelf`
+[its-children](src/its-children/README.md)
 
-- parses `'start'` as `'flex-start'`
-- parses `'end'` as `'flex-end'`
-- parses `'center'` as `'center'`
-- parses `'stretch'` as `'stretch'`
+[its-first](src/its-first/README.md)
 
-#### `animation` -> `animationName`
+[its-highlight](src/its-highlight/README.md)
 
-- parses one or more values
-- parses any valid value
+[its-last](src/its-last/README.md)
 
-#### `animationCount` -> `animationIterationCount`
+[its-next-multiple](src/its-next-multiple/README.md)
 
-- parses one or more values
-- parses `true` as `'infinite'`
-- parses any valid value
+[its-next-single](src/its-next-single/README.md)
 
-#### `animationDelay` -> `animationDelay`
+[its-placeholder](src/its-placeholder/README.md)
 
-- parses one or more values
-- parses number as ms
-- parses any valid value
+[limit](src/limit/README.md)
 
-#### `animationDirection` -> `animationDirection`
+[linear](src/linear/README.md)
 
-- parses one or more values
-- parses `-1` as `'normal'`
-- parses `1` as `'reverse'`
-- parses `2` as `'alternate'`
-- parses `-2` as `'alternate-reverse'`
+[matrix](src/matrix/README.md)
 
-#### `animationDuration` -> `animationDuration`
+[matrix-3d](src/matrix-3d/README.md)
 
-- parses one or more values
-- parses number as `'{number}ms'`
-- parses any valid value
+[on-active](src/on-active/README.md)
 
-#### `animationFn` -> `animationTimingFunction`
+[on-focus](src/on-focus/README.md)
 
-- parses one or more values
-- parses any valid value
+[on-hover](src/on-hover/README.md)
 
-#### `animationIsActive` -> `animationPlayState`
+[perspective](src/perspective/README.md)
 
-- parses one or more values
-- parses `true` as `'running'`
-- parses `false` as `'paused'`
+[radial](src/radial/README.md)
 
-#### `animationOrigin` -> `animationFillingMode`
+[repeat](src/repeat/README.md)
 
-- parses one or more values
-- parses `true` as `'both`
-- parses `false` as `'none'`
-- parses `1` as `'forwards'`
-- parses `-1` as `'backwards'`
+[rotate](src/rotate/README.md)
 
-#### `bg` -> `backgroundImage`
+[rotate-3d](src/rotate-3d/README.md)
 
-- parses one or more values
-- parses `false` as `'none'`
+[rotate-x](src/rotate-x/README.md)
 
-#### `bgMoveCol` -> `backgroundPositionY`
+[rotate-y](src/rotate-y/README.md)
 
-- parses one or more values
-- parses any valid value
+[rotate-z](src/rotate-z/README.md)
 
-#### `bgMoveRow` -> `backgroundPositionX`
+[scale](src/scale/README.md)
 
-- parses one or more values
-- parses any valid value
+[scale-3d](src/scale-3d/README.md)
 
-#### `bgOrigin` -> `backgroundOrigin`
+[scale-x](src/scale-x/README.md)
 
-- parses one or more values
-- parses `'border'` as `'border-box'`
-- parses `'space'` as `'padding-box'`
-- parses `'content'` as `'content-box'`
+[scale-y](src/scale-y/README.md)
 
-#### `bgOverflow` -> `backgroundClip`
+[scale-z](src/scale-z/README.md)
 
-- parses one or more values
-- parses `'border'` as `'border-box'`
-- parses `'space'` as `'padding-box'`
-- parses `'content'` as `'content-box'`
+[screen](src/screen/README.md)
 
-#### `bgPosition` -> `backgroundAttachment`
+[screen-between](src/screen-between/README.md)
 
-- parses one or more values
-- parses `'global'` as `scroll`
-- parses `'local'` as `local`
-- parses `false` as `'fixed'`
+[screen-from](src/screen-from/README.md)
 
-#### `bgRepeat` -> `backgroundRepeat`
+[screen-to](src/screen-to/README.md)
 
-- parses one or more values
-- parses `false` as `'no-repeat'`
-- parses `true` as `'repeat'`
-- parses `'col'` as `'repeat-y'`
-- parses `'row'` as `'repeat-x'`
+[skew](src/skew/README.md)
 
-#### `bgSize` -> `backgroundSize`
+[skew-x](src/skew-x/README.md)
 
-- parses one or more values
-- parses `'fill'` as `'cover'`
-- parses `'fit'` as `'contain'`
-- parses `'auto'` as `'auto'`
-- parses `{ height: val, width: val }` as `'{width} {height}'`
-- parses `{ height: number, width: number }` as `'{width}rem {height}rem'`
+[skew-y](src/skew-y/README.md)
 
-#### `borderColor` -> `borderBottomColor borderLeftColor borderRightColor borderTopColor`
+[translate](src/translate/README.md)
 
-- parses sides `{ left, right, top, bottom, row, col }`
-- parses any valid value
-- parses `false` as `'transparent'`
+[translate-3d](src/translate-3d/README.md)
 
-#### `borderKind` -> `borderBottomStyle borderLeftStyle borderRightStyle borderTopStyle`
+[translate-x](src/translate-x/README.md)
 
-- parses `true` as `'solid'`
-- parses `false` as `'none'`
-- parses sides `{ left, right, top, bottom, row, col }`
-- parses any valid value
+[translate-y](src/translate-y/README.md)
 
-#### `borderSize` -> `borderBottomWidth borderLeftWidth borderRightWidth borderTopWidth`
+[translate-z](src/translate-z/README.md)
 
-- parses sides `{ left, right, top, bottom, row, col }`
-- parses `number` as `'{number}px'`
-- parses any valid value
+### Alias
 
-#### `case` -> `textTransform`
 
-- parses `'upper'` as `'uppercase'`
-- parses `'lower'` as `'lowercase'`
-- parses `false` as `'none'`
+[align](src/alias/align/README.md)
 
-#### `colEnd` -> `gridColumnEnd`
+[align-content](src/alias/align-content/README.md)
 
-- parses `number` as `'{number}'`
-- parses `[number, true]` as `'span {number}'`
+[align-major](src/alias/align-major/README.md)
 
-#### `colorBox` -> `backgroundColor`
+[align-minor](src/alias/align-minor/README.md)
 
-- parses any valid value
-- parses `false` as `'transparent'`
+[align-self](src/alias/align-self/README.md)
 
-#### `colorText` -> `color`
+[align-self-major](src/alias/align-self-major/README.md)
 
-- parses any valid value
-- parses `false` as `'transparent'`
+[align-self-minor](src/alias/align-self-minor/README.md)
 
-#### `cols` -> `gridTemplateColumns`
+[animation](src/alias/animation/README.md)
 
-- parses one or more values
-- parses `false` as `'none'`
-- parses `1` as `1fr`
-- parses `[1, auto]` as `'repeat(1, auto)'`
-- parses `[fill, auto]` as `'repeat(auto-fill, auto)'`
-- parses `[fit, auto]` as `'repeat(auto-fit, auto)'`
-- parses `{ min: val, max: val }` as `'minmax({val}, {val})'`
-- parses `{ min: number, max: number }` as `'minmax({number}fr, {number}fr)'`
-- parses `{}` as `'minmax(auto, auto)'`
-- parses any valid value
+[animation-count](src/alias/animation-count/README.md)
 
-#### `colsPseudo` -> `gridAutoColumns`
+[animation-delay](src/alias/animation-delay/README.md)
 
-- parses one or more values
-- parses `false` as `'none'`
-- parses `1` as `1fr`
-- parses `[1, auto]` as `'repeat(1, auto)'`
-- parses `[fill, auto]` as `'repeat(auto-fill, auto)'`
-- parses `[fit, auto]` as `'repeat(auto-fit, auto)'`
-- parses `{ min: val, max: val }` as `'minmax({val}, {val})'`
-- parses `{ min: number, max: number }` as `'minmax({number}fr, {number}fr)'`
-- parses `{}` as `'minmax(auto, auto)'`
-- parses any valid value
+[animation-direction](src/alias/animation-direction/README.md)
 
-#### `colStart` -> `gridColumnStart`
+[animation-duration](src/alias/animation-duration/README.md)
 
-- parses `number` as `'{number}'`
+[animation-fn](src/alias/animation-fn/README.md)
 
-#### `content` -> `content`
+[animation-is-active](src/alias/animation-is-active/README.md)
 
-- parses `true` as `'""'`
-- parses any valid value
+[animation-origin](src/alias/animation-origin/README.md)
 
-#### `corner` -> `borderBottomLeftRadius borderBottomRightRadius borderTopLeftRadius borderTopRightRadius`
+[bg](src/alias/bg/README.md)
 
-- parses sides `{ leftTop, rightTop, leftBottom, rightBottom, left, right, top, bottom }`
-- parses `val` as `'{val}'`
-- parses `[val, val]` as `'{val} / {val}'`
-- parses `number` as `'{number}px'`
-- parses `[number, number]` as `'{number}px / {number}px'`
+[bg-move-x](src/alias/bg-move-x/README.md)
 
-#### `decoration` -> `textDecoration`
+[bg-move-y](src/alias/bg-move-y/README.md)
 
-- parses `'top'` as `'overline'`
-- parses `'center'` as `'line-through'`
-- parses `'bottom'` as `'underline'`
+[bg-origin](src/alias/bg-origin/README.md)
 
-#### `direction` -> `flexDirection`
+[bg-overflow](src/alias/bg-overflow/README.md)
 
-- parses `'row'` as `'row'`
-- parses `['row', true]` as `'row-reverse'`
-- parses `'col'` as `'column'`
-- parses `['col', true]` as `'column-reverse'`
+[bg-position](src/alias/bg-position/README.md)
 
-#### `fill` -> `fill`
+[bg-repeat](src/alias/bg-repeat/README.md)
 
-- parses any valid value
-- parses `false` as `'transparent'`
+[bg-size](src/alias/bg-size/README.md)
 
-#### `font` -> `fontFamily`
+[border-color-bottom](src/alias/border-color-bottom/README.md)
 
-- parses one or more values
-- parses any valid value
+[border-color-left](src/alias/border-color-left/README.md)
 
-#### `grow` -> `flexGrow`
+[border-color-right](src/alias/border-color-right/README.md)
 
-- parses any valid value
+[border-color-top](src/alias/border-color-top/README.md)
 
-#### `hasSuffix` -> `textOverflow`
+[border-kind-bottom](src/alias/border-kind-bottom/README.md)
 
-- parses `true` as `'ellipsis'`
-- parses `false` as `'clip'`
+[border-kind-left](src/alias/border-kind-left/README.md)
 
-#### `height` -> `height`
+[border-kind-right](src/alias/border-kind-right/README.md)
 
-- parses any valid value
+[border-kind-top](src/alias/border-kind-top/README.md)
 
-#### `heightMax` -> `maxHeight`
+[border-size-bottom](src/alias/border-size-bottom/README.md)
 
-- parses `false` as `none`
-- parses any valid value
+[border-size-left](src/alias/border-size-left/README.md)
 
-#### `heightMin` -> `minHeight`
+[border-size-right](src/alias/border-size-right/README.md)
 
-- parses any valid value
+[border-size-top](src/alias/border-size-top/README.md)
 
-#### `isInteractive` -> `cursor`
+[case](src/alias/case/README.md)
 
-- parses `true` as `'pointer'`
-- parses `false` as `'auto'`
+[col-end](src/alias/col-end/README.md)
 
-#### `isItalic` -> `fontStyle`
+[col-start](src/alias/col-start/README.md)
 
-- parses `true` as `'italic'`
-- parses `false` as `'normal'`
+[color-box](src/alias/color-box/README.md)
 
-#### `kind` -> `display`
+[color-text](src/alias/color-text/README.md)
 
-- parses `'box'` as `'block'`
-- parses `'text'` as `'inline'`
-- parses `1` as `'flex'`
-- parses `2` as `'grid'`
-- parses `false` as `'none'`
+[cols](src/alias/cols/README.md)
 
-#### `line` -> `lineHeight`
+[cols-pseudo](src/alias/cols-pseudo/README.md)
 
-- parses any valid value
+[content](src/alias/content/README.md)
 
-#### `move` -> `left right top bottom`
+[corner-left-bottom](src/alias/corner-left-bottom/README.md)
 
-- parses sides `{ left, right, top, bottom, row, col }`
-- parses any valid value
+[corner-left-top](src/alias/corner-left-top/README.md)
 
-#### `mustBreakWords` -> `overflowWrap`
+[corner-right-bottom](src/alias/corner-right-bottom/README.md)
 
-- parses `true` as `'break-word'`
-- parses `false` as `'normal'`
+[corner-right-top](src/alias/corner-right-top/README.md)
 
-#### `mustHandleEvents` -> `pointerEvents`
+[custom](src/alias/custom/README.md)
 
-- parses `true` as `'auto'`
-- parses `false` as `'none'`
+[decoration](src/alias/decoration/README.md)
 
-#### `opacity` -> `opacity`
+[direction](src/alias/direction/README.md)
 
-- parses `number` as `{number / 100}`
+[fill](src/alias/fill/README.md)
 
-#### `orderMajor` -> `order`
+[font](src/alias/font/README.md)
 
-- parses any valid value
+[grow](src/alias/grow/README.md)
 
-#### `orderMinor` -> `zIndex`
+[has-suffix](src/alias/has-suffix/README.md)
 
-- parses any valid value
+[height-max](src/alias/height-max/README.md)
 
-#### `origin` -> `flexBasis`
+[height-min](src/alias/height-min/README.md)
 
-- parses any valid value
+[is-interactive](src/alias/is-interactive/README.md)
 
-#### `overflowCol` -> `overflowY`
+[is-italic](src/alias/is-italic/README.md)
 
-- parses `true` as `'visible'`
-- parses `false` as `'hidden'`
-- parses `'auto'` as `'auto'`
-- parses `['auto', true]` as `'scroll'`
+[kind](src/alias/kind/README.md)
 
-#### `overflowDirection` -> `flexWrap`
+[line](src/alias/line/README.md)
 
-- parses `1` as `wrap`
-- parses false as `'nowrap'`
-- parses `-1` as `wrap-reverse`
+[modify](src/alias/modify/README.md)
 
+[modify-origin](src/alias/modify-origin/README.md)
 
-#### `overflowRow` -> `overflowX`
+[move-bottom](src/alias/move-bottom/README.md)
 
-- parses `true` as `'visible'`
-- parses `false` as `'hidden'`
-- parses `'auto'` as `'auto'`
-- parses `['auto', true]` as `'scroll'`
+[move-left](src/alias/move-left/README.md)
 
-#### `placeDirection` -> `gridAutoFlow`
+[move-right](src/alias/move-right/README.md)
 
-- parses `col` as `column`
-- parses `row` as `row`
+[move-top](src/alias/move-top/README.md)
 
-#### `placeMajor` -> `justifyContent`
+[must-break-words](src/alias/must-break-words/README.md)
 
-- parses `'start` as `'start'`
-- parses `'end` as `'end'`
-- parses `'center` as `'center'`
-- parses `'space-between'` as `'space-between'`
-- parses `'space-around'` as `'space-around'`
-- parses `['space-around', true]` as `'space-evenly'`
+[must-handle-events](src/alias/must-handle-events/README.md)
 
-#### `placeContent` -> `justifyContent`
+[opacity](src/alias/opacity/README.md)
 
-- parses `'start` as `'flex-start'`
-- parses `'end` as `'flex-end'`
-- parses `'center` as `'center'`
-- parses `'space-between'` as `'space-between'`
-- parses `'space-around'` as `'space-around'`
-- parses `['space-around', true]` as `'space-evenly'`
+[order-major](src/alias/order-major/README.md)
 
-#### `placeMinor` -> `alignContent`
+[order-minor](src/alias/order-minor/README.md)
 
-- parses `'start` as `'start'`
-- parses `'end` as `'end'`
-- parses `'center` as `'center'`
-- parses `'space-between'` as `'space-between'`
-- parses `'space-around'` as `'space-around'`
-- parses `['space-around', true]` as `'space-evenly'`
+[origin](src/alias/origin/README.md)
 
-#### `position` -> `position`
+[outline-color](src/alias/outline-color/README.md)
 
-- parses `true` as `'fixed'`
-- parses `'relative'` as `'relative'`
-- parses `'absolute'` as `'absolute'`
-- parses `false` as `'static'`
+[outline-kind](src/alias/outline-kind/README.md)
 
-#### `rowEnd` -> `gridRowEnd`
+[outline-size](src/alias/outline-size/README.md)
 
-- parses `number` as `'{number}'`
-- parses `[number, true]` as `'span {number}'`
+[outline-space](src/alias/outline-space/README.md)
 
-#### `rows` -> `gridTemplateRows`
+[overflow-direction](src/alias/overflow-direction/README.md)
 
-- parses one or more values
-- parses `false` as `'none'`
-- parses `1` as `1fr`
-- parses `[1, auto]` as `'repeat(1, auto)'`
-- parses `[fill, auto]` as `'repeat(auto-fill, auto)'`
-- parses `[fit, auto]` as `'repeat(auto-fit, auto)'`
-- parses `{ min: val, max: val }` as `'minmax({val}, {val})'`
-- parses `{ min: number, max: number }` as `'minmax({number}fr, {number}fr)'`
-- parses `{}` as `'minmax(auto, auto)'`
-- parses any valid value
+[overflow-x](src/alias/overflow-x/README.md)
 
-#### `rowsPseudo` -> `gridAutoRows`
+[overflow-y](src/alias/overflow-y/README.md)
 
-- parses one or more values
-- parses `false` as `'none'`
-- parses `1` as `1fr`
-- parses `[1, auto]` as `'repeat(1, auto)'`
-- parses `[fill, auto]` as `'repeat(auto-fill, auto)'`
-- parses `[fit, auto]` as `'repeat(auto-fit, auto)'`
-- parses `{ min: val, max: val }` as `'minmax({val}, {val})'`
-- parses `{ min: number, max: number }` as `'minmax({number}fr, {number}fr)'`
-- parses `{}` as `'minmax(auto, auto)'`
-- parses any valid value
+[place-content](src/alias/place-content/README.md)
 
-#### `rowStart` -> `gridRowStart`
+[place-direction](src/alias/place-direction/README.md)
 
-- parses `number` as `'{number}'`
+[place-major](src/alias/place-major/README.md)
 
-#### `shadowBox` -> `boxShadow`
+[place-minor](src/alias/place-minor/README.md)
 
-- parses one or more values
-- parses `false` as `'none'`
-- parses `{}` as `'0 0 0 0'`
-- parses `{ col, row, blur, size }` as `'{col} {row} {blur} {size}'`
-- parses `{ col, row, blur, size, color }` as `'{col} {row} {blur} {size} {color}'`
-- parses `{ col, row, blur, size, color, isReversed: true }` as `'{col} {row} {blur} {size} {color} inset'`
-- parses `{ col: 0, row: 0, blur: 0, size: 0, color }` as `'0 0 0 0 {color} '`
-- parses `{ col: number, row: number, blur: number, size: number, color }` as `'{col}px {row}px {blur}px {size}px {color}'`
-- parses any valid value
+[position](src/alias/position/README.md)
 
-#### `shadowText` -> `textShadow`
+[row-end](src/alias/row-end/README.md)
 
-- parses one or more values
-- parses `false` as `'none'`
-- parses `{}` as `'0 0 0'`
-- parses `{ col, row, blur }` as `'{col} {row} {blur}'`
-- parses `{ col, row, blur, color }` as `'{col} {row} {blur} {color}'`
-- parses `{ col: 0, row: 0, blur: 0, color }` as `'0 0 0 {color}'`
-- parses `{ col: number, row: number, blur: number, color }` as `'{col}px {row}px {blur}px {color}'`
-- parses any valid value
+[row-start](src/alias/row-start/README.md)
 
-#### `shrink` -> `flexShrink`
+[rows](src/alias/rows/README.md)
 
-- parses any valid value
+[rows-pseudo](src/alias/rows-pseudo/README.md)
 
-#### `size` -> `fontSize`
+[shadow-box](src/alias/shadow-box/README.md)
 
-- parses any valid value
+[shadow-text](src/alias/shadow-text/README.md)
 
-#### `spaceBreak` -> `whiteSpace`
+[shrink](src/alias/shrink/README.md)
 
-- parses `true` as `'normal'`
-- parses `false` as `'nowrap'`
-- parses `'raw'` as `'pre'`
-- parses `['raw', true]` as `'pre-wrap'`
-- parses `['raw', false]` as `'pre-line'`
+[size](src/alias/size/README.md)
 
-#### `spaceChar` -> `letterSpacing`
+[space-break](src/alias/space-break/README.md)
 
-- parses any valid value
+[space-char](src/alias/space-char/README.md)
 
-#### `spaceCol` -> `gridColumnGap`
+[space-inner-bottom](src/alias/space-inner-bottom/README.md)
 
-- parses `number` as `{number}fr`
-- parses `{ repeat: [val, val, val] }` as `'repeat({val},{val},{val})'`
-- parses `{ min: val, max: val }` as `'minmax({val}, {val})'`
-- parses `{ min: number, max: number }` as `'minmax({number}fr, {number}fr)'`
-- parses `{}` as `'minmax(auto, auto)'`
-- parses any valid value
+[space-inner-left](src/alias/space-inner-left/README.md)
 
-#### `spaceInner` -> `padding`
+[space-inner-right](src/alias/space-inner-right/README.md)
 
-- parses sides `{ left, right, top, bottom, row, col }`
-- parses any valid value
+[space-inner-top](src/alias/space-inner-top/README.md)
 
-#### `spaceOuter` -> `margin`
+[space-outer-bottom](src/alias/space-outer-bottom/README.md)
 
-- parses sides `{ left, right, top, bottom, row, col }`
-- parses any valid value
+[space-outer-left](src/alias/space-outer-left/README.md)
 
-#### `spaceRow` -> `gridRowGap`
+[space-outer-right](src/alias/space-outer-right/README.md)
 
-- parses `number` as `{number}fr`
-- parses `{ repeat: [val, val, val] }` as `'repeat({val},{val},{val})'`
-- parses `{ min: val, max: val }` as `'minmax({val}, {val})'`
-- parses `{ min: number, max: number }` as `'minmax({number}fr, {number}fr)'`
-- parses `{}` as `'minmax(auto, auto)'`
-- parses any valid value
+[space-outer-top](src/alias/space-outer-top/README.md)
 
-#### `spaceWord` -> `wordSpacing`
+[space-word](src/alias/space-word/README.md)
 
-- parses any valid value
+[space-x](src/alias/space-x/README.md)
 
-#### `strokeColor` -> `stroke`
+[space-y](src/alias/space-y/README.md)
 
-- parses any valid value
+[stroke-color](src/alias/stroke-color/README.md)
 
-#### `strokeDashes` -> `strokeDasharray`
+[stroke-dashes](src/alias/stroke-dashes/README.md)
 
-- parses one or more values
-- parses any valid value
+[stroke-size](src/alias/stroke-size/README.md)
 
-#### `strokeSize` -> `strokeWidth`
+[stroke-space](src/alias/stroke-space/README.md)
 
-- parses any valid value
+[template](src/alias/template/README.md)
 
-#### `strokeSpace` -> `strokeDashoffset`
+[text-cols-amount](src/alias/text-cols-amount/README.md)
 
-- parses any valid value
+[text-cols-border-color](src/alias/text-cols-border-color/README.md)
 
-#### `template` -> `gridTemplateAreas`
+[text-cols-border-kind](src/alias/text-cols-border-kind/README.md)
 
-- parses `[[...],[...],[...]` as `'"...""...""..."'`
-- parses `['...','...','...']` as `'"...""...""..."'`
-- parses any valid value
+[text-cols-border-size](src/alias/text-cols-border-size/README.md)
 
-#### `modify` -> `transform`
+[text-cols-space](src/alias/text-cols-space/README.md)
 
-- parses `false` as `none`
-- parses one or more values
-- parses any valid value
+[text-cols-width](src/alias/text-cols-width/README.md)
 
-#### `modifyOrigin` -> `transformOrigin`
+[transition](src/alias/transition/README.md)
 
-- parses any valid value
-- parses one or more values
-- parses number as `'{number}rem'`
+[transition-delay](src/alias/transition-delay/README.md)
 
-#### `weight` -> `fontWeight`
+[transition-duration](src/alias/transition-duration/README.md)
 
-- parses any valid value
+[transition-fn](src/alias/transition-fn/README.md)
 
-#### `width` -> `width`
+[weight](src/alias/weight/README.md)
 
-- parses any valid value
+[width-max](src/alias/width-max/README.md)
 
-#### `widthMax` -> `maxWidth`
+[width-min](src/alias/width-min/README.md)
 
-- parses `false` as `none`
-- parses any valid value
+## Challenges
 
-#### `widthMin` -> `minWidth`
-
-- parses any valid value
-
-#### `transition` -> `transitionProperty`
-
-- parses one or more values
-- parses any valid value
-- parses `'colorBox'` as `'background-color'`
-- parses `'colorText'` as `'color'`
-- parses `'modify'` as `'transform'`
-
-#### `transitionDelay` -> `transitionDelay`
-
-- parses one or more values
-- parses number as ms
-- parses any valid value
-
-#### `transitionDuration` -> `transitionDuration`
-
-- parses one or more values
-- parses number as `'{number}ms'`
-- parses any valid value
-
-#### `transitionFn` -> `transitionTimingFunction`
-
-- parses one or more values
-- parses any valid value
-
-#### `textColsAmount` -> `columnCount`
-
-- parses any valid value
-
-#### `textColsBorderColor` -> `columnRuleColor`
-
-- parses any valid value
-- parses `false` as `'transparent'`
-
-#### `textColsBorderKind` -> `columnRuleStyle`
-
-- parses any valid value
-- parses `true` as `'solid'`
-- parses `false` as `'none'`
-
-#### `textColsBorderSize` -> `columnRuleWidth`
-
-- parses any valid value
-
-#### `textColsSpace` -> `columnGap`
-
-- parses any valid value
-
-#### `textColsSize` -> `columnWidth`
-
-- parses any valid value
-
-#### `outlineColor` -> `outlineColor`
-
-- parses any valid value
-- parses `false` as `'transparent'`
-
-#### `outlineKind` -> `outlineStyle`
-
-- parses any valid value
-- parses `true` as `'solid'`
-- parses `false` as `'none'`
-
-#### `outlineSize` -> `outlineWidth`
-
-- parses any valid value
-
-#### `outlineSpace` -> `outlineOffset`
-
-- parses any valid value
-
-#### `custom`
-
-- contains any custom rules
-
+- Document all services
+- Document all alias
 
 ## License
 
