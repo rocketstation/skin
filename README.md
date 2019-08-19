@@ -67,354 +67,354 @@ ReactDOM.render(
 ### Services
 
 
-[attr](src/attr/README.md)
+[attr](src/attr)
 
-[attr-contains](src/attr-contains/README.md)
+[attr-contains](src/attr-contains)
 
-[attr-contains-str](src/attr-contains-str/README.md)
+[attr-contains-str](src/attr-contains-str)
 
-[attr-ends-with-str](src/attr-ends-with-str/README.md)
+[attr-ends-with-str](src/attr-ends-with-str)
 
-[attr-equals](src/attr-equals/README.md)
+[attr-equals](src/attr-equals)
 
-[attr-starts](src/attr-starts/README.md)
+[attr-starts](src/attr-starts)
 
-[attr-starts-with-str](src/attr-starts-with-str/README.md)
+[attr-starts-with-str](src/attr-starts-with-str)
 
-[img](src/img/README.md)
+[img](src/img)
 
-[its](src/its/README.md)
+[its](src/its)
 
-[its-after](src/its-after/README.md)
+[its-after](src/its-after)
 
-[its-before](src/its-before/README.md)
+[its-before](src/its-before)
 
-[its-children](src/its-children/README.md)
+[its-children](src/its-children)
 
-[its-first](src/its-first/README.md)
+[its-first](src/its-first)
 
-[its-highlight](src/its-highlight/README.md)
+[its-highlight](src/its-highlight)
 
-[its-last](src/its-last/README.md)
+[its-last](src/its-last)
 
-[its-next-multiple](src/its-next-multiple/README.md)
+[its-next-multiple](src/its-next-multiple)
 
-[its-next-single](src/its-next-single/README.md)
+[its-next-single](src/its-next-single)
 
-[its-placeholder](src/its-placeholder/README.md)
+[its-placeholder](src/its-placeholder)
 
-[limit](src/limit/README.md)
+[limit](src/limit)
 
-[linear](src/linear/README.md)
+[linear](src/linear)
 
-[matrix](src/matrix/README.md)
+[matrix](src/matrix)
 
-[matrix-3d](src/matrix-3d/README.md)
+[matrix-3d](src/matrix-3d)
 
-[on-active](src/on-active/README.md)
+[on-active](src/on-active)
 
-[on-focus](src/on-focus/README.md)
+[on-focus](src/on-focus)
 
-[on-hover](src/on-hover/README.md)
+[on-hover](src/on-hover)
 
-[perspective](src/perspective/README.md)
+[perspective](src/perspective)
 
-[radial](src/radial/README.md)
+[radial](src/radial)
 
-[repeat](src/repeat/README.md)
+[repeat](src/repeat)
 
-[rotate](src/rotate/README.md)
+[rotate](src/rotate)
 
-[rotate-3d](src/rotate-3d/README.md)
+[rotate-3d](src/rotate-3d)
 
-[rotate-x](src/rotate-x/README.md)
+[rotate-x](src/rotate-x)
 
-[rotate-y](src/rotate-y/README.md)
+[rotate-y](src/rotate-y)
 
-[rotate-z](src/rotate-z/README.md)
+[rotate-z](src/rotate-z)
 
-[scale](src/scale/README.md)
+[scale](src/scale)
 
-[scale-3d](src/scale-3d/README.md)
+[scale-3d](src/scale-3d)
 
-[scale-x](src/scale-x/README.md)
+[scale-x](src/scale-x)
 
-[scale-y](src/scale-y/README.md)
+[scale-y](src/scale-y)
 
-[scale-z](src/scale-z/README.md)
+[scale-z](src/scale-z)
 
-[screen](src/screen/README.md)
+[screen](src/screen)
 
-[screen-between](src/screen-between/README.md)
+[screen-between](src/screen-between)
 
-[screen-from](src/screen-from/README.md)
+[screen-from](src/screen-from)
 
-[screen-to](src/screen-to/README.md)
+[screen-to](src/screen-to)
 
-[skew](src/skew/README.md)
+[skew](src/skew)
 
-[skew-x](src/skew-x/README.md)
+[skew-x](src/skew-x)
 
-[skew-y](src/skew-y/README.md)
+[skew-y](src/skew-y)
 
-[translate](src/translate/README.md)
+[translate](src/translate)
 
-[translate-3d](src/translate-3d/README.md)
+[translate-3d](src/translate-3d)
 
-[translate-x](src/translate-x/README.md)
+[translate-x](src/translate-x)
 
-[translate-y](src/translate-y/README.md)
+[translate-y](src/translate-y)
 
-[translate-z](src/translate-z/README.md)
+[translate-z](src/translate-z)
 
 ### Alias
 
 
-[align](src/alias/align/README.md)
+[align](src/alias/align)
 
-[align-content](src/alias/align-content/README.md)
+[align-content](src/alias/align-content)
 
-[align-major](src/alias/align-major/README.md)
+[align-major](src/alias/align-major)
 
-[align-minor](src/alias/align-minor/README.md)
+[align-minor](src/alias/align-minor)
 
-[align-self](src/alias/align-self/README.md)
+[align-self](src/alias/align-self)
 
-[align-self-major](src/alias/align-self-major/README.md)
+[align-self-major](src/alias/align-self-major)
 
-[align-self-minor](src/alias/align-self-minor/README.md)
+[align-self-minor](src/alias/align-self-minor)
 
-[animation](src/alias/animation/README.md)
+[animation](src/alias/animation)
 
-[animation-count](src/alias/animation-count/README.md)
+[animation-count](src/alias/animation-count)
 
-[animation-delay](src/alias/animation-delay/README.md)
+[animation-delay](src/alias/animation-delay)
 
-[animation-direction](src/alias/animation-direction/README.md)
+[animation-direction](src/alias/animation-direction)
 
-[animation-duration](src/alias/animation-duration/README.md)
+[animation-duration](src/alias/animation-duration)
 
-[animation-fn](src/alias/animation-fn/README.md)
+[animation-fn](src/alias/animation-fn)
 
-[animation-is-active](src/alias/animation-is-active/README.md)
+[animation-is-active](src/alias/animation-is-active)
 
-[animation-origin](src/alias/animation-origin/README.md)
+[animation-origin](src/alias/animation-origin)
 
-[bg](src/alias/bg/README.md)
+[bg](src/alias/bg)
 
-[bg-move-x](src/alias/bg-move-x/README.md)
+[bg-move-x](src/alias/bg-move-x)
 
-[bg-move-y](src/alias/bg-move-y/README.md)
+[bg-move-y](src/alias/bg-move-y)
 
-[bg-origin](src/alias/bg-origin/README.md)
+[bg-origin](src/alias/bg-origin)
 
-[bg-overflow](src/alias/bg-overflow/README.md)
+[bg-overflow](src/alias/bg-overflow)
 
-[bg-position](src/alias/bg-position/README.md)
+[bg-position](src/alias/bg-position)
 
-[bg-repeat](src/alias/bg-repeat/README.md)
+[bg-repeat](src/alias/bg-repeat)
 
-[bg-size](src/alias/bg-size/README.md)
+[bg-size](src/alias/bg-size)
 
-[border-color-bottom](src/alias/border-color-bottom/README.md)
+[border-color-bottom](src/alias/border-color-bottom)
 
-[border-color-left](src/alias/border-color-left/README.md)
+[border-color-left](src/alias/border-color-left)
 
-[border-color-right](src/alias/border-color-right/README.md)
+[border-color-right](src/alias/border-color-right)
 
-[border-color-top](src/alias/border-color-top/README.md)
+[border-color-top](src/alias/border-color-top)
 
-[border-kind-bottom](src/alias/border-kind-bottom/README.md)
+[border-kind-bottom](src/alias/border-kind-bottom)
 
-[border-kind-left](src/alias/border-kind-left/README.md)
+[border-kind-left](src/alias/border-kind-left)
 
-[border-kind-right](src/alias/border-kind-right/README.md)
+[border-kind-right](src/alias/border-kind-right)
 
-[border-kind-top](src/alias/border-kind-top/README.md)
+[border-kind-top](src/alias/border-kind-top)
 
-[border-size-bottom](src/alias/border-size-bottom/README.md)
+[border-size-bottom](src/alias/border-size-bottom)
 
-[border-size-left](src/alias/border-size-left/README.md)
+[border-size-left](src/alias/border-size-left)
 
-[border-size-right](src/alias/border-size-right/README.md)
+[border-size-right](src/alias/border-size-right)
 
-[border-size-top](src/alias/border-size-top/README.md)
+[border-size-top](src/alias/border-size-top)
 
-[case](src/alias/case/README.md)
+[case](src/alias/case)
 
-[col-end](src/alias/col-end/README.md)
+[col-end](src/alias/col-end)
 
-[col-start](src/alias/col-start/README.md)
+[col-start](src/alias/col-start)
 
-[color-box](src/alias/color-box/README.md)
+[color-box](src/alias/color-box)
 
-[color-text](src/alias/color-text/README.md)
+[color-text](src/alias/color-text)
 
-[cols](src/alias/cols/README.md)
+[cols](src/alias/cols)
 
-[cols-pseudo](src/alias/cols-pseudo/README.md)
+[cols-pseudo](src/alias/cols-pseudo)
 
-[content](src/alias/content/README.md)
+[content](src/alias/content)
 
-[corner-left-bottom](src/alias/corner-left-bottom/README.md)
+[corner-left-bottom](src/alias/corner-left-bottom)
 
-[corner-left-top](src/alias/corner-left-top/README.md)
+[corner-left-top](src/alias/corner-left-top)
 
-[corner-right-bottom](src/alias/corner-right-bottom/README.md)
+[corner-right-bottom](src/alias/corner-right-bottom)
 
-[corner-right-top](src/alias/corner-right-top/README.md)
+[corner-right-top](src/alias/corner-right-top)
 
-[custom](src/alias/custom/README.md)
+[custom](src/alias/custom)
 
-[decoration](src/alias/decoration/README.md)
+[decoration](src/alias/decoration)
 
-[direction](src/alias/direction/README.md)
+[direction](src/alias/direction)
 
-[fill](src/alias/fill/README.md)
+[fill](src/alias/fill)
 
-[font](src/alias/font/README.md)
+[font](src/alias/font)
 
-[grow](src/alias/grow/README.md)
+[grow](src/alias/grow)
 
-[has-suffix](src/alias/has-suffix/README.md)
+[has-suffix](src/alias/has-suffix)
 
-[height-max](src/alias/height-max/README.md)
+[height-max](src/alias/height-max)
 
-[height-min](src/alias/height-min/README.md)
+[height-min](src/alias/height-min)
 
-[is-interactive](src/alias/is-interactive/README.md)
+[is-interactive](src/alias/is-interactive)
 
-[is-italic](src/alias/is-italic/README.md)
+[is-italic](src/alias/is-italic)
 
-[kind](src/alias/kind/README.md)
+[kind](src/alias/kind)
 
-[line](src/alias/line/README.md)
+[line](src/alias/line)
 
-[modify](src/alias/modify/README.md)
+[modify](src/alias/modify)
 
-[modify-origin](src/alias/modify-origin/README.md)
+[modify-origin](src/alias/modify-origin)
 
-[move-bottom](src/alias/move-bottom/README.md)
+[move-bottom](src/alias/move-bottom)
 
-[move-left](src/alias/move-left/README.md)
+[move-left](src/alias/move-left)
 
-[move-right](src/alias/move-right/README.md)
+[move-right](src/alias/move-right)
 
-[move-top](src/alias/move-top/README.md)
+[move-top](src/alias/move-top)
 
-[must-break-words](src/alias/must-break-words/README.md)
+[must-break-words](src/alias/must-break-words)
 
-[must-handle-events](src/alias/must-handle-events/README.md)
+[must-handle-events](src/alias/must-handle-events)
 
-[opacity](src/alias/opacity/README.md)
+[opacity](src/alias/opacity)
 
-[order-major](src/alias/order-major/README.md)
+[order-major](src/alias/order-major)
 
-[order-minor](src/alias/order-minor/README.md)
+[order-minor](src/alias/order-minor)
 
-[origin](src/alias/origin/README.md)
+[origin](src/alias/origin)
 
-[outline-color](src/alias/outline-color/README.md)
+[outline-color](src/alias/outline-color)
 
-[outline-kind](src/alias/outline-kind/README.md)
+[outline-kind](src/alias/outline-kind)
 
-[outline-size](src/alias/outline-size/README.md)
+[outline-size](src/alias/outline-size)
 
-[outline-space](src/alias/outline-space/README.md)
+[outline-space](src/alias/outline-space)
 
-[overflow-direction](src/alias/overflow-direction/README.md)
+[overflow-direction](src/alias/overflow-direction)
 
-[overflow-x](src/alias/overflow-x/README.md)
+[overflow-x](src/alias/overflow-x)
 
-[overflow-y](src/alias/overflow-y/README.md)
+[overflow-y](src/alias/overflow-y)
 
-[place-content](src/alias/place-content/README.md)
+[place-content](src/alias/place-content)
 
-[place-direction](src/alias/place-direction/README.md)
+[place-direction](src/alias/place-direction)
 
-[place-major](src/alias/place-major/README.md)
+[place-major](src/alias/place-major)
 
-[place-minor](src/alias/place-minor/README.md)
+[place-minor](src/alias/place-minor)
 
-[position](src/alias/position/README.md)
+[position](src/alias/position)
 
-[row-end](src/alias/row-end/README.md)
+[row-end](src/alias/row-end)
 
-[row-start](src/alias/row-start/README.md)
+[row-start](src/alias/row-start)
 
-[rows](src/alias/rows/README.md)
+[rows](src/alias/rows)
 
-[rows-pseudo](src/alias/rows-pseudo/README.md)
+[rows-pseudo](src/alias/rows-pseudo)
 
-[shadow-box](src/alias/shadow-box/README.md)
+[shadow-box](src/alias/shadow-box)
 
-[shadow-text](src/alias/shadow-text/README.md)
+[shadow-text](src/alias/shadow-text)
 
-[shrink](src/alias/shrink/README.md)
+[shrink](src/alias/shrink)
 
-[size](src/alias/size/README.md)
+[size](src/alias/size)
 
-[space-break](src/alias/space-break/README.md)
+[space-break](src/alias/space-break)
 
-[space-char](src/alias/space-char/README.md)
+[space-char](src/alias/space-char)
 
-[space-inner-bottom](src/alias/space-inner-bottom/README.md)
+[space-inner-bottom](src/alias/space-inner-bottom)
 
-[space-inner-left](src/alias/space-inner-left/README.md)
+[space-inner-left](src/alias/space-inner-left)
 
-[space-inner-right](src/alias/space-inner-right/README.md)
+[space-inner-right](src/alias/space-inner-right)
 
-[space-inner-top](src/alias/space-inner-top/README.md)
+[space-inner-top](src/alias/space-inner-top)
 
-[space-outer-bottom](src/alias/space-outer-bottom/README.md)
+[space-outer-bottom](src/alias/space-outer-bottom)
 
-[space-outer-left](src/alias/space-outer-left/README.md)
+[space-outer-left](src/alias/space-outer-left)
 
-[space-outer-right](src/alias/space-outer-right/README.md)
+[space-outer-right](src/alias/space-outer-right)
 
-[space-outer-top](src/alias/space-outer-top/README.md)
+[space-outer-top](src/alias/space-outer-top)
 
-[space-word](src/alias/space-word/README.md)
+[space-word](src/alias/space-word)
 
-[space-x](src/alias/space-x/README.md)
+[space-x](src/alias/space-x)
 
-[space-y](src/alias/space-y/README.md)
+[space-y](src/alias/space-y)
 
-[stroke-color](src/alias/stroke-color/README.md)
+[stroke-color](src/alias/stroke-color)
 
-[stroke-dashes](src/alias/stroke-dashes/README.md)
+[stroke-dashes](src/alias/stroke-dashes)
 
-[stroke-size](src/alias/stroke-size/README.md)
+[stroke-size](src/alias/stroke-size)
 
-[stroke-space](src/alias/stroke-space/README.md)
+[stroke-space](src/alias/stroke-space)
 
-[template](src/alias/template/README.md)
+[template](src/alias/template)
 
-[text-cols-amount](src/alias/text-cols-amount/README.md)
+[text-cols-amount](src/alias/text-cols-amount)
 
-[text-cols-border-color](src/alias/text-cols-border-color/README.md)
+[text-cols-border-color](src/alias/text-cols-border-color)
 
-[text-cols-border-kind](src/alias/text-cols-border-kind/README.md)
+[text-cols-border-kind](src/alias/text-cols-border-kind)
 
-[text-cols-border-size](src/alias/text-cols-border-size/README.md)
+[text-cols-border-size](src/alias/text-cols-border-size)
 
-[text-cols-space](src/alias/text-cols-space/README.md)
+[text-cols-space](src/alias/text-cols-space)
 
-[text-cols-width](src/alias/text-cols-width/README.md)
+[text-cols-width](src/alias/text-cols-width)
 
-[transition](src/alias/transition/README.md)
+[transition](src/alias/transition)
 
-[transition-delay](src/alias/transition-delay/README.md)
+[transition-delay](src/alias/transition-delay)
 
-[transition-duration](src/alias/transition-duration/README.md)
+[transition-duration](src/alias/transition-duration)
 
-[transition-fn](src/alias/transition-fn/README.md)
+[transition-fn](src/alias/transition-fn)
 
-[weight](src/alias/weight/README.md)
+[weight](src/alias/weight)
 
-[width-max](src/alias/width-max/README.md)
+[width-max](src/alias/width-max)
 
-[width-min](src/alias/width-min/README.md)
+[width-min](src/alias/width-min)
 
 ## Challenges
 

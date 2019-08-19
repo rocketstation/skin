@@ -3,7 +3,7 @@ module.exports = function(v) {
 
   if (v.constructor === Array) {
     return {
-      animationFillingMode: v.reduce(function(r, v) {
+      animationFillMode: v.reduce(function(r, v) {
         switch (v) {
           case false:
             return r + (r.length ? ',' : '') + 'none'
@@ -27,22 +27,22 @@ module.exports = function(v) {
   switch (v) {
     case false:
       return {
-        animationFillingMode: 'none',
+        animationFillMode: 'none',
       }
 
     case true:
       return {
-        animationFillingMode: 'both',
+        animationFillMode: 'both',
       }
 
     case 1:
       return {
-        animationFillingMode: 'forwards',
+        animationFillMode: 'forwards',
       }
 
     case -1:
       return {
-        animationFillingMode: 'backwards',
+        animationFillMode: 'backwards',
       }
 
     default:
