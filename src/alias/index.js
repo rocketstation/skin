@@ -23,6 +23,7 @@ module.exports = {
   bgRepeat: require('./bg-repeat'),
   bgSize: require('./bg-size'),
   borderColor: require('./border-color'),
+  borderColorBottom: require('./border-color-bottom'),
   borderColorLeft: require('./border-color-left'),
   borderColorRight: require('./border-color-right'),
   borderColorTop: require('./border-color-top'),
