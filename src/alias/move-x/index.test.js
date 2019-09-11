@@ -1,7 +1,8 @@
 const v = require('./index.js')
 
-test('spaceInnerBottom', () => {
+test('moveX', () => {
   expect(v(0)).toEqual({
-    paddingBottom: 0,
+    left: 0,
+    right: 0,
   })
 })

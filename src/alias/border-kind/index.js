@@ -1,0 +1,20 @@
+module.exports = function(v) {
+  var next = v
+
+  switch (next) {
+    case true:
+      next = 'solid'
+      break
+
+    case false:
+      next = 'none'
+      break
+  }
+
+  return {
+    borderBottomStyle: next,
+    borderLeftStyle: next,
+    borderRightStyle: next,
+    borderTopStyle: next,
+  }
+}

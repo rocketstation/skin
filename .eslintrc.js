@@ -8,8 +8,12 @@ module.exports = {
   parser: 'babel-eslint',
   plugins: ['prettier'],
   rules: {
-    'curly': ['error', 'multi-line'],
+    'arrow-body-style': ['error', 'always'],
+    curly: ['error', 'multi-line'],
     'prettier/prettier': 'error',
-    'sort-keys': ['error', 'asc', { 'caseSensitive': false, 'natural': true}]
+    'sort-keys': ['error', 'asc', {
+      caseSensitive: false,
+      natural: true
+    }]
   },
 }

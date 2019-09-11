@@ -216,6 +216,12 @@ ReactDOM.render(
 
 [bg-size](src/alias/bg-size)
 
+[border-color](src/alias/border-color)
+
+[border-color-x](src/alias/border-color-x)
+
+[border-color-y](src/alias/border-color-y)
+
 [border-color-bottom](src/alias/border-color-bottom)
 
 [border-color-left](src/alias/border-color-left)
@@ -224,6 +230,12 @@ ReactDOM.render(
 
 [border-color-top](src/alias/border-color-top)
 
+[border-kind](src/alias/border-kind)
+
+[border-kind-x](src/alias/border-kind-x)
+
+[border-kind-y](src/alias/border-kind-y)
+
 [border-kind-bottom](src/alias/border-kind-bottom)
 
 [border-kind-left](src/alias/border-kind-left)
@@ -231,6 +243,12 @@ ReactDOM.render(
 [border-kind-right](src/alias/border-kind-right)
 
 [border-kind-top](src/alias/border-kind-top)
+
+[border-size](src/alias/border-size)
+
+[border-size-x](src/alias/border-size-x)
+
+[border-size-y](src/alias/border-size-y)
 
 [border-size-bottom](src/alias/border-size-bottom)
 
@@ -255,6 +273,16 @@ ReactDOM.render(
 [cols-pseudo](src/alias/cols-pseudo)
 
 [content](src/alias/content)
+
+[corner](src/alias/corner)
+
+[corner-bottom](src/alias/corner-bottom)
+
+[corner-left](src/alias/corner-left)
+
+[corner-right](src/alias/corner-right)
+
+[corner-top](src/alias/corner-top)
 
 [corner-left-bottom](src/alias/corner-left-bottom)
 
@@ -293,6 +321,12 @@ ReactDOM.render(
 [modify](src/alias/modify)
 
 [modify-origin](src/alias/modify-origin)
+
+[move](src/alias/move)
+
+[move-x](src/alias/move-x)
+
+[move-y](src/alias/move-y)
 
 [move-bottom](src/alias/move-bottom)
 
@@ -358,6 +392,12 @@ ReactDOM.render(
 
 [space-char](src/alias/space-char)
 
+[space-inner](src/alias/space-inner)
+
+[space-inner-x](src/alias/space-inner-x)
+
+[space-inner-y](src/alias/space-inner-y)
+
 [space-inner-bottom](src/alias/space-inner-bottom)
 
 [space-inner-left](src/alias/space-inner-left)
@@ -365,6 +405,12 @@ ReactDOM.render(
 [space-inner-right](src/alias/space-inner-right)
 
 [space-inner-top](src/alias/space-inner-top)
+
+[space-outer](src/alias/space-outer)
+
+[space-outer-x](src/alias/space-outer-x)
+
+[space-outer-y](src/alias/space-outer-y)
 
 [space-outer-bottom](src/alias/space-outer-bottom)
 
