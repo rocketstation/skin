@@ -23,6 +23,7 @@ module.exports = {
   matrix3d: require('./matrix-3d'),
   onActive: require('./on-active'),
   onFocus: require('./on-focus'),
+  onFocusInside: require('./on-focus-inside'),
   onHover: require('./on-hover'),
   perspective: require('./perspective'),
   radial: require('./radial'),

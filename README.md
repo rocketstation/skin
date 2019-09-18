@@ -115,6 +115,8 @@ ReactDOM.render(
 
 [on-focus](src/on-focus)
 
+[on-focus-inside](src/on-focus-inside)
+
 [on-hover](src/on-hover)
 
 [perspective](src/perspective)
