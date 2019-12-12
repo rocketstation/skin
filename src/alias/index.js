@@ -85,7 +85,7 @@ module.exports = {
   mustBreakWords: require('./must-break-words'),
   mustHandleEvents: require('./must-handle-events'),
   opacity: require('./opacity'),
-  orderZ: require('./order-minor'),
+  orderZ: require('./order-z'),
   origin: require('./origin'),
   outlineColor: require('./outline-color'),
   outlineKind: require('./outline-kind'),
