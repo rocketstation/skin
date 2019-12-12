@@ -344,9 +344,7 @@ ReactDOM.render(
 
 [opacity](src/alias/opacity)
 
-[order-major](src/alias/order-major)
-
-[order-minor](src/alias/order-minor)
+[order-z](src/alias/order-z)
 
 [origin](src/alias/origin)
 

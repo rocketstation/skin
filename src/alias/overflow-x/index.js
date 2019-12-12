@@ -13,13 +13,7 @@ module.exports = function(v) {
       }
   }
 
-  if (v.constructor === Array && v[0] === 'auto' && v[1] === true) {
-    return {
-      overflowX: 'scroll',
-    }
-  }
-
   return {
-    overflowX: 'auto',
+    overflowX: v,
   }
 }
