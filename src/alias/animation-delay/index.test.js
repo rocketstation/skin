@@ -1,7 +1,7 @@
 const v = require('./index.js')
 
 test('animationDelay', () => {
-  expect(v([0, '0ms'])).toEqual({ animationDelay: '0ms,0ms' })
-  expect(v(0)).toEqual({ animationDelay: '0ms' })
-  expect(v('0ms')).toEqual({ animationDelay: '0ms' })
+  expect(v([100, '100ms'])).toEqual({ animationDelay: '100ms,100ms' })
+  expect(v(100)).toEqual({ animationDelay: '100ms' })
+  expect(v('100ms')).toEqual({ animationDelay: '100ms' })
 })

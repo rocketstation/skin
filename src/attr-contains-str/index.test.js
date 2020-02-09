@@ -1,5 +1,5 @@
 const v = require('./index.js')
 
 test('attrContainsStr', () => {
-  expect(v('foo', 'bar')).toEqual(`[foo*="bar"]`)
+  expect(v('foo', 'bar')).toEqual('[foo*="bar"]')
 })

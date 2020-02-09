@@ -3,7 +3,7 @@ module.exports = function(screen) {
 
   for (var query in screen) {
     if (Object.prototype.hasOwnProperty.call(screen, query)) {
-      queries += ' and ' + '(' + query + ':' + screen[query] + ')'
+      queries += ` and (${query}:${screen[query]})`
     }
   }
 

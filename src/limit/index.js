@@ -1,18 +1,5 @@
-module.exports = function(min, max) {
-  return (
-    'minmax' +
-    '(' +
-    (min != null
-      ? typeof min === 'number' && min !== 0
-        ? min + 'rem'
-        : min
-      : 'auto') +
-    ',' +
-    (max != null
-      ? typeof max === 'number' && max !== 0
-        ? max + 'rem'
-        : max
-      : 'auto') +
-    ')'
-  )
+const _ = require('../services')
+
+module.exports = function(min = 'auto', max = 'auto') {
+  return `minmax(${_.setRem(min)},${_.setRem(max)})`
 }

@@ -1,3 +1,3 @@
 module.exports = function(v) {
-  return 'scaleX' + '(' + v + ')'
+  return `scaleX(${v})`
 }

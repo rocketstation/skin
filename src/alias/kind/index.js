@@ -1,31 +1,16 @@
 module.exports = function(v) {
   switch (v) {
     case 'track':
-      return {
-        display: 'flex',
-      }
-
+      return { display: 'flex' }
     case 'grid':
-      return {
-        display: 'grid',
-      }
-
+      return { display: 'grid' }
     case false:
-      return {
-        display: 'none',
-      }
-
+      return { display: 'none' }
     case 'box':
-      return {
-        display: 'block',
-      }
-
+      return { display: 'block' }
     case 'text':
-      return {
-        display: 'inline',
-      }
-
+      return { display: 'inline' }
     default:
-      return {}
+      return { display: v }
   }
 }

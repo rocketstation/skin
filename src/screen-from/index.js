@@ -1,3 +1,3 @@
-module.exports = function(from) {
-  return '@media screen and ' + '(min-width:' + from / 16 + 'em' + ')'
+module.exports = function(v) {
+  return `@media screen and (min-width:${v / 16}em)`
 }

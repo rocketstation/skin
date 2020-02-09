@@ -1,5 +1,5 @@
 const v = require('./index.js')
 
-test('attrIs', () => {
-  expect(v('foo')).toEqual(`[foo]`)
+test('attr', () => {
+  expect(v('foo')).toEqual('[foo]')
 })

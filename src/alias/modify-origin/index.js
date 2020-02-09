@@ -1,19 +1,13 @@
+const _ = require('../../services')
+
 module.exports = function(v) {
-  if (v == null) return {}
-
-  if (v.constructor === Array) {
-    return {
-      transformOrigin: v.reduce(function(r, v, i, a) {
-        return (
-          r +
-          (r.length ? ' ' : '') +
-          (typeof v === 'number' && v !== 0 ? v + 'rem' : v)
-        )
-      }, ''),
-    }
-  }
-
   return {
-    transformOrigin: typeof v === 'number' && v !== 0 ? v + 'rem' : v,
+    transformOrigin: Array.isArray(v)
+      ? v.reduce(function(r, v) {
+          if (r.length > 0) return `${r} ${_.setRem(v)}`
+
+          return _.setRem(v)
+        }, '')
+      : _.setRem(v),
   }
 }

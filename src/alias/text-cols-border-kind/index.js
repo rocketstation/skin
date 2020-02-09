@@ -1,17 +1,10 @@
 module.exports = function(v) {
-  if (v === true) {
-    return {
-      columnRuleStyle: 'solid',
-    }
-  }
-
-  if (v === false) {
-    return {
-      columnRuleStyle: 'none',
-    }
-  }
-
-  return {
-    columnRuleStyle: v,
+  switch (v) {
+    case true:
+      return { columnRuleStyle: 'solid' }
+    case false:
+      return { columnRuleStyle: 'none' }
+    default:
+      return { columnRuleStyle: v }
   }
 }

@@ -1,51 +1,26 @@
-module.exports = function(v) {
-  if (v == null) return {}
-
-  if (v.constructor === Array) {
-    return {
-      animationDirection: v.reduce(function(r, v) {
-        switch (v) {
-          case -1:
-            return r + (r.length ? ',' : '') + 'reverse'
-
-          case -2:
-            return r + (r.length ? ',' : '') + 'alternate-reverse'
-
-          case 2:
-            return r + (r.length ? ',' : '') + 'alternate'
-
-          case 1:
-            return r + (r.length ? ',' : '') + 'normal'
-
-          default:
-            return r
-        }
-      }, ''),
-    }
-  }
-
+const parse = function(v) {
   switch (v) {
-    case 1:
-      return {
-        animationDirection: 'normal',
-      }
-
-    case -1:
-      return {
-        animationDirection: 'reverse',
-      }
-
-    case 2:
-      return {
-        animationDirection: 'alternate',
-      }
-
-    case -2:
-      return {
-        animationDirection: 'alternate-reverse',
-      }
-
+    case 'backwards-forwards':
+      return 'alternate-reverse'
+    case 'backwards':
+      return 'reverse'
+    case 'forwards':
+      return 'normal'
+    case 'forwards-backwards':
+      return 'alternate'
     default:
-      return {}
+      return v
+  }
+}
+
+module.exports = function(v) {
+  return {
+    animationDirection: Array.isArray(v)
+      ? v.reduce(function(r, v) {
+          if (r.length > 0) return `${r},${parse(v)}`
+
+          return parse(v)
+        }, '')
+      : parse(v),
   }
 }

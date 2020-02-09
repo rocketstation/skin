@@ -1,13 +1,15 @@
+const parse = function(v) {
+  return v === true ? 'infinite' : String(v)
+}
+
 module.exports = function(v) {
-  if (v == null) return {}
   return {
-    animationIterationCount:
-      v.constructor === Array
-        ? v.reduce(function(r, v) {
-            return r + (r.length ? ',' : '') + (v === true ? 'infinite' : v)
-          }, '')
-        : v === true
-        ? 'infinite'
-        : v,
+    animationIterationCount: Array.isArray(v)
+      ? v.reduce(function(r, v) {
+          if (r.length > 0) return `${r},${parse(v)}`
+
+          return parse(v)
+        }, '')
+      : parse(v),
   }
 }

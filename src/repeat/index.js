@@ -1,14 +1,7 @@
-module.exports = function(key, val) {
-  return (
-    'repeat' +
-    '(' +
-    (key === 'fill' || key === 'fit' ? 'auto-' + key : key) +
-    ',' +
-    (val != null
-      ? typeof val === 'number' && val !== 0
-        ? val + 'fr'
-        : val
-      : '1fr') +
-    ')'
-  )
+const _ = require('../services')
+
+module.exports = function(key, val = '1fr') {
+  return `repeat(${
+    key === 'fill' || key === 'fit' ? `auto-${key}` : key
+  },${_.setFr(val)})`
 }

@@ -1,15 +1,13 @@
+const _ = require('../../services')
+
 module.exports = function(v) {
-  if (v == null) return {}
   return {
-    animationDuration:
-      v.constructor === Array
-        ? v.reduce(function(r, v) {
-            return (
-              r + (r.length ? ',' : '') + (typeof v === 'number' ? v + 'ms' : v)
-            )
-          }, '')
-        : typeof v === 'number'
-        ? v + 'ms'
-        : v,
+    animationDuration: Array.isArray(v)
+      ? v.reduce(function(r, v) {
+          if (r.length > 0) return `${r},${_.setMs(v)}`
+
+          return _.setMs(v)
+        }, '')
+      : _.setMs(v),
   }
 }

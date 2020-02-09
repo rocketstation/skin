@@ -1,13 +1,22 @@
+const parse = function(v) {
+  switch (v) {
+    case true:
+      return 'running'
+    case false:
+      return 'paused'
+    default:
+      return v
+  }
+}
+
 module.exports = function(v) {
-  if (v == null) return {}
   return {
-    animationPlayState:
-      v.constructor === Array
-        ? v.reduce(function(r, v) {
-            return r + (r.length ? ',' : '') + (v ? 'running' : 'paused')
-          }, '')
-        : v
-        ? 'running'
-        : 'paused',
+    animationPlayState: Array.isArray(v)
+      ? v.reduce(function(r, v) {
+          if (r.length > 0) return `${r},${parse(v)}`
+
+          return parse(v)
+        }, '')
+      : parse(v),
   }
 }

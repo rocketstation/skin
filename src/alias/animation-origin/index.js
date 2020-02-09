@@ -1,51 +1,22 @@
-module.exports = function(v) {
-  if (v == null) return {}
-
-  if (v.constructor === Array) {
-    return {
-      animationFillMode: v.reduce(function(r, v) {
-        switch (v) {
-          case false:
-            return r + (r.length ? ',' : '') + 'none'
-
-          case true:
-            return r + (r.length ? ',' : '') + 'both'
-
-          case 1:
-            return r + (r.length ? ',' : '') + 'forwards'
-
-          case -1:
-            return r + (r.length ? ',' : '') + 'backwards'
-
-          default:
-            return r
-        }
-      }, ''),
-    }
-  }
-
+const parse = function(v) {
   switch (v) {
     case false:
-      return {
-        animationFillMode: 'none',
-      }
-
+      return 'none'
     case true:
-      return {
-        animationFillMode: 'both',
-      }
-
-    case 1:
-      return {
-        animationFillMode: 'forwards',
-      }
-
-    case -1:
-      return {
-        animationFillMode: 'backwards',
-      }
-
+      return 'both'
     default:
-      return {}
+      return v
+  }
+}
+
+module.exports = function(v) {
+  return {
+    animationFillMode: Array.isArray(v)
+      ? v.reduce(function(r, v) {
+          if (r.length > 0) return `${r},${parse(v)}`
+
+          return parse(v)
+        }, '')
+      : parse(v),
   }
 }

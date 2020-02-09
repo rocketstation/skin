@@ -1,3 +1,5 @@
+const _ = require('../services')
+
 module.exports = function(v) {
-  return 'translateY(' + (typeof v === 'number' ? v + 'rem' : v) + ')'
+  return `translateY(${_.setRem(v)})`
 }

@@ -1,51 +1,32 @@
-module.exports = function(v) {
-  if (v == null) return {}
-
-  if (v === false) {
-    return {
-      transitionProperty: 'none',
-    }
-  }
-
-  if (v.constructor === Array) {
-    return {
-      transitionProperty: v.reduce(function(r, v) {
-        switch (v) {
-          case 'color-box':
-            return r + (r.length ? ',' : '') + 'background-color'
-
-          case 'color-text':
-            return r + (r.length ? ',' : '') + 'color'
-
-          case 'modify':
-            return r + (r.length ? ',' : '') + 'transform'
-
-          default:
-            return r + (r.length ? ',' : '') + v
-        }
-      }, ''),
-    }
-  }
-
+const parse = function(v) {
   switch (v) {
-    case 'color-box':
-      return {
-        transitionProperty: 'background-color',
-      }
-
-    case 'color-text':
-      return {
-        transitionProperty: 'color',
-      }
-
+    case 'box':
+      return 'background-color'
+    case 'box-border':
+      return 'border-color'
+    case 'text':
+      return 'color'
+    case 'shape':
+      return 'fill'
+    case 'shape-border':
+      return 'stroke'
     case 'modify':
-      return {
-        transitionProperty: 'transform',
-      }
-
+      return 'transform'
     default:
-      return {
-        transitionProperty: v,
-      }
+      return v
+  }
+}
+
+module.exports = function(v) {
+  if (v === false) return { transitionProperty: 'none' }
+
+  return {
+    transitionProperty: Array.isArray(v)
+      ? v.reduce(function(r, v) {
+          if (r.length > 0) return `${r},${parse(v)}`
+
+          return parse(v)
+        }, '')
+      : parse(v),
   }
 }

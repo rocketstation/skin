@@ -1,5 +1,5 @@
-const v = require('./index.js')
+const v = require('../index.js')
 
 test('custom', () => {
-  expect(v({ foo: 'bar' })).toEqual({ foo: 'bar' })
+  expect(v.custom({ foo: 'bar' })).toEqual({ foo: 'bar' })
 })

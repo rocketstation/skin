@@ -1,3 +1,3 @@
 module.exports = function(v) {
-  return 'url' + '(' + v + ')'
+  return `url(${v})`
 }
