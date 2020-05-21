@@ -1629,14 +1629,14 @@ box-order
 }
 ```
 
-box-outline-color
+box-outline
 
 ```javascript
 // in
 
 {
-  boxOutlineColor: false,
-  boxOutlineColor: 'hsl(0,0%,0%)',
+  boxOutline: false,
+  boxOutline: 'hsl(0,0%,0%)',
 }
 
 // out
