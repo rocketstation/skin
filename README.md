@@ -3122,24 +3122,14 @@ transition
 // in
 
 {
-  transition: 'box',
-  transition: 'boxBorder',
-  transition: 'text',
-  transition: 'shape',
-  transition: 'shapeBorder',
-  transition: 'modify',
-  transition: ['box', 'boxBorder', 'text', 'shape', 'shapeBorder', 'modify'],
+  transition: 'color',
+  transition: ['background-color', 'border-color', 'color', 'fill', 'stroke', 'transform'],
 }
 
 // out
 
 {
-  transitionProperty: 'background-color',
-  transitionProperty: 'border-color',
   transitionProperty: 'color',
-  transitionProperty: 'fill',
-  transitionProperty: 'stroke',
-  transitionProperty: 'transform',
   transitionProperty: 'background-color, border-color, color, fill, stroke, transform',
 }
 ```
