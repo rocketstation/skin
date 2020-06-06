@@ -137,6 +137,7 @@ module.exports = {
   trackAlignSelf: require('./track-align-self'),
   trackDirection: require('./track-direction'),
   trackGrow: require('./track-grow'),
+  trackOrder: require('./track-order'),
   trackOrigin: require('./track-origin'),
   trackOverflow: require('./track-overflow'),
   trackPlace: require('./track-place'),
