@@ -2077,6 +2077,22 @@ box-width-min
 }
 ```
 
+grid-area
+
+```javascript
+// in
+
+{
+  gridArea: 'name',
+}
+
+// out
+
+{
+  gridArea: 'name',
+}
+```
+
 grid-align-major
 
 ```javascript
