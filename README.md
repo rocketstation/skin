@@ -1673,7 +1673,7 @@ box-outline-size
 // in
 
 {
-  boxOutlineWidth: 1,
+  boxOutlineSize: 1,
 }
 
 // out
