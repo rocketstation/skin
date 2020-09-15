@@ -105,10 +105,10 @@ attr-starts-str
 attrStartsStr('key', 'val') // [key^="val"]
 ```
 
-img
+src
 
 ```javascript
-img('src') // url(src)
+src('src') // url(src)
 ```
 
 its
@@ -188,50 +188,29 @@ linear
 linear(360, 'white', 'black') // linear-gradient(360deg,white,black)
 linear(360, ['white', 0], ['black', 100]) // linear-gradient(360deg,white 0%,black 100%)
 ```
-
-matrix
-
-```javascript
-matrix(1, 1, 1, 1, 1, 1) // matrix(1,1,1,1,1,1)
-```
-
-matrix-3d
-
-```javascript
-matrix3d(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1) // matrix3d(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)
-```
-
 on-active
 
 ```javascript
-active // :active
+onActive // :active
 ```
 
 on-focus
 
 ```javascript
-focus // :focus
+onFocus // :focus
 ```
 
 on-focus-inside
 
 ```javascript
-focusInner // :focusWithin
+onFocusInner // :focusWithin
 ```
 
 on-hover
 
 ```javascript
-onFocus // :hover
+onHover // :hover
 ```
-
-perspective
-
-```javascript
-perspective(1) // perspective(1rem)
-perspective('1rem') // perspective(1rem)
-```
-
 radial
 
 ```javascript
@@ -247,66 +226,6 @@ repeat('fit', '1rem')) // repeat(auto-fit,1rem)
 repeat(1)) // repeat(1,1fr)
 repeat(1, 1)) // repeat(1,1fr)
 repeat(1, 'auto')) // repeat(1,auto)
-```
-
-rotate
-
-```javascript
-rotate(1) // rotate(1deg)
-```
-
-rotate-3d
-
-```javascript
-rotate3d(1,1,1,1) // rotate(1,1,1,1deg)
-```
-
-rotate-x
-
-```javascript
-rotateX(1) // rotateX(1deg)
-```
-
-rotate-y
-
-```javascript
-rotateY(1) // rotateY(1deg)
-```
-
-rotate-z
-
-```javascript
-rotateZ(1) // rotateZ(1deg)
-```
-
-scale
-
-```javascript
-scale(1,1) // scale(1,1)
-```
-
-scale-3d
-
-```javascript
-scale3d(1,1,1) // scale(1,1,1)
-```
-
-scale-x
-
-```javascript
-scaleX(1) // scale(1)
-```
-
-scale-y
-
-```javascript
-scaleY(1) // scale(1)
-```
-
-scale-z
-
-```javascript
-scaleZ(1) // scale(1)
 ```
 
 screen
@@ -331,59 +250,6 @@ screen-to
 
 ```javascript
 screenTo(1200) // @media screen and (max-width:74.9375em)
-```
-
-skew
-
-```javascript
-skew(360, 360) // skew(360deg,360deg)
-```
-
-skew-x
-
-```javascript
-skewX(360) // skewX(360deg)
-```
-
-skew-y
-
-```javascript
-skewY(360) // skewY(360deg)
-```
-
-translate
-
-```javascript
-translate(1,1) // translate(1rem,1rem)
-translate('100%', '100%') // translate(100%,100%)
-```
-
-translate-3d
-
-```javascript
-translate3d(1,1,1) // translate3d(1rem,1rem,1rem)
-translate3d('100%', '100%', '100%') // translate3d(100%,100%,100%)
-```
-
-translate-x
-
-```javascript
-translateX(1) // translateX(1rem)
-translateX('100%') // translateX(100%)
-```
-
-translate-y
-
-```javascript
-translateY(1) // translateY(1rem)
-translateY('100%') // translateY(100%)
-```
-
-translate-z
-
-```javascript
-translateZ(1) // translateZ(1rem)
-translateZ('100%') // translateZ(100%)
 ```
 
 ### Alias

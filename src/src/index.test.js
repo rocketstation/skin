@@ -1,5 +1,5 @@
 const v = require('./index.js')
 
-test('img', () => {
+test('src', () => {
   expect(v('./bg.svg')).toEqual('url(./bg.svg)')
 })
